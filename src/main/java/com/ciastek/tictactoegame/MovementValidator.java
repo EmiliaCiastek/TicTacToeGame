@@ -7,7 +7,7 @@ public class MovementValidator {
         this.gameBoard = gameBoard;
     }
 
-    public void validate(int x, int y) {
+    public void validate(int x, int y) throws IllegalArgumentException {
         if(x < 1 || y < 1) {
             throw new IllegalArgumentException("Coordinates have to be equals or greater than 1");
         } else if(x > gameBoard.getWidth() || y > gameBoard.getHeight()){
