@@ -10,13 +10,18 @@ public class GameUI {
 
 
     public static void main(String[] args) {
+        // TODO:
+        // 1) input validation
+        // 2) Arbiter
+        // 3) get win conditions from user
+        // 4) match and get number of matches in single game (from user)
+
         System.out.println("TicTacToeGame");
         System.out.println("I optimistically assume that you'll provide correct values :)");
         System.out.println("Choose first player: O or X?");
         input = new Scanner(System.in);
         userInput = input.nextLine();
-        validatePlayerSign(userInput); //TODO: game.setFirstPlayer(input)
-
+        validatePlayerSign(userInput);
 
         System.out.println("Choose board size (greater than 2): ");
         int boardSize = input.nextInt();
@@ -49,7 +54,6 @@ public class GameUI {
     }
 
     private static void validatePlayerSign(String userInput) {
-
         if (userInput != "" && userInput.length() == 1) {
             if (userInput == "X" || userInput == "O") {
                 System.out.println("Provided input: " + userInput);
