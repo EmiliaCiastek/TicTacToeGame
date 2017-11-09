@@ -49,6 +49,7 @@ public class GameUI {
             } catch (IllegalArgumentException exception){
                 System.out.println(exception.getMessage());
             }
+
             System.out.println(board.toString());
         }
     }

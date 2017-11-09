@@ -15,7 +15,7 @@ public class Player {
         return character;
     }
 
-    public void move(int x, int y) {
+    public void move(int x, int y) throws IllegalArgumentException {
         try {
             validator.validate(x, y);
             game.play(x, y);
