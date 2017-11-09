@@ -68,4 +68,16 @@ public class Board {
 
         return builder.toString();
     }
+
+    public boolean isFilled() {
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if(characterBoard[i][j] == PlayerCharacter.NONE)
+                    return false;
+            }
+        }
+
+        return true;
+    }
 }

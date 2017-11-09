@@ -33,4 +33,8 @@ public class Game {
     public PlayerCharacter[][] getBoard() {
         return board.getCharacterBoard();
     }
+
+    public boolean isFinished() {
+        return board.isFilled();
+    }
 }

@@ -88,4 +88,27 @@ public class BoardTest {
         assertEquals(board.toString(), builder.toString());
     }
 
+    @Test
+    public void whenBoardNotFilledThenFalse(){
+        board.add(2, 2, PlayerCharacter.O);
+        assertFalse(board.isFilled());
+    }
+
+    @Test
+    public void whenBoardFilledThenTrue(){
+        boardSize = 3;
+        board = new Board(boardSize);
+
+        board.add(1,1, PlayerCharacter.O);
+        board.add(2,1, PlayerCharacter.X);
+        board.add(1,3, PlayerCharacter.O);
+        board.add(3,3, PlayerCharacter.X);
+        board.add(2,2, PlayerCharacter.O);
+        board.add(1,2, PlayerCharacter.X);
+        board.add(2,3, PlayerCharacter.O);
+        board.add(3,1, PlayerCharacter.X);
+        board.add(3,2, PlayerCharacter.O);
+
+        assertTrue(board.isFilled());
+    }
 }

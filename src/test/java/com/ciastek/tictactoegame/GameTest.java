@@ -50,4 +50,24 @@ public class GameTest {
             assertEquals(game.getBoard()[i], expectedBoard[i]);
         }
     }
+
+    @Test
+    public void whenGameInitializedThenIsFinishedFalse(){
+        assertFalse(game.isFinished());
+    }
+
+    @Test
+    public void whenBoardFilledThenGameIsFinished(){
+        game.play(1,1); //O
+        game.play(2,1); //X
+        game.play(1,3); //O
+        game.play(3,3); //X
+        game.play(2,2); //O
+        game.play(1,2); //X
+        game.play(2,3); //O
+        game.play(3,1); //X
+        game.play(3,2); //O
+
+        assertTrue(game.isFinished());
+    }
 }
