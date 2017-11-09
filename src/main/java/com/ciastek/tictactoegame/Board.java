@@ -2,7 +2,7 @@ package com.ciastek.tictactoegame;
 
 public class Board {
     private int size;
-    private PlayerCharacter[][] characterBoard;
+    private PlayerCharacter[][] characterBoard; //TODO: change to Arraylist
 
     public Board(int size){
         this.size = size;
@@ -20,7 +20,8 @@ public class Board {
         characterBoard[x -1][y -1] = character;
     }
 
-    private void validateCoordinates(int x, int y) {
+    private void validateCoordinates(int x, int y) {     // TODO: Move to MovementValidator (with tests)
+
         validate(x);
         validate(y);
         isFieldOccupied(x -1, y -1);
