@@ -34,12 +34,12 @@ public class BoardTest {
         }
     }
 
-    @Test (expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Coordinates smaller than 1")
+    @Test (expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Coordinates have to be equals or greater than 1")
     public void givenCoordinatesSmallerThan1WhenAddThenThrowException(){
         board.add(0, 1, PlayerCharacter.X);
     }
 
-    @Test (expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Coordinates greater than board size")
+    @Test (expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Coordinates have to be equals or smaller than board size")
     public void givenCoordinatesGreaterThanBoardSizeWhenAddThenThrowException(){
         board.add(1, 9, PlayerCharacter.X);
     }
@@ -47,9 +47,9 @@ public class BoardTest {
     @Test
     public void givenCorrectCoordinatesWhenAddThenAddCharacterToBoard(){
         int x = 1;
-        int y = 2;
+        int y = 3;
         board.add(x, y, PlayerCharacter.X);
-        assertEquals(board.getCharacterBoard()[x][y], PlayerCharacter.X);
+        assertEquals(board.getCharacterBoard()[x -1][y -1], PlayerCharacter.X);
     }
 
     @Test (expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Field is already occupied")
@@ -60,5 +60,32 @@ public class BoardTest {
         board.add(x, y, PlayerCharacter.O);
     }
 
+    @Test
+    public void givenEmptyBoardWhenToStringThenConvertToString(){
+        boardSize = 3;
+        board = new Board(boardSize);
+        StringBuilder builder = new StringBuilder();
+        builder.append(" | | /n")
+                .append(" | | /n")
+                .append(" | | /n");
+
+        assertEquals(board.toString(), builder.toString());
+    }
+
+    @Test
+    public void givenNotEmptyBoardWhenToStringThenConvertToString(){
+        boardSize = 3;
+        board = new Board(boardSize);
+        board.add(1, 1, PlayerCharacter.X);
+        board.add(2, 1, PlayerCharacter.O);
+        board.add(3, 2, PlayerCharacter.X);
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("X| | /n")
+                .append("O| | /n")
+                .append(" |X| /n");
+
+        assertEquals(board.toString(), builder.toString());
+    }
 
 }

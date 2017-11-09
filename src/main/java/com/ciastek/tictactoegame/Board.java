@@ -17,13 +17,13 @@ public class Board {
     public void add(int x, int y, PlayerCharacter character) {
         validateCoordinates(x, y);
 
-        characterBoard[x][y] = character;
+        characterBoard[x -1][y -1] = character;
     }
 
     private void validateCoordinates(int x, int y) {
         validate(x);
         validate(y);
-        isFieldOccupied(x, y);
+        isFieldOccupied(x -1, y -1);
     }
 
     public PlayerCharacter[][] getCharacterBoard() {
@@ -32,9 +32,9 @@ public class Board {
 
     private void validate(int coordinate){
         if(coordinate < 1) {
-            throw new IllegalArgumentException("Coordinates smaller than 1");
+            throw new IllegalArgumentException("Coordinates have to be equals or greater than 1");
         } else if(coordinate > size){
-            throw new IllegalArgumentException("Coordinates greater than board size");
+            throw new IllegalArgumentException("Coordinates have to be equals or smaller than board size");
         }
     }
 
@@ -50,5 +50,22 @@ public class Board {
                 characterBoard[i][j] = PlayerCharacter.NONE;
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                builder.append(characterBoard[i][j])
+                        .append("|");
+            }
+            builder.deleteCharAt(builder.lastIndexOf("|"));
+            builder.append("/n");
+
+        }
+
+        return builder.toString();
     }
 }
