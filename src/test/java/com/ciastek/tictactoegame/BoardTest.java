@@ -20,6 +20,20 @@ public class BoardTest {
         assertEquals(board.getSize(), boardSize);
     }
 
+    @Test
+    public void whenBoardInitializedThenAllFieldsNone() {
+        boardSize = 3;
+        board = new Board(boardSize);
+
+        PlayerCharacter[][] expected = {{PlayerCharacter.NONE, PlayerCharacter.NONE, PlayerCharacter.NONE} ,
+                {PlayerCharacter.NONE, PlayerCharacter.NONE, PlayerCharacter.NONE},
+                {PlayerCharacter.NONE, PlayerCharacter.NONE, PlayerCharacter.NONE}};
+
+        for (int i = 0; i < boardSize; i++) {
+            assertEquals(board.getCharacterBoard()[i], expected[i]);
+        }
+    }
+
     @Test (expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Coordinates smaller than 1")
     public void givenCoordinatesSmallerThan1WhenAddThenThrowException(){
         board.add(0, 1, PlayerCharacter.X);
@@ -45,5 +59,6 @@ public class BoardTest {
         board.add(x, y, PlayerCharacter.X);
         board.add(x, y, PlayerCharacter.O);
     }
+
 
 }

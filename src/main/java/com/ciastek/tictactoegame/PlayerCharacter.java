@@ -7,7 +7,7 @@ public enum PlayerCharacter {
 
     private final String value;
 
-    private PlayerCharacter(final String value) {
+    PlayerCharacter(final String value) {
         this.value = value;
     }
 
@@ -15,4 +15,6 @@ public enum PlayerCharacter {
     public String toString() {
         return value;
     }
+
+
 }

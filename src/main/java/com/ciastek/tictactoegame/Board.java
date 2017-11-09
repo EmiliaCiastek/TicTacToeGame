@@ -1,14 +1,13 @@
 package com.ciastek.tictactoegame;
 
-import java.util.Arrays;
-
 public class Board {
     private int size;
-    private PlayerCharacter[][] characterBoard; //TODO: change to String[][]?
+    private PlayerCharacter[][] characterBoard;
 
     public Board(int size){
         this.size = size;
         characterBoard = new PlayerCharacter[size][size];
+        initializeBoard();
     }
 
     public int getSize(){
@@ -40,8 +39,16 @@ public class Board {
     }
 
     private void isFieldOccupied(int x, int y) {
-        if(characterBoard[x][y] != null){
+        if(characterBoard[x][y] != PlayerCharacter.NONE){
             throw new IllegalArgumentException("Field is already occupied");
+        }
+    }
+
+    private void initializeBoard(){
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                characterBoard[i][j] = PlayerCharacter.NONE;
+            }
         }
     }
 }
