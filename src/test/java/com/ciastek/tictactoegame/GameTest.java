@@ -2,6 +2,9 @@ package com.ciastek.tictactoegame;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+
 import static org.testng.Assert.*;
 
 @Test
@@ -33,21 +36,26 @@ public class GameTest {
         PlayerCharacter actual = game.getBoardField(x, y);
         assertEquals(actual, PlayerCharacter.O);
     }
-/*
+
     public void playTest(){
-        PlayerCharacter[][] expectedBoard = {{PlayerCharacter.O, PlayerCharacter.NONE, PlayerCharacter.O},
-                                             {PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.NONE},
-                                             {PlayerCharacter.NONE, PlayerCharacter.NONE, PlayerCharacter.X}};
+        ArrayList<PlayerCharacter> expectedBoard = new ArrayList<>();
+        expectedBoard.add(PlayerCharacter.O);
+        expectedBoard.add(PlayerCharacter.X);
+        expectedBoard.add(PlayerCharacter.NONE);
+        expectedBoard.add(PlayerCharacter.NONE);
+        expectedBoard.add(PlayerCharacter.NONE);
+        expectedBoard.add(PlayerCharacter.NONE);
+        expectedBoard.add(PlayerCharacter.O);
+        expectedBoard.add(PlayerCharacter.NONE);
+        expectedBoard.add(PlayerCharacter.X);
+
         game.play(1,1); //O
         game.play(2,1); //X
         game.play(1,3); //O
         game.play(3,3); //X
 
-        for (int i = 0; i < game.getBoard().size(); i++) {
-            assertEquals(game.getBoard()[i], expectedBoard[i]);
-        }
+        assertEquals(game.getBoard(), expectedBoard);
     }
-    */
 
     public void whenGameInitializedThenIsFinishedFalse(){
         assertFalse(game.isFinished());

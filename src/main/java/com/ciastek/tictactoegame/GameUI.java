@@ -13,20 +13,29 @@ public class GameUI {
         System.out.println("Choose first player: O or X?");
         input = new Scanner(System.in);
         userInput = input.nextLine();
-        validatePlayerSign(userInput);
-        //System.out.println(new Board(6));
+        validatePlayerSign(userInput); //TODO: game.setFirstPlayer(input)
 
 
         System.out.println("Choose board size (greater than 2): ");
+        int boardSize = input.nextInt();
+        Board board = new Board(boardSize, boardSize);
+        game = new Game(board);
+        game.setFirstPlayer(PlayerCharacter.O);
+
+
         userInput = input.nextLine();
         System.out.println("Game started");
 
-        /*
+
         while (!game.isFinished()){
+            System.out.println(board.toString());
+            System.out.println("Provide x: ");
+            int x = input.nextInt();
+            System.out.println("Provide y: ");
+            int y = input.nextInt();
 
+            game.play(x, y);
         }
-        */
-
     }
 
 

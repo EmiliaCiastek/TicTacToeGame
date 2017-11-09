@@ -27,9 +27,8 @@ public class BoardTest {
     public void whenBoardInitializedThenSizeSet() {
         assertEquals(board.getSize(), boardSize);
     }
-/*
-    @Test
 
+    @Test
     public void whenBoardInitializedThenAllFieldsNone() {
         List<PlayerCharacter> expected = new ArrayList<>(boardSize);
         for (int i = 0; i < boardSize; i++) {
@@ -38,17 +37,6 @@ public class BoardTest {
 
         assertEquals(board.getCharacterBoard(), expected);
     }
-    */
-
-    @Test (expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Coordinates have to be equals or greater than 1")
-    public void givenCoordinatesSmallerThan1WhenAddThenThrowException(){
-        board.add(0, 1, PlayerCharacter.X);
-    }
-
-    @Test (expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Coordinates have to be equals or smaller than board size")
-    public void givenCoordinatesGreaterThanBoardSizeWhenAddThenThrowException(){
-        board.add(1, 9, PlayerCharacter.X);
-    }
 
     @Test
     public void givenCorrectCoordinatesWhenAddThenAddCharacterToBoard(){
@@ -56,17 +44,6 @@ public class BoardTest {
         int y = 2;
         board.add(x, y, PlayerCharacter.X);
         assertEquals(board.getCharacterAt(x, y), PlayerCharacter.X);
-    }
-
-    @Test (expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Field is already occupied")
-    public void givenOccupiedCoordinatesWhenAddThenThrowException(){
-
-        board = new Board(boardWidth, boardHeight);
-
-        int x = 2;
-        int y = 2;
-        board.add(x, y, PlayerCharacter.X);
-        board.add(x, y, PlayerCharacter.O);
     }
 
     @Test
@@ -121,22 +98,10 @@ public class BoardTest {
         board = new Board(3, 3);
 
         board.add(1,1, PlayerCharacter.O);
-        System.out.println(board.getCharacterBoard().size());
-
         board.add(1,2, PlayerCharacter.O);
-        System.out.println(board.getCharacterBoard().size());
-
         board.add(1,3, PlayerCharacter.O);
-        System.out.println(board.getCharacterBoard().size());
-
         board.add(2,1, PlayerCharacter.O);
-        System.out.println(board.getCharacterAt(2,2));
-        System.out.println(board.getSize());
-        System.out.println(board.getCharacterBoard().size());
-
         board.add(2,2, PlayerCharacter.O);
-        System.out.println(board.getCharacterAt(2,2));
-
         board.add(2,3, PlayerCharacter.O);
         board.add(3,1, PlayerCharacter.O);
         board.add(3,2, PlayerCharacter.O);
