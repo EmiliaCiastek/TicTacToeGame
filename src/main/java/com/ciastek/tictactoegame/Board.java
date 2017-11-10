@@ -32,7 +32,7 @@ public class Board {
     }
 
     public void add(int x, int y, PlayerCharacter character) {
-        int index = (y - 1) * width + (x - 1) ;
+        int index = (y - 1) * width + (x - 1) ; //TODO: extract method calculateIndex() ?
 
         characterBoard.set(index, character);
     }
@@ -43,16 +43,25 @@ public class Board {
     }
 
     @Override
-    public String toString() { //TODO: add row and column numbers
+    public String toString() {
         StringBuilder builder = new StringBuilder();
+        builder.append("  ");
 
-        for (int i = 0; i < size; i++) {
-            if(i > 0 && i % width == 0){
-                builder.append("\n");
+        for (int i = 0; i < width; i++) {
+            builder.append(i+1 + " ");
+        }
+        builder.append("\n");
+
+        for (int i = 0; i < height; i++) {
+            builder.append(i + 1 + " ");
+
+            for (int j = 0; j < width; j++) {
+                int index = (i) * width + (j) ;
+                builder.append(characterBoard.get(index))
+                        .append("|");
             }
-
-            builder.append(characterBoard.get(i))
-                    .append("|");
+            builder.append("\n")
+                    .append("--------\n");
         }
 
         return builder.toString();

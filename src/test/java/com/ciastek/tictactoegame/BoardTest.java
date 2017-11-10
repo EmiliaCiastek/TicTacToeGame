@@ -16,7 +16,7 @@ public class BoardTest {
     private int boardHeight;
 
     @BeforeMethod
-    public void setUpBoard(){
+    public void setUpBoard() {
         boardWidth = 3;
         boardHeight = 3;
         boardSize = boardHeight * boardWidth;
@@ -39,7 +39,7 @@ public class BoardTest {
     }
 
     @Test
-    public void givenCorrectCoordinatesWhenAddThenAddCharacterToBoard(){
+    public void givenCorrectCoordinatesWhenAddThenAddCharacterToBoard() {
         int x = 2;
         int y = 2;
         board.add(x, y, PlayerCharacter.X);
@@ -47,29 +47,25 @@ public class BoardTest {
     }
 
     @Test
-    public void givenEmptyBoardWhenToStringThenConvertToString(){
+    public void givenEmptyBoardWhenToStringThenConvertToString() {
         boardSize = 3;
         board = new Board(boardSize, boardSize);
         StringBuilder builder = new StringBuilder();
-        /*builder.append("1 2 3")
-                .append("1 | | \n")
-                .append("------\n")
-                .append("2 | | \n")
-                .append("------\n")
-                .append("3 | | \n")
-                .append("------\n");
 
-                */
 
-        builder.append(" | | |\n")
-                .append(" | | |\n")
-                .append(" | | |");
+        builder.append("  1 2 3 \n")
+                .append("1  | | |\n")
+                .append("--------\n")
+                .append("2  | | |\n")
+                .append("--------\n")
+                .append("3  | | |\n")
+                .append("--------\n");
 
         assertEquals(board.toString(), builder.toString());
     }
 
     @Test
-    public void givenNotEmptyBoardWhenToStringThenConvertToString(){
+    public void givenNotEmptyBoardWhenToStringThenConvertToString() {
         boardSize = 3;
         board = new Board(boardSize, boardSize);
         board.add(1, 1, PlayerCharacter.X);
@@ -79,33 +75,37 @@ public class BoardTest {
 
 
         StringBuilder builder = new StringBuilder();
-        builder.append("X|O| |\n")
-                .append(" | |X|\n")
-                .append(" | |O|");
+        builder.append("  1 2 3 \n")
+                .append("1 X|O| |\n")
+                .append("--------\n")
+                .append("2  | |X|\n")
+                .append("--------\n")
+                .append("3  | |O|\n")
+                .append("--------\n");
 
         assertEquals(board.toString(), builder.toString());
     }
 
     @Test
-    public void whenBoardNotFilledThenFalse(){
+    public void whenBoardNotFilledThenFalse() {
         board.add(2, 2, PlayerCharacter.O);
         assertFalse(board.isFilled());
     }
 
     @Test
-    public void whenBoardFilledThenTrue(){
+    public void whenBoardFilledThenTrue() {
         //boardSize = 3;
         board = new Board(3, 3);
 
-        board.add(1,1, PlayerCharacter.O);
-        board.add(1,2, PlayerCharacter.O);
-        board.add(1,3, PlayerCharacter.O);
-        board.add(2,1, PlayerCharacter.O);
-        board.add(2,2, PlayerCharacter.O);
-        board.add(2,3, PlayerCharacter.O);
-        board.add(3,1, PlayerCharacter.O);
-        board.add(3,2, PlayerCharacter.O);
-        board.add(3,3, PlayerCharacter.O);
+        board.add(1, 1, PlayerCharacter.O);
+        board.add(1, 2, PlayerCharacter.O);
+        board.add(1, 3, PlayerCharacter.O);
+        board.add(2, 1, PlayerCharacter.O);
+        board.add(2, 2, PlayerCharacter.O);
+        board.add(2, 3, PlayerCharacter.O);
+        board.add(3, 1, PlayerCharacter.O);
+        board.add(3, 2, PlayerCharacter.O);
+        board.add(3, 3, PlayerCharacter.O);
 
         assertTrue(board.isFilled());
     }

@@ -19,7 +19,7 @@ public class Player {
         try {
             validator.validate(x, y);
             game.play(x, y);
-        } catch (IllegalArgumentException exception){
+        } catch (IllegalArgumentException exception) {
             throw exception;
         }
     }
