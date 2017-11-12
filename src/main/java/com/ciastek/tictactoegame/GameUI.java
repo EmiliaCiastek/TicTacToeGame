@@ -50,6 +50,8 @@ public class GameUI {
                 System.out.println(exception.getMessage());
             }
 
+            // TODO: check if there is winner - after minimal number of moves
+
             System.out.println(board.toString());
         }
     }

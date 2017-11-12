@@ -8,7 +8,6 @@ import java.util.List;
 
 import static org.testng.Assert.*;
 
-
 public class BoardTest {
     private Board board;
     private int boardSize;
