@@ -5,12 +5,12 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-public class HorizontalVictoryValidatorTest {
+public class VictoryValidatorTest {
 
 
     @Test
     public void givenNoVictoryThenFalse(){
-        HorizontalVictoryValidator victory = new HorizontalVictoryValidator(3);
+        VictoryValidator victory = new VictoryValidator(3);
 
         String row = "X O X";
 
@@ -19,7 +19,7 @@ public class HorizontalVictoryValidatorTest {
 
     @Test
     public void givenXVictoryThenTrue(){
-        HorizontalVictoryValidator victory = new HorizontalVictoryValidator(4);
+        VictoryValidator victory = new VictoryValidator(4);
 
         String row = "X X X X";
 
@@ -28,7 +28,7 @@ public class HorizontalVictoryValidatorTest {
 
     @Test
     public void givenOVictoryThenTrue(){
-        HorizontalVictoryValidator victory = new HorizontalVictoryValidator(10);
+        VictoryValidator victory = new VictoryValidator(10);
 
         String row = "O O O O O O O O O O";
         assertTrue(victory.isVictory(row));
