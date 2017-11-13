@@ -33,4 +33,11 @@ public class VictoryValidatorTest {
         String row = "O O O O O O O O O O";
         assertTrue(victory.isVictory(row));
     }
+
+    @Test
+    public void givenNoVictoryWithFourOThenFalse(){
+        VictoryValidator victory = new VictoryValidator(3);
+        String row = "O O X O X";
+        assertFalse(victory.isVictory(row));
+    }
 }

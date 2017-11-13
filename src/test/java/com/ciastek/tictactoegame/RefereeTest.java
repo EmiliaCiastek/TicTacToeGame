@@ -1,25 +1,51 @@
 package com.ciastek.tictactoegame;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class RefereeTest {
 
-    private Referee referee;
+    @Test
+    public void givenNoWinningBoardPieceThenNoWinner(){
+        Referee referee = new Referee(3);
+        // TODO: add winningCondition and BoardPiece
+        List<PlayerCharacter> boardPiece = new ArrayList<>(9);
 
-    @BeforeMethod
-    public void setUp() {
-        referee = new Referee();
+        boardPiece.add(PlayerCharacter.O);
+        boardPiece.add(PlayerCharacter.X);
+        boardPiece.add(PlayerCharacter.O);
+        boardPiece.add(PlayerCharacter.NONE);
+        boardPiece.add(PlayerCharacter.NONE);
+        boardPiece.add(PlayerCharacter.NONE);
+        boardPiece.add(PlayerCharacter.NONE);
+        boardPiece.add(PlayerCharacter.NONE);
+        boardPiece.add(PlayerCharacter.NONE);
+
+        assertFalse(referee.isWon(boardPiece));
     }
 
     @Test
-    public void givenNoWinnerStringWhenGetWinnerThenNone() {
-        String boardPiece = "[ , O, X,  , X, O,  , O,  ]";
-        System.out.println(boardPiece);
+    public void givenHorizontalWinningBoardPieceThenTrue(){
+        Referee referee = new Referee(3);
+        // TODO: add winningCondition and BoardPiece
+        List<PlayerCharacter> boardPiece = new ArrayList<>(9);
 
-        assertEquals(referee.getWinner(boardPiece), PlayerCharacter.NONE);
+        boardPiece.add(PlayerCharacter.O);
+        boardPiece.add(PlayerCharacter.O);
+        boardPiece.add(PlayerCharacter.O);
+        boardPiece.add(PlayerCharacter.NONE);
+        boardPiece.add(PlayerCharacter.NONE);
+        boardPiece.add(PlayerCharacter.NONE);
+        boardPiece.add(PlayerCharacter.NONE);
+        boardPiece.add(PlayerCharacter.NONE);
+        boardPiece.add(PlayerCharacter.NONE);
+
+        assertTrue(referee.isWon(boardPiece));
     }
 
 }
