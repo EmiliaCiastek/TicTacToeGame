@@ -74,9 +74,60 @@ public class BoardSplitterTest {
         int index = 14;
         board.add(index, PlayerCharacter.X);
 
-        System.out.println(expectedColumn);
-        System.out.println(splitter.getColumn(board, index));
         assertEquals(splitter.getColumn(board, index), expectedColumn);
     }
+
+    @Test (expectedExceptions = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenStartIndexOutOfDiagonal(){
+        splitter.getFirstDiagonal(board, 7);
+    }
+
+    @Test (expectedExceptions = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenEndIndexOutOfDiagonal(){
+        splitter.getFirstDiagonal(board,17);
+    }
+
+    @Test
+    public void shouldReturnBoardDiagonalWhenGetFirstDiagonal() {
+        List<PlayerCharacter> expectedDiagonal = new ArrayList<>();
+        expectedDiagonal.add(PlayerCharacter.NONE);
+        expectedDiagonal.add(PlayerCharacter.NONE);
+        expectedDiagonal.add(PlayerCharacter.X);
+        expectedDiagonal.add(PlayerCharacter.NONE);
+        expectedDiagonal.add(PlayerCharacter.NONE);
+
+        int index = 15;
+        board.add(index, PlayerCharacter.X);
+
+        assertEquals(splitter.getFirstDiagonal(board, index), expectedDiagonal);
+    }
+
+    @Test (expectedExceptions = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenStartIndexOutOfSecondDiagonal(){
+        splitter.getSecondDiagonal(board, 7);
+    }
+
+    @Test (expectedExceptions = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenEndIndexOutOfSecondDiagonal(){
+        splitter.getSecondDiagonal(board,19);
+    }
+
+    @Test
+    public void shouldReturnBoardDiagonalWhenGetSecondDiagonal() {
+        List<PlayerCharacter> expectedDiagonal = new ArrayList<>();
+        expectedDiagonal.add(PlayerCharacter.NONE);
+        expectedDiagonal.add(PlayerCharacter.NONE);
+        expectedDiagonal.add(PlayerCharacter.O);
+        expectedDiagonal.add(PlayerCharacter.NONE);
+        expectedDiagonal.add(PlayerCharacter.NONE);
+
+        int index = 14;
+        board.add(index, PlayerCharacter.O);
+
+        System.out.println(expectedDiagonal);
+        System.out.println(splitter.getSecondDiagonal(board, index));
+        assertEquals(splitter.getSecondDiagonal(board, index), expectedDiagonal);
+    }
+
 
 }

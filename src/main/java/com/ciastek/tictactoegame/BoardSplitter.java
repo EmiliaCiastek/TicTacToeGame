@@ -43,4 +43,45 @@ public class BoardSplitter {
 
         return board.getCharacterBoard().subList(startIndex, endIndex);
     }
+
+    public List<PlayerCharacter> getFirstDiagonal(Board board, int index) {
+        int startIndex = index - ((winningCondition - 1) * (board.getBoardDimensions().getWidth() +1));
+        int endIndex = index + ((winningCondition -1) * (board.getBoardDimensions().getWidth() +1));
+        int boardWidth = board.getBoardDimensions().getWidth();
+
+        if (startIndex < 0 ){
+            throw  new IllegalArgumentException();
+        } else if(endIndex % boardWidth != index % boardWidth + (winningCondition - 1)){
+            throw  new IllegalArgumentException();
+        }
+
+        int diagonalLength = winningCondition * 2 - 1;
+        List<PlayerCharacter> diagonal = new ArrayList<>();
+        for (int i = 0; i < diagonalLength; i++) {
+            diagonal.add(board.getCharacterAt(startIndex + (i * boardWidth + i)));
+        }
+
+        return diagonal;
+    }
+
+
+    public List<PlayerCharacter> getSecondDiagonal(Board board, int index) {
+        int boardWidth = board.getBoardDimensions().getWidth();
+        int startIndex = index - ((winningCondition - 1) * (board.getBoardDimensions().getWidth() -1));
+        int endIndex = index + ((winningCondition - 1) * (board.getBoardDimensions().getWidth() -1));
+
+        if(startIndex < 0){
+            throw new IllegalArgumentException();
+        } else if(endIndex % boardWidth != index % boardWidth - (winningCondition - 1)){
+            throw  new IllegalArgumentException();
+        }
+
+        int diagonalLength = winningCondition * 2 - 1;
+        List<PlayerCharacter> diagonal = new ArrayList<>();
+        for (int i = 0; i < diagonalLength; i++) {
+            diagonal.add(board.getCharacterAt(startIndex + (i * boardWidth - i)));
+        }
+
+        return diagonal;
+    }
 }
