@@ -11,11 +11,18 @@ import static org.testng.Assert.assertEquals;
 public class BoardSplitterTest {
 
     private BoardSplitter splitter;
+    private Board board;
+
 
     @BeforeMethod
     public void setUp(){
         int winningCondition = 3;
         splitter = new BoardSplitter(winningCondition);
+        int boardWidth = 6;
+        int boardHeight = 10;
+
+        BoardDimensions boardDimensions = new BoardDimensions(boardWidth, boardHeight);
+        board = new Board(boardDimensions);
     }
 
     @Test
@@ -27,31 +34,49 @@ public class BoardSplitterTest {
         expectedRow.add(PlayerCharacter.NONE);
         expectedRow.add(PlayerCharacter.NONE);
 
-        int boardWidth = 6;
-        int boardHeight = 10;
-        int x = 3;
-        int y = 6;
+        int index = 8;
+        board.add(index, PlayerCharacter.O);
 
-        BoardDimensions boardDimensions = new BoardDimensions(boardWidth, boardHeight);
-        Board board = new Board(boardDimensions);
-        board.add(x, PlayerCharacter.O);
-        int index = (y-1) * boardWidth  + (x-1); //TODO: fix adding to Board (board.add(index, PlayerCharacter) !
         assertEquals(splitter.getRow(board, index), expectedRow);
     }
 
-   /* @Test
-    public void shouldReturnBoardColumnWhenGetColumn(){
+    @Test (expectedExceptions = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenStartIndexOutOfRow(){
+        splitter.getRow(board,13);
+    }
+
+    @Test (expectedExceptions = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenEndIndexOutOfRow(){
+        splitter.getRow(board,11);
+    }
+
+
+    @Test (expectedExceptions = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenStartIndexOutOfColumn(){
+        splitter.getColumn(board,7);
+    }
+
+    @Test (expectedExceptions = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenEndIndexOutOfColumn() {
+
+        splitter.getColumn(board, 54);
+    }
+
+    @Test
+    public void shouldReturnBoardColumnWhenGetColumn() {
         List<PlayerCharacter> expectedColumn = new ArrayList<>();
         expectedColumn.add(PlayerCharacter.NONE);
         expectedColumn.add(PlayerCharacter.NONE);
-        expectedColumn.add(PlayerCharacter.O);
+        expectedColumn.add(PlayerCharacter.X);
         expectedColumn.add(PlayerCharacter.NONE);
         expectedColumn.add(PlayerCharacter.NONE);
 
-        Board board = new Board(10, 10);
-        board.add(3, 3, PlayerCharacter.O);
-        int index = 2 * 9 + 2; //TODO: fix adding to Board (board.add(index, PlayerCharacter) !
+        int index = 14;
+        board.add(index, PlayerCharacter.X);
+
+        System.out.println(expectedColumn);
+        System.out.println(splitter.getColumn(board, index));
         assertEquals(splitter.getColumn(board, index), expectedColumn);
+    }
 
-    }*/
 }

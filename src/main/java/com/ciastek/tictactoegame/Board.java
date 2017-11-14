@@ -5,9 +5,12 @@ import java.util.List;
 
 public class Board {
     private int size;
-    private int width;
-    private int height;
     private List<PlayerCharacter> characterBoard;
+
+    public BoardDimensions getBoardDimensions() {
+        return boardDimensions;
+    }
+
     private BoardDimensions boardDimensions;
 
     public Board(BoardDimensions boardDimensions){
@@ -70,13 +73,5 @@ public class Board {
         }
 
         return true;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
     }
 }
