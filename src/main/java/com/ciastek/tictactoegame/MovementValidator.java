@@ -17,5 +17,6 @@ public class MovementValidator {
         if (gameBoard.getCharacterAt(x, y) != PlayerCharacter.NONE) {
             throw new IllegalArgumentException("Field is already occupied");
         }
+
     }
 }
