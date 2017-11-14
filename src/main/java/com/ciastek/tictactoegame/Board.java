@@ -8,11 +8,12 @@ public class Board {
     private int width;
     private int height;
     private List<PlayerCharacter> characterBoard;
+    private BoardDimensions boardDimensions;
 
-    public Board(int width, int height){
-        this.width = width;
-        this.height = height;
-        this.size = width * height;
+    public Board(BoardDimensions boardDimensions){
+        this.boardDimensions = boardDimensions;
+        this.size = boardDimensions.getHeight() * boardDimensions.getWidth();
+
         characterBoard = new ArrayList<>();
         initializeBoard();
     }
@@ -31,37 +32,30 @@ public class Board {
         return characterBoard;
     }
 
-    public void add(int x, int y, PlayerCharacter character) {
-        int index = (y - 1) * width + (x - 1) ; //TODO: extract method calculateIndex() ?
-
+    public void add(int index, PlayerCharacter character) {
         characterBoard.set(index, character);
     }
 
-    public PlayerCharacter getCharacterAt(int x, int y) {
-        int index = (y-1) * width + (x-1);
+    public PlayerCharacter getCharacterAt(int index) {
         return characterBoard.get(index);
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("  ");
 
-        for (int i = 0; i < width; i++) {
-            builder.append(i+1 + " ");
-        }
-        builder.append("\n");
-
-        for (int i = 0; i < height; i++) {
-            builder.append(i + 1 + " ");
-
-            for (int j = 0; j < width; j++) {
-                int index = (i) * width + (j) ;
-                builder.append(characterBoard.get(index))
-                        .append("|");
+        for (int i = 0; i < characterBoard.size(); i++) {
+            if(characterBoard.get(i) != PlayerCharacter.NONE){
+                builder.append(characterBoard.get(i));
+            } else {
+                builder.append(i);
             }
-            builder.append("\n")
-                    .append("--------\n");
+            builder.append("|");
+
+            if((i + 1) % boardDimensions.getWidth() == 0){
+               builder.append("\n")
+                       .append("------\n");
+            }
         }
 
         return builder.toString();

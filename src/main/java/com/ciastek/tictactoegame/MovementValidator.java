@@ -7,14 +7,14 @@ public class MovementValidator {
         this.gameBoard = gameBoard;
     }
 
-    public void validate(int x, int y) throws IllegalArgumentException {
-        if(x < 1 || y < 1) {
-            throw new IllegalArgumentException("Coordinates have to be equals or greater than 1");
-        } else if(x > gameBoard.getWidth() || y > gameBoard.getHeight()){
+    public void validate(int index) throws IllegalArgumentException { //TODO: fix validate method: x y -> index
+        if(index < 0) {
+            throw new IllegalArgumentException("Coordinates have to be equals or greater than 0");
+        } else if(index > gameBoard.getCharacterBoard().size()){
             throw new IllegalArgumentException("Coordinates have to be equals or smaller than board size");
         }
 
-        if (gameBoard.getCharacterAt(x, y) != PlayerCharacter.NONE) {
+        if (gameBoard.getCharacterAt(index) != PlayerCharacter.NONE) {
             throw new IllegalArgumentException("Field is already occupied");
         }
 

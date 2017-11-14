@@ -15,10 +15,10 @@ public class Player {
         return character;
     }
 
-    public void move(int x, int y) throws IllegalArgumentException {
+    public void move(int index) throws IllegalArgumentException {
         try {
-            validator.validate(x, y);
-            game.play(x, y);
+            validator.validate(index);
+            game.play(index);
         } catch (IllegalArgumentException exception) {
             throw exception;
         }

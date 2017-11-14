@@ -18,8 +18,8 @@ public class Game {
         return currentPlayer;
     }
 
-    public void play(int x, int y) {
-        board.add(x, y, currentPlayer);
+    public void play(int index) { //TODO: fix play method: x y -> index
+        board.add(index, currentPlayer);
 
         switchPlayer();
     }
@@ -40,8 +40,7 @@ public class Game {
         return board.isFilled();
     }
 
-    public PlayerCharacter getBoardField(int x, int y) {
-        int index = (y-1) * board.getWidth() + (x-1);
+    public PlayerCharacter getBoardField(int index) {
         return board.getCharacterBoard().get(index);
     }
 }

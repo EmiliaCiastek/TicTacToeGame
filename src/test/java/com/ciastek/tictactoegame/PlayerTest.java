@@ -15,8 +15,8 @@ public class PlayerTest {
     public void setUp(){
         int width = 3;
         int height = 4;
-
-        board = new Board(width, height);
+        BoardDimensions boardDimensions = new BoardDimensions(width, height);
+        board = new Board(boardDimensions);
         game = new Game(board);
         game.setFirstPlayer(PlayerCharacter.O);
         validator = new MovementValidator(board);
@@ -30,17 +30,15 @@ public class PlayerTest {
 
     @Test
     public void givenCoordinatesWhenPlayThenAddedToBoard(){
-        int x = 1;
-        int y = 3;
-        player.move(x, y);
+        int index = 3;
+        player.move(index);
 
-        assertEquals(board.getCharacterAt(x, y), player.getCharacter());
+        assertEquals(board.getCharacterAt(index), player.getCharacter());
     }
 
     @Test (expectedExceptions = IllegalArgumentException.class)
     public void givenIncorrectCoordinatesWhenPlayThenThrowException(){
-        int x = 0;
-        int y = 5;
-        player.move(x, y);
+        int index = 20;
+        player.move(index);
     }
 }

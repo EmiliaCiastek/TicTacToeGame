@@ -11,28 +11,27 @@ public class MovementValidatorTest {
     public void setUp(){
         int width = 4;
         int height = 3;
-        board = new Board(width, height);
-
+        BoardDimensions boardDimensions = new BoardDimensions(width, height);
+        board = new Board(boardDimensions);
         validator = new MovementValidator(board);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Coordinates have to be equals or greater than 1")
+    @Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Coordinates have to be equals or greater than 0")
     public void givenCoordinatesSmallerThan1WhenAddThenThrowException(){
-        validator.validate(0, 1);
+        validator.validate(-1);
     }
 
     @Test (expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Coordinates have to be equals or smaller than board size")
     public void givenCoordinatesGreaterThanBoardSizeWhenAddThenThrowException(){
-        validator.validate(1, 9);
+        validator.validate(20);
     }
 
     @Test (expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Field is already occupied")
     public void givenOccupiedCoordinatesWhenAddThenThrowException(){
 
-        int x = 2;
-        int y = 2;
-        board.add(x, y, PlayerCharacter.X);
+        int index = 4;
+        board.add(index, PlayerCharacter.X);
 
-        validator.validate(2, 2);
+        validator.validate(index);
     }
 }

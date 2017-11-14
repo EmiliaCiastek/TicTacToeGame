@@ -10,21 +10,21 @@ import static org.testng.Assert.*;
 
 public class BoardTest {
     private Board board;
+    private BoardDimensions boardDimensions;
     private int boardSize;
-    private int boardWidth;
-    private int boardHeight;
 
     @BeforeMethod
     public void setUpBoard() {
-        boardWidth = 3;
-        boardHeight = 3;
-        boardSize = boardHeight * boardWidth;
-        board = new Board(boardWidth, boardHeight);
+        boardDimensions = new BoardDimensions(10, 12);
+        board = new Board(boardDimensions);
+        boardSize = boardDimensions.getHeight() * boardDimensions.getWidth();
     }
 
     @Test
     public void whenBoardInitializedThenSizeSet() {
-        assertEquals(board.getSize(), boardSize);
+        int expectedSize = boardDimensions.getWidth() * boardDimensions.getHeight();
+
+        assertEquals(board.getSize(), expectedSize);
     }
 
     @Test
@@ -37,28 +37,30 @@ public class BoardTest {
         assertEquals(board.getCharacterBoard(), expected);
     }
 
+
     @Test
     public void givenCorrectCoordinatesWhenAddThenAddCharacterToBoard() {
-        int x = 2;
-        int y = 2;
-        board.add(x, y, PlayerCharacter.X);
-        assertEquals(board.getCharacterAt(x, y), PlayerCharacter.X);
+        int index = 4;
+        board.add(4, PlayerCharacter.X);
+        assertEquals(board.getCharacterAt(4), PlayerCharacter.X);
     }
+
+
 
     @Test
     public void givenEmptyBoardWhenToStringThenConvertToString() {
         boardSize = 3;
-        board = new Board(boardSize, boardSize);
+        boardDimensions = new BoardDimensions(boardSize, boardSize);
+        board = new Board(boardDimensions);
         StringBuilder builder = new StringBuilder();
 
 
-        builder.append("  1 2 3 \n")
-                .append("1  | | |\n")
-                .append("--------\n")
-                .append("2  | | |\n")
-                .append("--------\n")
-                .append("3  | | |\n")
-                .append("--------\n");
+        builder.append("0|1|2|\n")
+                .append("------\n")
+                .append("3|4|5|\n")
+                .append("------\n")
+                .append("6|7|8|\n")
+                .append("------\n");
 
         assertEquals(board.toString(), builder.toString());
     }
@@ -66,46 +68,50 @@ public class BoardTest {
     @Test
     public void givenNotEmptyBoardWhenToStringThenConvertToString() {
         boardSize = 3;
-        board = new Board(boardSize, boardSize);
-        board.add(1, 1, PlayerCharacter.X);
-        board.add(2, 1, PlayerCharacter.O);
-        board.add(3, 2, PlayerCharacter.X);
-        board.add(3, 3, PlayerCharacter.O);
+        boardDimensions = new BoardDimensions(boardSize, boardSize);
+        board = new Board(boardDimensions);
+        board.add(0, PlayerCharacter.X);
+        board.add(1, PlayerCharacter.O);
+        board.add(5, PlayerCharacter.X);
+        board.add(8, PlayerCharacter.O);
 
 
         StringBuilder builder = new StringBuilder();
-        builder.append("  1 2 3 \n")
-                .append("1 X|O| |\n")
-                .append("--------\n")
-                .append("2  | |X|\n")
-                .append("--------\n")
-                .append("3  | |O|\n")
-                .append("--------\n");
+        builder.append("X|O|2|\n")
+                .append("------\n")
+                .append("3|4|X|\n")
+                .append("------\n")
+                .append("6|7|O|\n")
+                .append("------\n");
 
         assertEquals(board.toString(), builder.toString());
     }
 
     @Test
     public void whenBoardNotFilledThenFalse() {
-        board.add(2, 2, PlayerCharacter.O);
+        board.add(4, PlayerCharacter.O);
         assertFalse(board.isFilled());
     }
 
+
+
     @Test
     public void whenBoardFilledThenTrue() {
-        //boardSize = 3;
-        board = new Board(3, 3);
+        boardSize = 3;
+        boardDimensions = new BoardDimensions(boardSize, boardSize);
+        board = new Board(boardDimensions);
 
-        board.add(1, 1, PlayerCharacter.O);
-        board.add(1, 2, PlayerCharacter.O);
-        board.add(1, 3, PlayerCharacter.O);
-        board.add(2, 1, PlayerCharacter.O);
-        board.add(2, 2, PlayerCharacter.O);
-        board.add(2, 3, PlayerCharacter.O);
-        board.add(3, 1, PlayerCharacter.O);
-        board.add(3, 2, PlayerCharacter.O);
-        board.add(3, 3, PlayerCharacter.O);
+        board.add(0, PlayerCharacter.O);
+        board.add(1, PlayerCharacter.O);
+        board.add(2, PlayerCharacter.O);
+        board.add(3, PlayerCharacter.O);
+        board.add(4, PlayerCharacter.O);
+        board.add(5, PlayerCharacter.O);
+        board.add(6, PlayerCharacter.O);
+        board.add(7, PlayerCharacter.O);
+        board.add(8, PlayerCharacter.O);
 
         assertTrue(board.isFilled());
     }
+
 }

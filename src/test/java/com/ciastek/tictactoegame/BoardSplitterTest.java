@@ -32,8 +32,9 @@ public class BoardSplitterTest {
         int x = 3;
         int y = 6;
 
-        Board board = new Board(boardWidth, boardHeight);
-        board.add(x, y, PlayerCharacter.O);
+        BoardDimensions boardDimensions = new BoardDimensions(boardWidth, boardHeight);
+        Board board = new Board(boardDimensions);
+        board.add(x, PlayerCharacter.O);
         int index = (y-1) * boardWidth  + (x-1); //TODO: fix adding to Board (board.add(index, PlayerCharacter) !
         assertEquals(splitter.getRow(board, index), expectedRow);
     }

@@ -10,6 +10,7 @@ public class GameUI {
 
 
     public static void main(String[] args) {
+
         // TODO:
         // 1) input validation
         // 2) Arbiter
@@ -25,7 +26,8 @@ public class GameUI {
 
         System.out.println("Choose board size (greater than 2): ");
         int boardSize = input.nextInt();
-        Board board = new Board(boardSize, boardSize);
+        BoardDimensions boardDimensions = new BoardDimensions(boardSize, boardSize);
+        Board board = new Board(boardDimensions);
         game = new Game(board);
         game.setFirstPlayer(PlayerCharacter.valueOf(String.valueOf(userInput.charAt(0))));
 
@@ -45,7 +47,7 @@ public class GameUI {
             int y = input.nextInt();
 
             try {
-                player.move(x, y);
+                player.move(x);
             } catch (IllegalArgumentException exception){
                 System.out.println(exception.getMessage());
             }
@@ -54,6 +56,7 @@ public class GameUI {
 
             System.out.println(board.toString());
         }
+
     }
 
     private static void validatePlayerSign(String userInput) {
@@ -67,4 +70,5 @@ public class GameUI {
             System.out.println("Provide Player which starts the game: O or X");
         }
     }
+
 }

@@ -14,7 +14,9 @@ public class GameTest {
     @BeforeMethod
     public void setUp(){
         int boardSize = 3;
-        Board board = new Board(boardSize, boardSize);
+        BoardDimensions boardDimensions = new BoardDimensions(boardSize, boardSize);
+
+        Board board = new Board(boardDimensions);
         game = new Game(board);
         game.setFirstPlayer(PlayerCharacter.O);
     }
@@ -24,16 +26,15 @@ public class GameTest {
     }
 
     public void givenOPlayerMoveWhenPlayThenCurrentPlayerX(){
-        game.play(1, 1);
+        game.play(1);
 
         assertEquals(game.getCurrentPlayer(), PlayerCharacter.X);
     }
 
     public void whenPlayThenBoardFieldSet(){
-        int x = 1;
-        int y = 2;
-        game.play(x, y);
-        PlayerCharacter actual = game.getBoardField(x, y);
+        int index = 1;
+        game.play(index);
+        PlayerCharacter actual = game.getBoardField(index);
         assertEquals(actual, PlayerCharacter.O);
     }
 
@@ -49,10 +50,10 @@ public class GameTest {
         expectedBoard.add(PlayerCharacter.NONE);
         expectedBoard.add(PlayerCharacter.X);
 
-        game.play(1,1); //O
-        game.play(2,1); //X
-        game.play(1,3); //O
-        game.play(3,3); //X
+        game.play(0); //O
+        game.play(1); //X
+        game.play(6); //O
+        game.play(8); //X
 
         assertEquals(game.getBoard(), expectedBoard);
     }
@@ -62,15 +63,15 @@ public class GameTest {
     }
 
     public void whenBoardFilledThenGameIsFinished(){
-        game.play(1,1); //O
-        game.play(2,1); //X
-        game.play(1,3); //O
-        game.play(3,3); //X
-        game.play(2,2); //O
-        game.play(1,2); //X
-        game.play(2,3); //O
-        game.play(3,1); //X
-        game.play(3,2); //O
+        game.play(0); //O
+        game.play(1); //X
+        game.play(2); //O
+        game.play(3); //X
+        game.play(4); //O
+        game.play(5); //X
+        game.play(6); //O
+        game.play(7); //X
+        game.play(8); //O
 
         assertTrue(game.isFinished());
     }
