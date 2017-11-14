@@ -124,8 +124,6 @@ public class BoardSplitterTest {
         int index = 14;
         board.add(index, PlayerCharacter.O);
 
-        System.out.println(expectedDiagonal);
-        System.out.println(splitter.getSecondDiagonal(board, index));
         assertEquals(splitter.getSecondDiagonal(board, index), expectedDiagonal);
     }
 

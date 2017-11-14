@@ -1,6 +1,7 @@
 package com.ciastek.tictactoegame;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class VictoryValidator {
     private int winningCondition;
@@ -9,22 +10,32 @@ public class VictoryValidator {
         this.winningCondition = winningCondition;
     }
 
-    public boolean isVictory(String boardPiece){
-        long xCounter = boardPiece.chars().filter(ch -> ch =='X').count();
-        long oCounter = boardPiece.chars().filter(ch -> ch =='O').count();
+    public boolean isVictory(List<PlayerCharacter> boardPiece){
 
-        System.out.println(xCounter);
-        System.out.println(oCounter);
+        // currentCanditate = List.get(0)
+        // for i = 1 po  List {
+        // if list.get(i) == currentCandidate
+        // counter ++
+        //     if counter == winningCond return true;
+        // else {
+        //         curreCa = list get(i)
+        //          counter = 0;
+        // }
+        PlayerCharacter currentCandidate = boardPiece.get(0);
+        int counter = 1;
 
-        //TODO: regex!
+        for (int i = 1; i < boardPiece.size(); i++) {
+            if (boardPiece.get(i) == currentCandidate){
+                counter ++;
+                if (counter == winningCondition && currentCandidate != PlayerCharacter.NONE){
+                    return true;
+                }
+            } else {
+                currentCandidate = boardPiece.get(i);
+                counter = 1;
+            }
+        }
 
-        String joinedString = String.join(" ", "X", "X", "X");
-        String joinedString2 = String.join(" ", "O", "O", "O");
-
-        System.out.println(joinedString);
-        System.out.println(joinedString2);
-
-
-        return boardPiece.contains(joinedString) || boardPiece.contains(joinedString2);
+        return false;
     }
 }

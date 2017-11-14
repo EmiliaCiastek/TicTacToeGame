@@ -2,6 +2,9 @@ package com.ciastek.tictactoegame;
 
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -12,32 +15,42 @@ public class VictoryValidatorTest {
     public void givenNoVictoryThenFalse(){
         VictoryValidator victory = new VictoryValidator(3);
 
-        String row = "X O X";
+        List<PlayerCharacter> boardPiece = new ArrayList<>();
+        boardPiece.add(PlayerCharacter.NONE);
+        boardPiece.add(PlayerCharacter.X);
+        boardPiece.add(PlayerCharacter.NONE);
+        boardPiece.add(PlayerCharacter.O);
+        boardPiece.add(PlayerCharacter.NONE);
 
-        assertFalse(victory.isVictory(row));
+        assertFalse(victory.isVictory(boardPiece));
     }
 
     @Test
     public void givenXVictoryThenTrue(){
         VictoryValidator victory = new VictoryValidator(4);
 
-        String row = "X X X X";
+        List<PlayerCharacter> boardPiece = new ArrayList<>();
+        boardPiece.add(PlayerCharacter.O);
+        boardPiece.add(PlayerCharacter.X);
+        boardPiece.add(PlayerCharacter.X);
+        boardPiece.add(PlayerCharacter.X);
+        boardPiece.add(PlayerCharacter.X);
+        boardPiece.add(PlayerCharacter.NONE);
 
-        assertTrue(victory.isVictory(row));
+        assertTrue(victory.isVictory(boardPiece));
     }
 
     @Test
-    public void givenOVictoryThenTrue(){
-        VictoryValidator victory = new VictoryValidator(10);
-
-        String row = "O O O O O O O O O O";
-        assertTrue(victory.isVictory(row));
-    }
-
-    @Test
-    public void givenNoVictoryWithFourOThenFalse(){
+    public void givenNoVictoryWithNoneThenFalse(){
         VictoryValidator victory = new VictoryValidator(3);
-        String row = "O O X O X";
-        assertFalse(victory.isVictory(row));
+        List<PlayerCharacter> boardPiece = new ArrayList<>();
+        boardPiece.add(PlayerCharacter.NONE);
+        boardPiece.add(PlayerCharacter.NONE);
+        boardPiece.add(PlayerCharacter.NONE);
+        boardPiece.add(PlayerCharacter.NONE);
+        boardPiece.add(PlayerCharacter.NONE);
+
+        assertFalse(victory.isVictory(boardPiece));
     }
+
 }
