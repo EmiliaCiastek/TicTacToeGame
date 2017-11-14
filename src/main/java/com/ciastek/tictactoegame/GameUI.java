@@ -13,7 +13,6 @@ public class GameUI {
 
         // TODO:
         // 1) input validation
-        // 2) Arbiter
         // 3) get win conditions from user
         // 4) match and get number of matches in single game (from user)
 
