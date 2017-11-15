@@ -12,15 +12,6 @@ public class VictoryValidator {
 
     public boolean isVictory(List<PlayerCharacter> boardPiece){
 
-        // currentCanditate = List.get(0)
-        // for i = 1 po  List {
-        // if list.get(i) == currentCandidate
-        // counter ++
-        //     if counter == winningCond return true;
-        // else {
-        //         curreCa = list get(i)
-        //          counter = 0;
-        // }
         PlayerCharacter currentCandidate = boardPiece.get(0);
         int counter = 1;
 

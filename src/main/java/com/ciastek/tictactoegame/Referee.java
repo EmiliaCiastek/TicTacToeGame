@@ -28,7 +28,7 @@ public class Referee {
 
         boolean isVictory = validator.isVictory(column) ||
                 validator.isVictory(row);
-                //validator.isVictory(diagonal1) ||
+                //validator.isVictory(diagonal1);
                // validator.isVictory(diagonal2);
 
         return isVictory;

@@ -84,4 +84,24 @@ public class BoardSplitterTest {
         assertEquals(actualDiagonal, expectedDiagonal);
     }
 
+    @Test
+    public void shouldReturnTopBottomDiagonal() {
+        BoardSplitter splitter = new BoardSplitter();
+        BoardDimensions boardDimensions = new BoardDimensions(10, 5);
+        Board board = new Board(boardDimensions);
+
+        board.add(0, PlayerCharacter.X);
+        board.add(1, PlayerCharacter.O);
+        board.add(2, PlayerCharacter.X);
+
+        List<PlayerCharacter> expected = new ArrayList();
+        expected.add(PlayerCharacter.X);
+        expected.add(PlayerCharacter.NONE);
+        expected.add(PlayerCharacter.NONE);
+        expected.add(PlayerCharacter.NONE);
+        expected.add(PlayerCharacter.NONE);
+        List<PlayerCharacter> actual = splitter.getTopBottomDiagonal(board,2);
+        assertEquals(actual, expected);
+    }
+
 }

@@ -37,13 +37,19 @@ public class BoardSplitter {
         int columnNumber = getColumnNumber(index, boardWidth);
 
         int diagonalDelta = boardWidth + 1;
-        int startIndex = index - (diagonalDelta * columnNumber);
+        int startIndex;
+        if(getRowNumber(index, boardWidth) == 0){
+            startIndex = index;
+        } else {
+           startIndex =  index - (diagonalDelta * columnNumber);
+        }
 
         List<PlayerCharacter> diagonal = new ArrayList<>();
 
         int rowNumber = getRowNumber(startIndex, boardWidth);
         int diagonalIndex = startIndex;
-        while(rowNumber < boardHeight){
+        while(rowNumber < boardHeight && diagonalIndex >= 0){
+            System.out.println(diagonalIndex);
             diagonal.add(board.getCharacterAt(diagonalIndex));
             diagonalIndex = diagonalIndex + diagonalDelta;
             rowNumber = getRowNumber(diagonalIndex, boardWidth);
@@ -72,8 +78,8 @@ public class BoardSplitter {
 
         int rowNumber = getRowNumber(startIndex, boardWidth);
         int diagonalIndex = startIndex;
-        while(rowNumber < boardHeight){
-            System.out.println(rowNumber);
+
+        while(rowNumber < boardHeight && diagonalIndex >= 0){
             diagonal.add(board.getCharacterAt(diagonalIndex));
             diagonalIndex = diagonalIndex + diagonalDelta;
             rowNumber = getRowNumber(diagonalIndex, boardWidth);

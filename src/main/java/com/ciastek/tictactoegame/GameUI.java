@@ -23,14 +23,16 @@ public class GameUI {
         userInput = input.nextLine();
         validatePlayerSign(userInput);
 
-        System.out.println("Choose board size (greater than 2): ");
-        int boardSize = input.nextInt();
-        BoardDimensions boardDimensions = new BoardDimensions(boardSize, boardSize);
+        System.out.println("Provide board width (greater than 2): ");
+        int width = input.nextInt();
+        System.out.println("Provide board height (greater than 2): ");
+        int height = input.nextInt();
+        BoardDimensions boardDimensions = new BoardDimensions(width, height);
         Board board = new Board(boardDimensions);
         game = new Game(board);
         game.setFirstPlayer(PlayerCharacter.valueOf(String.valueOf(userInput.charAt(0))));
 
-        userInput = input.nextLine();
+       // userInput = input.nextLine();
         System.out.println("Game started");
 
         System.out.println(board.toString());
@@ -40,13 +42,11 @@ public class GameUI {
 
         while (!game.isFinished()){
             System.out.println("Player: " + game.getCurrentPlayer() + " turn");
-            System.out.println("Provide x: ");
-            int x = input.nextInt();
-            System.out.println("Provide y: ");
-            int y = input.nextInt();
+            System.out.println("Provide index: ");
+            int index = input.nextInt();
 
             try {
-                player.move(x);
+                player.move(index);
             } catch (IllegalArgumentException exception){
                 System.out.println(exception.getMessage());
             }
@@ -62,12 +62,7 @@ public class GameUI {
         if (userInput != "" && userInput.length() == 1) {
             if (userInput == "X" || userInput == "O") {
                 System.out.println("Provided input: " + userInput);
-            } else {
-                System.out.println("Provide Player which starts the game: O or X");
             }
-        } else {
-            System.out.println("Provide Player which starts the game: O or X");
         }
     }
-
 }

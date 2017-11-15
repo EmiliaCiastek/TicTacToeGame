@@ -53,11 +53,10 @@ public class Board {
             } else {
                 builder.append(i);
             }
-            builder.append("|");
+            builder.append("\t\t|");
 
             if((i + 1) % boardDimensions.getWidth() == 0){
-               builder.append("\n")
-                       .append("------\n");
+               builder.append("\n\n");
             }
         }
 

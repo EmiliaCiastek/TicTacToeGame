@@ -17,10 +17,9 @@ public class RefereeTest {
         board.add(1, PlayerCharacter.O);
         board.add(2, PlayerCharacter.X);
 
-
         assertFalse(referee.isWon(board, 2));
     }
-/*
+
     @Test
     public void givenWinningInColumnThenTrue(){
         Referee referee = new Referee(3);
@@ -38,8 +37,20 @@ public class RefereeTest {
         board.add(7, PlayerCharacter.X);
         board.add(8, PlayerCharacter.NONE);
 
-        System.out.println(board.toString());
-        assertTrue(referee.isWon(board, 2));
+        assertTrue(referee.isWon(board, 1));
+    }
+/*
+    @Test
+    public void givenWinningDiagonalThenTrue(){
+        Referee referee = new Referee(3);
+
+        BoardDimensions boardDimensions = new BoardDimensions(4, 3);
+        Board board = new Board(boardDimensions);
+        board.add(0, PlayerCharacter.O);
+        board.add(5, PlayerCharacter.O);
+        board.add(10, PlayerCharacter.O);
+
+        assertTrue(referee.isWon(board, 0));
     }
 */
 }
