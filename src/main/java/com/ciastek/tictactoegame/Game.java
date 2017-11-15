@@ -18,8 +18,9 @@ public class Game {
         return currentPlayer;
     }
 
-    public void play(int index) { //TODO: fix play method: x y -> index
+    public void play(int index) {
         board.add(index, currentPlayer);
+
 
         switchPlayer();
     }
