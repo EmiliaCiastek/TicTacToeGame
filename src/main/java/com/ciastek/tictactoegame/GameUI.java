@@ -11,10 +11,9 @@ public class GameUI {
 
     public static void main(String[] args) {
 
-        // TODO:
-        // 1) input validation
-        // 3) get win conditions from user
-        // 4) match and get number of matches in single game (from user)
+        // TODO (1): input validation
+        // TODO (2): get win conditions from user
+        // TODO (3): match number of matches always 3
 
         System.out.println("TicTacToeGame");
         System.out.println("I optimistically assume that you'll provide correct values :)");
@@ -32,7 +31,6 @@ public class GameUI {
         game = new Game(board);
         game.setFirstPlayer(PlayerCharacter.valueOf(String.valueOf(userInput.charAt(0))));
 
-       // userInput = input.nextLine();
         System.out.println("Game started");
 
         System.out.println(board.toString());
@@ -55,7 +53,6 @@ public class GameUI {
 
             System.out.println(board.toString());
         }
-
     }
 
     private static void validatePlayerSign(String userInput) {

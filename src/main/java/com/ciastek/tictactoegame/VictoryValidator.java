@@ -12,6 +12,10 @@ public class VictoryValidator {
 
     public boolean isVictory(List<PlayerCharacter> boardPiece){
 
+        if(boardPiece.size() < winningCondition){
+            return false;
+        }
+
         PlayerCharacter currentCandidate = boardPiece.get(0);
         int counter = 1;
 

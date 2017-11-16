@@ -5,6 +5,9 @@ public class Player {
     private Game game;
     private MovementValidator validator;
 
+    //TODO (1): add scores and name
+    //TODO (2): delete game!
+
     public Player(PlayerCharacter character, Game game, MovementValidator validator) {
         this.character = character;
         this.game = game;

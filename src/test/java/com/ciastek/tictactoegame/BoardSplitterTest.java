@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class BoardSplitterTest {
     @Test
@@ -104,4 +105,32 @@ public class BoardSplitterTest {
         assertEquals(actual, expected);
     }
 
+    @Test
+    public void shouldReturnCorrectDiagonalForProvidedIndex(){
+        BoardSplitter splitter = new BoardSplitter();
+        BoardDimensions boardDimensions = new BoardDimensions(3, 3);
+        Board board = new Board(boardDimensions);
+
+        board.add(0, PlayerCharacter.O);
+        board.add(1, PlayerCharacter.X);
+        board.add(2, PlayerCharacter.O);
+        board.add(3, PlayerCharacter.X);
+        board.add(4, PlayerCharacter.O);
+        board.add(5, PlayerCharacter.X);
+        board.add(6, PlayerCharacter.O);
+        board.add(7, PlayerCharacter.X);
+        board.add(8, PlayerCharacter.O);
+
+        List<PlayerCharacter> actual = splitter.getDiagonal(board, 5);
+        System.out.println(actual);
+
+        List<PlayerCharacter> expectedDiagonal = new ArrayList<>();
+        expectedDiagonal.add(PlayerCharacter.X);
+        expectedDiagonal.add(PlayerCharacter.X);
+        System.out.println(expectedDiagonal);
+
+        assertEquals(actual, expectedDiagonal);
+    }
+
+    //TODO: add parametrized tests
 }

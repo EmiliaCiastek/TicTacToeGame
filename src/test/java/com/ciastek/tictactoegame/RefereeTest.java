@@ -39,7 +39,7 @@ public class RefereeTest {
 
         assertTrue(referee.isWon(board, 1));
     }
-/*
+
     @Test
     public void givenWinningDiagonalThenTrue(){
         Referee referee = new Referee(3);
@@ -52,5 +52,5 @@ public class RefereeTest {
 
         assertTrue(referee.isWon(board, 0));
     }
-*/
+
 }

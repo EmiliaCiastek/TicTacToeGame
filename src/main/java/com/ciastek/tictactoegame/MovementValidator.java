@@ -3,11 +3,12 @@ package com.ciastek.tictactoegame;
 public class MovementValidator {
     private Board gameBoard;
 
+    // TODO: Create Movements collection (Game History?) (hashMap? ) if contains Movement -> field is occupied
     public MovementValidator(Board gameBoard) {
         this.gameBoard = gameBoard;
     }
 
-    public void validate(int index) throws IllegalArgumentException { //TODO: fix validate method: x y -> index
+    public void validate(int index) throws IllegalArgumentException {
         if(index < 0) {
             throw new IllegalArgumentException("Coordinates have to be equals or greater than 0");
         } else if(index > gameBoard.getCharacterBoard().size()){

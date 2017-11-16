@@ -31,6 +31,8 @@ public class Game {
     }
 
     private void switchPlayer() {
+        //TODO (1): Players objects!
+
         if (currentPlayer == PlayerCharacter.O){
             currentPlayer = PlayerCharacter.X;
         } else {
