@@ -17,14 +17,13 @@ public class Referee {
     public boolean isWon(Board board, int index) {
         List<PlayerCharacter> column = splitter.getColumn(board, index);
         List<PlayerCharacter> row = splitter.getRow(board, index);
-
-
-
+        List<PlayerCharacter> topLeftDiagonal = splitter.getTopLeftBottomRightDiagonal(board, index);
+        List<PlayerCharacter> topRightDiagonal = splitter.getTopRightBottomLeftDiagonal(board, index);
 
         boolean isVictory = validator.isVictory(column) ||
-                validator.isVictory(row);
-
-
+                validator.isVictory(row) ||
+                validator.isVictory(topLeftDiagonal) ||
+                validator.isVictory(topRightDiagonal);
 
         return isVictory;
 
