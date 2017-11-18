@@ -1,6 +1,7 @@
 package com.ciastek.tictactoegame;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class BoardSplitter {
@@ -16,11 +17,10 @@ public class BoardSplitter {
 
     public List<PlayerCharacter> getColumn(Board board, int index) {
         int boardHeight = board.getBoardDimensions().getHeight();
-        int boardWidth = board.getBoardDimensions().getWidth();
-
-        int columnNumber = getColumnNumber(index, boardWidth);
 
         int indexDelta = board.getBoardDimensions().getWidth();
+        int columnNumber = getColumnNumber(index, indexDelta);
+
 
         List<PlayerCharacter> column = new ArrayList<>(boardHeight);
 
@@ -31,7 +31,45 @@ public class BoardSplitter {
         return column;
     }
 
+    public List<PlayerCharacter> getTopLeftBottomRightDiagonal(Board board, int startIndex) {
+        List<PlayerCharacter> diagonal = new ArrayList<>();
 
+        diagonal.addAll(getElementsAboveStartIndex(board, startIndex));
+        diagonal.addAll(getElementsBelowStartIndex(board, startIndex));
+
+        return diagonal;
+    }
+
+    private List<PlayerCharacter> getElementsAboveStartIndex(Board board, int currentIndex) {
+        List<PlayerCharacter> aboveStartIndex = new ArrayList<>();
+        int boardWidth = board.getBoardDimensions().getWidth();
+        int diagonalIndexDelta = boardWidth + 1;
+        int previousColumn = getColumnNumber(currentIndex, boardWidth);
+
+        while(currentIndex >= 0 && previousColumn >= 0){
+            aboveStartIndex.add(board.getCharacterAt(currentIndex));
+            previousColumn --;
+            currentIndex -= diagonalIndexDelta;
+        }
+        Collections.reverse(aboveStartIndex);
+        return aboveStartIndex;
+    }
+
+    private List<PlayerCharacter> getElementsBelowStartIndex(Board board, int startIndex) {
+        List<PlayerCharacter> belowStartIndex = new ArrayList<>();
+        int boardWidth = board.getBoardDimensions().getWidth();
+        int diagonalIndexDelta = boardWidth + 1;
+        int currentIndex = startIndex + diagonalIndexDelta;
+        int previousColumn = getColumnNumber(startIndex, boardWidth);
+
+        while (currentIndex < board.getSize() && getColumnNumber(currentIndex, boardWidth) > previousColumn) {
+            belowStartIndex.add(board.getCharacterAt(currentIndex));
+            previousColumn++;
+            currentIndex += diagonalIndexDelta;
+        }
+
+        return belowStartIndex;
+    }
 
     private int getRowNumber(int index, int boardWidth){
         return index/boardWidth;
@@ -41,74 +79,4 @@ public class BoardSplitter {
         return index % boardWidth;
     }
 
-    public List<PlayerCharacter> getBottomTopDiagonal(Board board, int index) {
-        int boardWidth = board.getBoardDimensions().getWidth();
-        int boardHeight = board.getBoardDimensions().getHeight();
-        int columnNumber = getColumnNumber(index, boardWidth);
-
-        int diagonalDelta = boardWidth - 1;
-        int startIndex = index - (diagonalDelta * (Math.abs(boardWidth - columnNumber -1)));
-
-        List<PlayerCharacter> diagonal = new ArrayList<>();
-
-        int rowNumber = getRowNumber(startIndex, boardWidth);
-        int diagonalIndex = startIndex;
-
-        while(rowNumber < boardHeight && diagonalIndex >= 0){
-            diagonal.add(board.getCharacterAt(diagonalIndex));
-            diagonalIndex = diagonalIndex + diagonalDelta;
-            rowNumber = getRowNumber(diagonalIndex, boardWidth);
-        }
-        return diagonal;
-    }
-    public List<PlayerCharacter> getTopBottomDiagonal(Board board, int index) {
-        int boardWidth = board.getBoardDimensions().getWidth();
-        int boardHeight = board.getBoardDimensions().getHeight();
-        int columnNumber = getColumnNumber(index, boardWidth);
-
-        int diagonalDelta = boardWidth + 1;
-        int startIndex;
-        if(getRowNumber(index, boardWidth) == 0){
-            startIndex = index;
-        } else {
-            startIndex =  index - (diagonalDelta * columnNumber);
-        }
-
-        List<PlayerCharacter> diagonal = new ArrayList<>();
-
-        int rowNumber = getRowNumber(startIndex, boardWidth);
-        int diagonalIndex = startIndex;
-        while(rowNumber < boardHeight && diagonalIndex >= 0){
-            System.out.println(diagonalIndex);
-            diagonal.add(board.getCharacterAt(diagonalIndex));
-            diagonalIndex = diagonalIndex + diagonalDelta;
-            rowNumber = getRowNumber(diagonalIndex, boardWidth);
-        }
-
-        return diagonal;
-    }
-
-    public List<PlayerCharacter> getDiagonal(Board board, int index) {
-        int boardWidth = board.getBoardDimensions().getWidth();
-        int diagonalIndexDelta = boardWidth + 1;
-        int indexRowNumber = getRowNumber(index, boardWidth);
-
-        int startIndex;
-
-        if(indexRowNumber == 0){
-            startIndex = index;
-        } else {
-            startIndex = index - (diagonalIndexDelta * indexRowNumber);
-        }
-
-        List<PlayerCharacter> diagonal = new ArrayList<>();
-
-        int currentIndex = startIndex;
-
-        while (currentIndex < board.getSize()){
-            diagonal.add(board.getCharacterAt(currentIndex));
-            currentIndex += diagonalIndexDelta;
-        }
-        return diagonal;
-    }
 }
