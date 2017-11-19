@@ -21,4 +21,20 @@ public class PlayerResultTest {
 
         assertEquals(result.getParsedPlayer(), PlayerCharacter.NONE);
     }
+
+    @Test
+    public void givenCorrectInputThenIsValidTrue(){
+        String input = "X";
+        PlayerResult result = new PlayerResult(true, input);
+
+        assertTrue(result.isValid());
+    }
+
+    @Test
+    public void givenIncorrectInputThenIsValidFalse(){
+        String input = "dfhwuirf";
+        PlayerResult result = new PlayerResult(false, input);
+
+        assertFalse(result.isValid());
+    }
 }

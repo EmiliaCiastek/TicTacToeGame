@@ -22,4 +22,8 @@ public class PlayerResult extends Result<PlayerCharacter> {
             return PlayerCharacter.NONE;
         }
     }
+
+    public boolean isValid() {
+        return isValid;
+    }
 }
