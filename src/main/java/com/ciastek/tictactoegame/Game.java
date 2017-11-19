@@ -10,7 +10,7 @@ public class Game {
 
     public Game(Board board){
         this.board = board;
-        referee = new Referee(3); //TODO: get winning Condition from user
+        referee = new Referee(new WinningCondition(3)); //TODO: get winning Condition from user
     }
 
     public void setFirstPlayer(PlayerCharacter player) {

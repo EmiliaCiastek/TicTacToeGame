@@ -1,18 +1,17 @@
 package com.ciastek.tictactoegame;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class VictoryValidator {
-    private int winningCondition;
+    private WinningCondition winningCondition;
 
-    public VictoryValidator(int winningCondition){
+    public VictoryValidator(WinningCondition winningCondition){
         this.winningCondition = winningCondition;
     }
 
     public boolean isVictory(List<PlayerCharacter> boardPiece){
 
-        if(boardPiece.size() < winningCondition){
+        if(boardPiece.size() < winningCondition.asInt()){
             return false;
         }
 
@@ -22,7 +21,7 @@ public class VictoryValidator {
         for (int i = 1; i < boardPiece.size(); i++) {
             if (boardPiece.get(i) == currentCandidate){
                 counter ++;
-                if (counter == winningCondition && currentCandidate != PlayerCharacter.NONE){
+                if (counter == winningCondition.asInt() && currentCandidate != PlayerCharacter.NONE){
                     return true;
                 }
             } else {

@@ -6,10 +6,11 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class RefereeTest {
+    private Referee referee = new Referee(new WinningCondition(3));
+
 
     @Test
     public void givenNoWinningBoardPieceThenNoWinner(){
-        Referee referee = new Referee(3);
         BoardDimensions boardDimensions = new BoardDimensions(10, 12);
         Board board = new Board(boardDimensions);
 
@@ -22,8 +23,6 @@ public class RefereeTest {
 
     @Test
     public void givenWinningInColumnThenTrue(){
-        Referee referee = new Referee(3);
-
         BoardDimensions boardDimensions = new BoardDimensions(3, 3);
         Board board = new Board(boardDimensions);
 
@@ -42,8 +41,6 @@ public class RefereeTest {
 
     @Test
     public void givenWinningDiagonalThenTrue(){
-        Referee referee = new Referee(3);
-
         BoardDimensions boardDimensions = new BoardDimensions(4, 3);
         Board board = new Board(boardDimensions);
         board.add(0, PlayerCharacter.O);

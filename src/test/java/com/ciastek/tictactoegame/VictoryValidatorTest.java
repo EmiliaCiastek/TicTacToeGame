@@ -13,7 +13,7 @@ public class VictoryValidatorTest {
 
     @Test
     public void givenNoVictoryThenFalse(){
-        VictoryValidator victory = new VictoryValidator(3);
+        VictoryValidator victory = new VictoryValidator(new WinningCondition(3));
 
         List<PlayerCharacter> boardPiece = new ArrayList<>();
         boardPiece.add(PlayerCharacter.NONE);
@@ -27,7 +27,7 @@ public class VictoryValidatorTest {
 
     @Test
     public void givenXVictoryThenTrue(){
-        VictoryValidator victory = new VictoryValidator(4);
+        VictoryValidator victory = new VictoryValidator(new WinningCondition(4));
 
         List<PlayerCharacter> boardPiece = new ArrayList<>();
         boardPiece.add(PlayerCharacter.O);
@@ -42,7 +42,7 @@ public class VictoryValidatorTest {
 
     @Test
     public void givenNoVictoryWithNoneThenFalse(){
-        VictoryValidator victory = new VictoryValidator(3);
+        VictoryValidator victory = new VictoryValidator(new WinningCondition(3));
         List<PlayerCharacter> boardPiece = new ArrayList<>();
         boardPiece.add(PlayerCharacter.NONE);
         boardPiece.add(PlayerCharacter.NONE);

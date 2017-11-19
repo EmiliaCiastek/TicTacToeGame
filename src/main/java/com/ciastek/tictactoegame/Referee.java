@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Referee {
 
-    private int winningCondition;
+    private WinningCondition winningCondition;
     private BoardSplitter splitter;
     private VictoryValidator validator;
 
-    public Referee(int winningCondition) {
+    public Referee(WinningCondition winningCondition) {
         this.winningCondition = winningCondition;
         this.splitter = new BoardSplitter();
         this.validator = new VictoryValidator(winningCondition);
