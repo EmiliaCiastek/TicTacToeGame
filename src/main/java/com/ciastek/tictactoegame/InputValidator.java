@@ -8,9 +8,9 @@ public class InputValidator {
     public PlayerResult checkPlayer(String input) {
 
         if(input.equals("O") || input.equals("X")){
-            return new PlayerResult(true, input);
+            return new PlayerResult(true, PlayerCharacter.valueOf(input));
         } else {
-            return new PlayerResult(false, input);
+            return new PlayerResult();
         }
     }
 }

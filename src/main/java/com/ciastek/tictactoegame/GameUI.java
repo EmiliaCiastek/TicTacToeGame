@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class GameUI {
     private static Game game;
-    private static String userInput;
     private static Scanner input;
     private static Player player;
 
