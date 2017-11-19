@@ -7,10 +7,13 @@ public class Game {
     private Board board;
     private Referee referee;
     private boolean isGameWon = false;
+    private MovementValidator validator;
 
     public Game(Board board){
         this.board = board;
         referee = new Referee(new WinningCondition(3)); //TODO: get winning Condition from user
+        validator = new MovementValidator(board);
+
     }
 
     public void setFirstPlayer(PlayerCharacter player) {
@@ -22,7 +25,13 @@ public class Game {
     }
 
     public void play(int index) {
-        board.add(index, currentPlayer);
+        try {
+            validator.validate(index);
+            board.add(index, currentPlayer);
+        } catch (IllegalArgumentException exception) {
+            throw exception;
+        }
+
         isGameWon = referee.isWon(board, index);
         if (isGameWon){
             System.out.println("Game over! Player " + currentPlayer + " won!!!");

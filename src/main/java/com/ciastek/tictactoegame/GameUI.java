@@ -34,9 +34,8 @@ public class GameUI {
         System.out.println("Game started");
 
         System.out.println(board.toString());
-        MovementValidator validator = new MovementValidator(board);
 
-        player = new Player(PlayerCharacter.O, game, validator);
+        player = new Player(PlayerCharacter.O);
 
         while (!game.isFinished()){
             System.out.println("Player: " + game.getCurrentPlayer() + " turn");
@@ -44,7 +43,7 @@ public class GameUI {
             int index = input.nextInt();
 
             try {
-                player.move(index);
+                game.play(index);
             } catch (IllegalArgumentException exception){
                 System.out.println(exception.getMessage());
             }
