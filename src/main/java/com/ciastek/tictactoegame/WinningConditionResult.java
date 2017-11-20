@@ -18,7 +18,8 @@ public class WinningConditionResult {
         return parsedValue;
     }
 
-    public boolean isValid() {
+    public boolean isValid()
+    {
         return isValid;
     }
 }

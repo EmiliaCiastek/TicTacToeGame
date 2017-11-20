@@ -82,7 +82,9 @@ public class InputValidatorTest {
     }
 
     @Test
-    public void givenWinningConditionGreaterThenBoardDimensionsWhenValidateThenReturnEmptyConditionResult(){
+    public void givenWinningConditionGreaterThanBoardWidthWhenValidateThenReturnEmptyConditionResult(){
+        dimensions = new BoardDimensions(3, 6);
+
         input = "7";
 
         WinningConditionResult result = validator.checkWinningCondition(input, dimensions);
@@ -90,4 +92,13 @@ public class InputValidatorTest {
         assertFalse(result.isValid());
     }
 
+    @Test
+    public void givenWinningConditionSmallerThanBoardHeightThenBoardWidthWhenValidateThenReturnCorrectConditionResult(){
+        dimensions = new BoardDimensions(3, 6);
+        input = "5";
+
+        WinningConditionResult result = validator.checkWinningCondition(input, dimensions);
+
+        assertTrue(result.isValid());
+    }
 }

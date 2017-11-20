@@ -1,7 +1,7 @@
 package com.ciastek.tictactoegame;
 
 public class GameSettings {
-    private WinningCondition winningCondition;
-    private BoardDimensions boardDimensions;
+    public WinningCondition winningCondition;
+    public BoardDimensions boardDimensions;
 
 }

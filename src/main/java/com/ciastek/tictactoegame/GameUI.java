@@ -14,6 +14,7 @@ public class GameUI {
         // TODO (2): get win conditions from user
         // TODO (3): match number of matches always 3
 
+        GameSettings settings = new GameSettings();
         System.out.println("TicTacToeGame");
         System.out.println("I optimistically assume that you'll provide correct values :)");
         input = new Scanner(System.in);
@@ -25,7 +26,7 @@ public class GameUI {
         BoardDimensions boardDimensions = new BoardDimensions(width, height);
         Board board = new Board(boardDimensions);
         game = new Game(board);
-
+       setWinningCondition(settings, boardDimensions);
 
         setFirstPlayer(game);
 
@@ -35,14 +36,14 @@ public class GameUI {
 
         player = new Player(PlayerCharacter.O);
 
-        while (!game.isFinished()){
+        while (!game.isFinished()) {
             System.out.println("Player: " + game.getCurrentPlayer() + " turn");
             System.out.println("Provide index: ");
             int index = input.nextInt();
 
             try {
                 game.play(index);
-            } catch (IllegalArgumentException exception){
+            } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());
             }
 
@@ -55,23 +56,26 @@ public class GameUI {
     private static void setFirstPlayer(Game game) {
         InputValidator inputValidator = new InputValidator();
         System.out.println("Choose first player: O or X?");
-        PlayerResult firstPlayerResult = inputValidator.checkPlayer(input.nextLine());
+        Scanner inputPlayer = new Scanner(System.in);
+        PlayerResult firstPlayerResult = inputValidator.checkPlayer(inputPlayer.nextLine());
 
-        while(firstPlayerResult.isValid() != true){
+        while (firstPlayerResult.isValid() != true) {
             System.out.println("Provided input is incorrect. Choose first player: O or X?");
-            firstPlayerResult = inputValidator.checkPlayer(input.nextLine());
+            firstPlayerResult = inputValidator.checkPlayer(inputPlayer.nextLine());
         }
         game.setFirstPlayer(firstPlayerResult.getParsedPlayer());
     }
 
-    private static void setWinningCondition(GameSettings settings, BoardDimensions dimensions){
+    private static void setWinningCondition(GameSettings settings, BoardDimensions dimensions) {
         InputValidator inputValidator = new InputValidator();
         System.out.println("Provide winning condition: greater than 2 and smaller or equal board's width or height");
-        WinningConditionResult winningConditionResult = inputValidator.checkWinningCondition(input.nextLine(), dimensions);
+        Scanner inputCondition = new Scanner(System.in);
+        WinningConditionResult winningConditionResult = inputValidator.checkWinningCondition(inputCondition.nextLine(), dimensions);
 
-        while (winningConditionResult.isValid() != true){
+        while (winningConditionResult.isValid() != true) {
             System.out.println("Provided input is incorrect. \nProvide winning condition: greater than 2 and smaller or equal board's width or height");
-            winningConditionResult = inputValidator.checkWinningCondition(input.nextLine(), dimensions);
+            winningConditionResult = inputValidator.checkWinningCondition(inputCondition.nextLine(), dimensions);
         }
+
     }
 }
