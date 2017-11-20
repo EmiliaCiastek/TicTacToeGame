@@ -1,5 +1,7 @@
 package com.ciastek.tictactoegame;
 
+import com.ciastek.tictactoegame.engine.board.Board;
+
 public class MovementValidator {
     private Board gameBoard;
 

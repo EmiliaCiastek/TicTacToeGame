@@ -1,5 +1,6 @@
 package com.ciastek.tictactoegame;
 
+import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;

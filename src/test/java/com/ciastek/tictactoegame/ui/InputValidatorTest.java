@@ -1,5 +1,8 @@
 package com.ciastek.tictactoegame;
 
+import com.ciastek.tictactoegame.engine.board.BoardDimensions;
+import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
+import com.ciastek.tictactoegame.engine.player.PlayerResult;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

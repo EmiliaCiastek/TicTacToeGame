@@ -1,5 +1,7 @@
 package com.ciastek.tictactoegame;
 
+import com.ciastek.tictactoegame.engine.board.Board;
+
 import java.util.List;
 
 public class Game {
@@ -9,7 +11,7 @@ public class Game {
     private boolean isGameWon = false;
     private MovementValidator validator;
 
-    public Game(Board board){
+    public Game(Board board) {
         this.board = board;
         referee = new Referee(new WinningCondition(3)); //TODO: get winning Condition from user
         validator = new MovementValidator(board);
@@ -33,7 +35,7 @@ public class Game {
         }
 
         isGameWon = referee.isWon(board, index);
-        if (isGameWon){
+        if (isGameWon) {
             System.out.println("Game over! Player " + currentPlayer + " won!!!");
         }
         switchPlayer();
@@ -42,7 +44,7 @@ public class Game {
     private void switchPlayer() {
         //TODO (1): Players objects!
 
-        if (currentPlayer == PlayerCharacter.O){
+        if (currentPlayer == PlayerCharacter.O) {
             currentPlayer = PlayerCharacter.X;
         } else {
             currentPlayer = PlayerCharacter.O;

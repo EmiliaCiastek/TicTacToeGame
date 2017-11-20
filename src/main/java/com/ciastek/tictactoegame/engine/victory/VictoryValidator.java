@@ -1,5 +1,7 @@
 package com.ciastek.tictactoegame;
 
+import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
+
 import java.util.List;
 
 public class VictoryValidator {

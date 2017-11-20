@@ -1,5 +1,9 @@
 package com.ciastek.tictactoegame;
 
+import com.ciastek.tictactoegame.engine.board.BoardDimensions;
+import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
+import com.ciastek.tictactoegame.engine.player.PlayerResult;
+
 public class InputValidator {
 
     public PlayerResult checkPlayer(String input) {

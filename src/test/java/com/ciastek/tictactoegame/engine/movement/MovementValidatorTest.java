@@ -1,5 +1,7 @@
 package com.ciastek.tictactoegame;
 
+import com.ciastek.tictactoegame.engine.board.Board;
+import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
