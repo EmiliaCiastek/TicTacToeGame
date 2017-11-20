@@ -1,4 +1,6 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.engine.board;
+
+import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +55,7 @@ public class Board {
             } else {
                 builder.append(i);
             }
-            builder.append("\t\t| ");
+            builder.append("\t\t|");
 
             if((i + 1) % boardDimensions.getWidth() == 0){
                builder.append("\n\n");

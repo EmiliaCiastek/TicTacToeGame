@@ -1,5 +1,6 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.engine.movement;
 
+import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.board.Board;
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import org.testng.annotations.BeforeMethod;

@@ -1,4 +1,4 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.engine.player;
 
 import org.testng.annotations.Test;
 

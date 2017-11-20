@@ -1,8 +1,10 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.engine.victory;
 
 import com.ciastek.tictactoegame.engine.board.Board;
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
+import com.ciastek.tictactoegame.engine.victory.Referee;
+import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertFalse;

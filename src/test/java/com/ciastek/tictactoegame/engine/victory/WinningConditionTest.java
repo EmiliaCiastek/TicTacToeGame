@@ -1,5 +1,6 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.engine.victory;
 
+import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;

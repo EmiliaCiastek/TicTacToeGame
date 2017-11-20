@@ -1,5 +1,6 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.engine.board;
 
+import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -55,11 +56,11 @@ public class BoardTest {
         StringBuilder builder = new StringBuilder();
 
 
-        builder.append("0\t\t| 1\t\t| 2\t\t| \n")
+        builder.append("0\t\t|1\t\t|2\t\t|\n")
                 .append("\n")
-                .append("3\t\t| 4\t\t| 5\t\t| \n")
+                .append("3\t\t|4\t\t|5\t\t|\n")
                 .append("\n")
-                .append("6\t\t| 7\t\t| 8\t\t| \n")
+                .append("6\t\t|7\t\t|8\t\t|\n")
                 .append("\n");
 
         assertEquals(board.toString(), builder.toString());
@@ -77,11 +78,11 @@ public class BoardTest {
 
 
         StringBuilder builder = new StringBuilder();
-        builder.append("X\t\t| O\t\t| 2\t\t| \n")
+        builder.append("X\t\t|O\t\t|2\t\t|\n")
                 .append("\n")
-                .append("3\t\t| 4\t\t| X\t\t| \n")
+                .append("3\t\t|4\t\t|X\t\t|\n")
                 .append("\n")
-                .append("6\t\t| 7\t\t| O\t\t| \n")
+                .append("6\t\t|7\t\t|O\t\t|\n")
                 .append("\n");
 
         assertEquals(board.toString(), builder.toString());

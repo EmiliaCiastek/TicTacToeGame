@@ -1,4 +1,4 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.ui;
 
 public class Printer {
 }

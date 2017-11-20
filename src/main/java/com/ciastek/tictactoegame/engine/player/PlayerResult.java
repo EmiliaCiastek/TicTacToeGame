@@ -1,4 +1,6 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.engine.player;
+
+import com.ciastek.tictactoegame.Result;
 
 public class PlayerResult extends Result<PlayerCharacter> {
 

@@ -1,5 +1,9 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.engine.game;
 
+import com.ciastek.tictactoegame.engine.movement.MovementValidator;
+import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
+import com.ciastek.tictactoegame.engine.victory.Referee;
+import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import com.ciastek.tictactoegame.engine.board.Board;
 
 import java.util.List;

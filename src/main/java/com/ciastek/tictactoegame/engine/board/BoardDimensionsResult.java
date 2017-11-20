@@ -1,4 +1,6 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.engine.board;
+
+import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 
 public class BoardDimensionsResult {
 

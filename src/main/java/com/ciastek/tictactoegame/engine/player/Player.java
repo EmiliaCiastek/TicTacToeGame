@@ -1,4 +1,4 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.engine.player;
 
 public class Player {
     private PlayerCharacter character;

@@ -1,8 +1,9 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.ui;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.player.PlayerResult;
+import com.ciastek.tictactoegame.engine.victory.WinningConditionResult;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

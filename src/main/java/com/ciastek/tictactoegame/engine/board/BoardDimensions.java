@@ -1,4 +1,4 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.engine.board;
 
 public class BoardDimensions {
     private int width;

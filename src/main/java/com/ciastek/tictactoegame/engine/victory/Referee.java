@@ -1,5 +1,6 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.engine.victory;
 
+import com.ciastek.tictactoegame.engine.board.BoardSplitter;
 import com.ciastek.tictactoegame.engine.board.Board;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 
@@ -29,6 +30,5 @@ public class Referee {
                 validator.isVictory(topRightDiagonal);
 
         return isVictory;
-
     }
 }

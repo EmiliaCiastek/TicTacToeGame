@@ -1,4 +1,4 @@
-package com.ciastek.tictactoegame.engine;
+package com.ciastek.tictactoegame;
 
 public abstract class Result<T> {
     public boolean isValid;

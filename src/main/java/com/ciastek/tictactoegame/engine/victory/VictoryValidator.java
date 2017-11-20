@@ -1,4 +1,4 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.engine.victory;
 
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 

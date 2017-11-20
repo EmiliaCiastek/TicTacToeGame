@@ -1,5 +1,6 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.engine.board;
 
+import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
