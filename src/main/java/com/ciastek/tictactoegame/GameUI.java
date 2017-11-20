@@ -26,6 +26,7 @@ public class GameUI {
         Board board = new Board(boardDimensions);
         game = new Game(board);
 
+
         setFirstPlayer(game);
 
         System.out.println("Game started");
@@ -61,5 +62,16 @@ public class GameUI {
             firstPlayerResult = inputValidator.checkPlayer(input.nextLine());
         }
         game.setFirstPlayer(firstPlayerResult.getParsedPlayer());
+    }
+
+    private static void setWinningCondition(GameSettings settings, BoardDimensions dimensions){
+        InputValidator inputValidator = new InputValidator();
+        System.out.println("Provide winning condition: greater than 2 and smaller or equal board's width or height");
+        WinningConditionResult winningConditionResult = inputValidator.checkWinningCondition(input.nextLine(), dimensions);
+
+        while (winningConditionResult.isValid() != true){
+            System.out.println("Provided input is incorrect. \nProvide winning condition: greater than 2 and smaller or equal board's width or height");
+            winningConditionResult = inputValidator.checkWinningCondition(input.nextLine(), dimensions);
+        }
     }
 }
