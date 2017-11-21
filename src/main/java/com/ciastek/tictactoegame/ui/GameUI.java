@@ -1,12 +1,9 @@
 package com.ciastek.tictactoegame.ui;
 
-import com.ciastek.tictactoegame.engine.board.Board;
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.board.BoardDimensionsResult;
 import com.ciastek.tictactoegame.engine.game.Game;
 import com.ciastek.tictactoegame.engine.game.GameBuilder;
-import com.ciastek.tictactoegame.engine.game.GameSettings;
-import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.player.PlayerResult;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
@@ -15,32 +12,22 @@ import com.ciastek.tictactoegame.engine.victory.WinningConditionResult;
 import java.util.Scanner;
 
 public class GameUI {
-    private static Game game;
-    private static Scanner input;
 
 
     public static void main(String[] args) {
 
         // TODO (1): input validation
-        // TODO (2): get win conditions from user
-        // TODO (3): match number of matches always 3
-
+        // TODO (2): match number of matches always 3
+        Scanner input = new Scanner(System.in);
         GameBuilder gameBuilder = new GameBuilder();
 
         System.out.println("TicTacToeGame");
         System.out.println("I optimistically assume that you'll provide correct values :)");
-        input = new Scanner(System.in);
-
         gameBuilder.withBoardDimensions(setBoardDimensions())
-                .withWinningCondition(setWinningCondition(gameBuilder.getBoardDimensions()));
+                .withWinningCondition(setWinningCondition(gameBuilder.getBoardDimensions()))
+                .withFirstPlayer(setFirstPlayer());
 
-        //BoardDimensions boardDimensions = setBoardDimensions();
-        //Board board = new Board(boardDimensions);
-        //game = new Game(board);
-        //setWinningCondition(settings, boardDimensions);
-        game = gameBuilder.build();
-
-        setFirstPlayer(game);
+        Game game = gameBuilder.build();
 
         System.out.println("Game started");
 
@@ -57,11 +44,11 @@ public class GameUI {
                 System.out.println(exception.getMessage());
             }
 
-            // TODO: check if there is winner - after minimal number of moves
+            // TODO (3): check if there is winner - after minimal number of moves
         }
     }
 
-    private static void setFirstPlayer(Game game) {
+    private static PlayerCharacter setFirstPlayer() {
         InputValidator inputValidator = new InputValidator();
         System.out.println("Choose first player: O or X?");
         Scanner inputPlayer = new Scanner(System.in);
@@ -71,7 +58,7 @@ public class GameUI {
             System.out.println("Provided input is incorrect. Choose first player: O or X?");
             firstPlayerResult = inputValidator.checkPlayer(inputPlayer.nextLine());
         }
-        game.setFirstPlayer(firstPlayerResult.getParsedPlayer());
+        return firstPlayerResult.getParsedPlayer();
     }
 
     private static WinningCondition setWinningCondition(BoardDimensions dimensions) {

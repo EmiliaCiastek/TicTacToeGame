@@ -11,4 +11,6 @@ public class PlayerTest {
         Player player = new Player(PlayerCharacter.O);
         assertEquals(player.getCharacter(), PlayerCharacter.O);
     }
+
+
 }

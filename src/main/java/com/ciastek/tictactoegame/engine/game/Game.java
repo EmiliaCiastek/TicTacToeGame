@@ -7,8 +7,6 @@ import com.ciastek.tictactoegame.engine.victory.Referee;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import com.ciastek.tictactoegame.engine.board.Board;
 
-import java.util.List;
-
 public class Game {
     private PlayerCharacter currentPlayer;
     private Board board;
@@ -19,18 +17,18 @@ public class Game {
 
     public Game(Board board) {
         this.board = board;
-        referee = new Referee(new WinningCondition(3)); //TODO: get winning Condition from user
+        referee = new Referee(new WinningCondition(3));
         validator = new MovementValidator(board);
     }
 
     public Game(GameSettings gameSettings) {
         this.gameSettings = gameSettings;
         board = new Board(gameSettings.getBoardDimensions());
+        currentPlayer = gameSettings.getFirstPlayer();
+        validator = new MovementValidator(board);
+        referee = new Referee(gameSettings.getWinningCondition());
     }
 
-    public void setFirstPlayer(PlayerCharacter player) {
-        currentPlayer = player;
-    }
 
     public PlayerCharacter getCurrentPlayer() {
         return currentPlayer;
@@ -61,9 +59,6 @@ public class Game {
         }
     }
 
-    /*public List<PlayerCharacter> getBoard() {
-        return board.getCharacterBoard();
-    }*/
     public Board getBoard() {
         return board;
     }
@@ -82,5 +77,9 @@ public class Game {
 
     public BoardDimensions getBoardDimensions() {
         return gameSettings.getBoardDimensions();
+    }
+
+    public void setFirstPlayer(PlayerCharacter firstPlayer) {
+        this.currentPlayer = firstPlayer;
     }
 }
