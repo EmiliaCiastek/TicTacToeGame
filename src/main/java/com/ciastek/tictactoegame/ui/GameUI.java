@@ -2,6 +2,7 @@ package com.ciastek.tictactoegame.ui;
 
 import com.ciastek.tictactoegame.engine.board.Board;
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
+import com.ciastek.tictactoegame.engine.board.BoardDimensionsResult;
 import com.ciastek.tictactoegame.engine.game.Game;
 import com.ciastek.tictactoegame.engine.game.GameSettings;
 import com.ciastek.tictactoegame.engine.player.Player;
@@ -27,14 +28,12 @@ public class GameUI {
         System.out.println("I optimistically assume that you'll provide correct values :)");
         input = new Scanner(System.in);
 
-        System.out.println("Provide board width (greater than 2): ");
-        int width = input.nextInt();
-        System.out.println("Provide board height (greater than 2): ");
-        int height = input.nextInt();
-        BoardDimensions boardDimensions = new BoardDimensions(width, height);
+        System.out.println("Provide board size in format: width x height (without spaces). Minimum size 3x3, maximum size 100x100: ");
+
+        BoardDimensions boardDimensions = setBoardDimensions();
         Board board = new Board(boardDimensions);
         game = new Game(board);
-       setWinningCondition(settings, boardDimensions);
+        setWinningCondition(settings, boardDimensions);
 
         setFirstPlayer(game);
 
@@ -82,5 +81,19 @@ public class GameUI {
             System.out.println("Provided input is incorrect. \nProvide winning condition: greater than 2 and smaller or equal board's width or height");
             winningConditionResult = inputValidator.checkWinningCondition(inputCondition.nextLine(), dimensions);
         }
+    }
+
+    private static BoardDimensions setBoardDimensions() {
+        InputValidator inputValidator = new InputValidator();
+        System.out.println("Provide board size in format: width x height (without spaces). Minimum size 3x3, maximum size 100x100");
+        Scanner sizeInput = new Scanner(System.in);
+
+        BoardDimensionsResult boardDimensionsResult = inputValidator.checkBoardDimensions(sizeInput.nextLine());
+        while (boardDimensionsResult.isValid() != true) {
+            System.out.println("Provided input is incorrect. \nProvide board size in format: width x height (without spaces). Minimum size 3x3, maximum size 100x100");
+            boardDimensionsResult = inputValidator.checkBoardDimensions(sizeInput.nextLine());
+        }
+
+        return boardDimensionsResult.getParsedDimensions();
     }
 }

@@ -76,8 +76,6 @@ public class GameTest {
         game.play(7); //X
         game.play(8); //O
 
-        System.out.println(game.getBoard().toString());
-
         assertTrue(game.isFinished());
     }
 

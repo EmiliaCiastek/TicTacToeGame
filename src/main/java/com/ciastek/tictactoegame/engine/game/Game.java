@@ -14,6 +14,8 @@ public class Game {
     private Referee referee;
     private boolean isGameWon = false;
     private MovementValidator validator;
+    private final GameSettings gameSettings = new GameSettings();
+
 
     public Game(Board board) {
         this.board = board;

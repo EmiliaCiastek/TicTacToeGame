@@ -53,12 +53,12 @@ public class BoardSplitterTest {
         assertEquals(actualColumn, expectedColumn);
     }
 
-    @DataProvider(name = "main topLeft - bottomRight diagonal's indexes")
+    @DataProvider(name = "main topLeft - bottomRight diagonal's indices")
     public static Object[] mainTopLeftBottomRightDiagonalIndexes(){
         return new Object[] {0, 6, 12, 18, 24};
     }
 
-    @Test (dataProvider = "main topLeft - bottomRight diagonal's indexes")
+    @Test (dataProvider = "main topLeft - bottomRight diagonal's indices")
     public void givenSquareBoardThenReturnMainTopLeftBottomRightDiagonal(int index){
         //Given:
         BoardDimensions dimensions = new BoardDimensions(5, 5);
@@ -81,7 +81,7 @@ public class BoardSplitterTest {
         assertEquals(actualDiagonal, expectedDiagonal);
     }
 
-    @DataProvider(name = "below main topLeft - bottomRight diagonal's indexes")
+    @DataProvider(name = "below main topLeft - bottomRight diagonal's indices")
     public static Object[][] belowMainTopLeftBottomRightDiagonalIndexes(){
         return new Object[][] {
                 {5, new PlayerCharacter[]{PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.NONE, PlayerCharacter.NONE}},
@@ -92,7 +92,7 @@ public class BoardSplitterTest {
         };
     }
 
-    @Test (dataProvider = "below main topLeft - bottomRight diagonal's indexes")
+    @Test (dataProvider = "below main topLeft - bottomRight diagonal's indices")
     public void givenSquareBoardThenReturnBelowTopLeftBottomRightMainDiagonals(int index, PlayerCharacter[] characters){
        //Given
         BoardDimensions dimensions = new BoardDimensions(5, 5);
@@ -110,7 +110,7 @@ public class BoardSplitterTest {
         assertEquals(actualDiagonal, expectedDiagonal);
     }
 
-    @DataProvider(name = "above main topLeft - bottomRight diagonal's indexes")
+    @DataProvider(name = "above main topLeft - bottomRight diagonal's indices")
     public static Object[][] aboveMainTopLeftBottomRightDiagonalIndexes(){
         return new Object[][] {
                 {1, new PlayerCharacter[]{PlayerCharacter.NONE, PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.O}},
@@ -121,7 +121,7 @@ public class BoardSplitterTest {
         };
     }
 
-    @Test (dataProvider = "above main topLeft - bottomRight diagonal's indexes")
+    @Test (dataProvider = "above main topLeft - bottomRight diagonal's indices")
     public void givenSquareBoardThenReturnAboveTopLeftBottomRightMainDiagonals(int index, PlayerCharacter[] characters){
         //Given:
         BoardDimensions dimensions = new BoardDimensions(5, 5);
@@ -141,12 +141,12 @@ public class BoardSplitterTest {
         assertEquals(actualDiagonal, expectedDiagonal);
     }
 
-    @DataProvider(name = "main topRight - bottomLeft diagonal's indexes")
+    @DataProvider(name = "main topRight - bottomLeft diagonal's indices")
     public static Object[] mainTopRightBottomLeftDiagonalIndexes(){
         return new Object[] {4, 8, 12, 16, 20};
     }
 
-    @Test (dataProvider = "main topRight - bottomLeft diagonal's indexes")
+    @Test (dataProvider = "main topRight - bottomLeft diagonal's indices")
     public void givenSquareBoardThenReturnMainTopRightBottomLeftDiagonal(int index){
         //Given:
         BoardDimensions dimensions = new BoardDimensions(5, 5);
@@ -169,7 +169,7 @@ public class BoardSplitterTest {
         assertEquals(actualDiagonal, expectedDiagonal);
     }
 
-    @DataProvider(name = "below main topRight - bottomLeft diagonal's indexes")
+    @DataProvider(name = "below main topRight - bottomLeft diagonal's indices")
     public static Object[][] belowTopRightBottomLeftMainDiagonalIndexes(){
         return new Object[][] {
                 {9, new PlayerCharacter[]{PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.NONE, PlayerCharacter.NONE}},
@@ -180,7 +180,7 @@ public class BoardSplitterTest {
         };
     }
 
-    @Test (dataProvider = "below main topRight - bottomLeft diagonal's indexes")
+    @Test (dataProvider = "below main topRight - bottomLeft diagonal's indices")
     public void givenSquareBoardThenReturnBelowTopRightBottomLeftMainDiagonals(int index, PlayerCharacter[] characters){
         //Given:
         BoardDimensions dimensions = new BoardDimensions(5, 5);
@@ -198,7 +198,7 @@ public class BoardSplitterTest {
         assertEquals(actualDiagonal, expectedDiagonal);
     }
 
-    @DataProvider(name = "above main topRight - bottomLeft diagonal's indexes")
+    @DataProvider(name = "above main topRight - bottomLeft diagonal's indices")
     public static Object[][] aboveTopRightBottomLeftMainDiagonalIndexes(){
         return new Object[][] {
                 {3, new PlayerCharacter[]{PlayerCharacter.NONE, PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.O}},
@@ -209,7 +209,7 @@ public class BoardSplitterTest {
         };
     }
 
-    @Test (dataProvider = "above main topRight - bottomLeft diagonal's indexes")
+    @Test (dataProvider = "above main topRight - bottomLeft diagonal's indices")
     public void givenSquareBoardThenReturnAboveTopRightBottomLeftMainDiagonals(int index, PlayerCharacter[] characters){
         //Given:
         BoardDimensions dimensions = new BoardDimensions(5, 5);
