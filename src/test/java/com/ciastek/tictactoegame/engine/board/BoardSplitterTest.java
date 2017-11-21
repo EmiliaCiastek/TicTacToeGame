@@ -11,7 +11,7 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 
 public class BoardSplitterTest {
-    BoardSplitter splitter = new BoardSplitter();
+    private BoardSplitter splitter = new BoardSplitter();
 
     @Test
     public void shouldReturnWholeRowWhichContainsIndex(){
@@ -83,11 +83,13 @@ public class BoardSplitterTest {
 
     @DataProvider(name = "below main topLeft - bottomRight diagonal's indexes")
     public static Object[][] belowMainTopLeftBottomRightDiagonalIndexes(){
-        return new Object[][] {{5, new PlayerCharacter[]{PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.NONE, PlayerCharacter.NONE}},
+        return new Object[][] {
+                {5, new PlayerCharacter[]{PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.NONE, PlayerCharacter.NONE}},
                 {17, new PlayerCharacter[]{PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.NONE, PlayerCharacter.NONE}},
                 {22, new PlayerCharacter[]{PlayerCharacter.NONE, PlayerCharacter.O, PlayerCharacter.NONE}},
                 {15, new PlayerCharacter[]{PlayerCharacter.NONE, PlayerCharacter.X}},
-                {20, new PlayerCharacter[]{PlayerCharacter.NONE}}};
+                {20, new PlayerCharacter[]{PlayerCharacter.NONE}}
+        };
     }
 
     @Test (dataProvider = "below main topLeft - bottomRight diagonal's indexes")
@@ -110,11 +112,13 @@ public class BoardSplitterTest {
 
     @DataProvider(name = "above main topLeft - bottomRight diagonal's indexes")
     public static Object[][] aboveMainTopLeftBottomRightDiagonalIndexes(){
-        return new Object[][] {{1, new PlayerCharacter[]{PlayerCharacter.NONE, PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.O}},
+        return new Object[][] {
+                {1, new PlayerCharacter[]{PlayerCharacter.NONE, PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.O}},
                 {19, new PlayerCharacter[]{PlayerCharacter.NONE, PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.O}},
                 {8, new PlayerCharacter[]{PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.NONE}},
                 {9, new PlayerCharacter[]{PlayerCharacter.O, PlayerCharacter.NONE}},
-                {4, new PlayerCharacter[]{PlayerCharacter.X}}};
+                {4, new PlayerCharacter[]{PlayerCharacter.X}}
+        };
     }
 
     @Test (dataProvider = "above main topLeft - bottomRight diagonal's indexes")
@@ -167,11 +171,13 @@ public class BoardSplitterTest {
 
     @DataProvider(name = "below main topRight - bottomLeft diagonal's indexes")
     public static Object[][] belowTopRightBottomLeftMainDiagonalIndexes(){
-        return new Object[][] {{9, new PlayerCharacter[]{PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.NONE, PlayerCharacter.NONE}},
+        return new Object[][] {
+                {9, new PlayerCharacter[]{PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.NONE, PlayerCharacter.NONE}},
                 {17, new PlayerCharacter[]{PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.NONE, PlayerCharacter.NONE}},
                 {18, new PlayerCharacter[]{PlayerCharacter.NONE, PlayerCharacter.O, PlayerCharacter.NONE}},
                 {23, new PlayerCharacter[]{PlayerCharacter.NONE, PlayerCharacter.X}},
-                {24, new PlayerCharacter[]{PlayerCharacter.NONE}}};
+                {24, new PlayerCharacter[]{PlayerCharacter.NONE}}
+        };
     }
 
     @Test (dataProvider = "below main topRight - bottomLeft diagonal's indexes")
@@ -182,6 +188,7 @@ public class BoardSplitterTest {
         board.add(9, PlayerCharacter.X);
         board.add(18, PlayerCharacter.O);
         board.add(23, PlayerCharacter.X);
+
         //When:
         List<PlayerCharacter> actualDiagonal = splitter.getTopRightBottomLeftDiagonal(board, index);
 
@@ -193,11 +200,13 @@ public class BoardSplitterTest {
 
     @DataProvider(name = "above main topRight - bottomLeft diagonal's indexes")
     public static Object[][] aboveTopRightBottomLeftMainDiagonalIndexes(){
-        return new Object[][] {{3, new PlayerCharacter[]{PlayerCharacter.NONE, PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.O}},
+        return new Object[][] {
+                {3, new PlayerCharacter[]{PlayerCharacter.NONE, PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.O}},
                 {15, new PlayerCharacter[]{PlayerCharacter.NONE, PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.O}},
                 {6, new PlayerCharacter[]{PlayerCharacter.X, PlayerCharacter.NONE, PlayerCharacter.NONE}},
                 {5, new PlayerCharacter[]{PlayerCharacter.O, PlayerCharacter.NONE}},
-                {0, new PlayerCharacter[]{PlayerCharacter.X}}};
+                {0, new PlayerCharacter[]{PlayerCharacter.X}}
+        };
     }
 
     @Test (dataProvider = "above main topRight - bottomLeft diagonal's indexes")

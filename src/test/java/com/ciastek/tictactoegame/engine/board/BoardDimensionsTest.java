@@ -1,6 +1,5 @@
 package com.ciastek.tictactoegame.engine.board;
 
-import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;

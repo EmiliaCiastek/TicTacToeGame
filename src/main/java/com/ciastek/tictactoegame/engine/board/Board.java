@@ -8,12 +8,13 @@ import java.util.List;
 public class Board {
     private int size;
     private List<PlayerCharacter> characterBoard;
+    private BoardDimensions boardDimensions;
+
 
     public BoardDimensions getBoardDimensions() {
         return boardDimensions;
     }
 
-    private BoardDimensions boardDimensions;
 
     public Board(BoardDimensions boardDimensions){
         this.boardDimensions = boardDimensions;

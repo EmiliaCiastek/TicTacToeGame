@@ -14,7 +14,6 @@ import java.util.Scanner;
 public class GameUI {
     private static Game game;
     private static Scanner input;
-    private static Player player;
 
 
     public static void main(String[] args) {
@@ -42,8 +41,6 @@ public class GameUI {
         System.out.println("Game started");
 
         System.out.println(board.toString());
-
-        player = new Player(PlayerCharacter.O);
 
         while (!game.isFinished()) {
             System.out.println("Player: " + game.getCurrentPlayer() + " turn");
@@ -85,6 +82,5 @@ public class GameUI {
             System.out.println("Provided input is incorrect. \nProvide winning condition: greater than 2 and smaller or equal board's width or height");
             winningConditionResult = inputValidator.checkWinningCondition(inputCondition.nextLine(), dimensions);
         }
-
     }
 }

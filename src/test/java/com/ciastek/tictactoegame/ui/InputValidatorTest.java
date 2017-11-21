@@ -1,6 +1,7 @@
 package com.ciastek.tictactoegame.ui;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
+import com.ciastek.tictactoegame.engine.board.BoardDimensionsResult;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.player.PlayerResult;
 import com.ciastek.tictactoegame.engine.victory.WinningConditionResult;
@@ -86,7 +87,7 @@ public class InputValidatorTest {
     }
 
     @Test
-    public void givenWinningConditionGreaterThanBoardWidthWhenValidateThenReturnEmptyConditionResult(){
+    public void givenWinningConditionGreaterThanBoardHeightWhenValidateThenReturnEmptyConditionResult(){
         dimensions = new BoardDimensions(3, 6);
 
         input = "7";
@@ -97,12 +98,52 @@ public class InputValidatorTest {
     }
 
     @Test
-    public void givenWinningConditionSmallerThanBoardHeightThenBoardWidthWhenValidateThenReturnCorrectConditionResult(){
+    public void givenWinningConditionSmallerThanBoardWidthWhenValidateThenReturnCorrectConditionResult(){
         dimensions = new BoardDimensions(3, 6);
         input = "5";
 
         WinningConditionResult result = validator.checkWinningCondition(input, dimensions);
 
         assertTrue(result.isValid());
+    }
+
+    @Test
+    public void givenCorrectBoardDimensionsWhenValidateThenReturnCorrectBoardDimensionsResult(){
+        input = "5x6";
+
+        BoardDimensionsResult result = validator.checkBoardDimensions(input);
+
+        assertTrue(result.isValid());
+        assertEquals(result.getParsedDimensions().getWidth(), 5);
+        assertEquals(result.getParsedDimensions().getHeight(), 6);
+    }
+
+    @DataProvider(name = "incorrect board dimensions input")
+    public static Object[] incorrectBoardDimensionsInput() {
+        return new Object[]{"", " ", "bla", "/n", "2 x 4", " 3xfff"} ;
+    }
+
+    @Test (dataProvider = "incorrect board dimensions input")
+    public void givenIncorrectFormatInputWhenValidateThenReturnEmptyBoardDimensionsResult(String incorrectsInput){
+        BoardDimensionsResult result = validator.checkBoardDimensions(incorrectsInput);
+
+        assertFalse(result.isValid());
+    }
+
+    @Test
+    public void givenWidthGreaterThanMaxDimensionWhenValidateThenReturnEmptyBoardDimensionsResult(){
+        input = "4x101";
+
+        BoardDimensionsResult result = validator.checkBoardDimensions(input);
+
+        assertFalse(result.isValid());
+    }
+
+    @Test
+    public void givenHeightSmallerThanMinDimensionWhenValidateThenReturnEmptyBoardDimensionsResult(){
+        input = "2x5";
+        BoardDimensionsResult result = validator.checkBoardDimensions(input);
+
+        assertFalse(result.isValid());
     }
 }
