@@ -1,5 +1,6 @@
 package com.ciastek.tictactoegame.engine.game;
 
+import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.movement.MovementValidator;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.Referee;
@@ -14,14 +15,17 @@ public class Game {
     private Referee referee;
     private boolean isGameWon = false;
     private MovementValidator validator;
-    private final GameSettings gameSettings = new GameSettings();
-
+    private GameSettings gameSettings;
 
     public Game(Board board) {
         this.board = board;
         referee = new Referee(new WinningCondition(3)); //TODO: get winning Condition from user
         validator = new MovementValidator(board);
+    }
 
+    public Game(GameSettings gameSettings) {
+        this.gameSettings = gameSettings;
+        board = new Board(gameSettings.getBoardDimensions());
     }
 
     public void setFirstPlayer(PlayerCharacter player) {
@@ -57,8 +61,11 @@ public class Game {
         }
     }
 
-    public List<PlayerCharacter> getBoard() {
+    /*public List<PlayerCharacter> getBoard() {
         return board.getCharacterBoard();
+    }*/
+    public Board getBoard() {
+        return board;
     }
 
     public boolean isFinished() {
@@ -67,5 +74,13 @@ public class Game {
 
     public PlayerCharacter getBoardField(int index) {
         return board.getCharacterBoard().get(index);
+    }
+
+    public WinningCondition getWinningCondition() {
+        return gameSettings.getWinningCondition();
+    }
+
+    public BoardDimensions getBoardDimensions() {
+        return gameSettings.getBoardDimensions();
     }
 }

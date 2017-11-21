@@ -13,11 +13,12 @@ import static org.testng.Assert.*;
 @Test
 public class GameTest {
     Game game;
+    BoardDimensions boardDimensions;
 
     @BeforeMethod
     public void setUp(){
         int boardSize = 3;
-        BoardDimensions boardDimensions = new BoardDimensions(boardSize, boardSize);
+        boardDimensions = new BoardDimensions(boardSize, boardSize);
 
         Board board = new Board(boardDimensions);
         game = new Game(board);
@@ -42,23 +43,18 @@ public class GameTest {
     }
 
     public void playTest(){
-        ArrayList<PlayerCharacter> expectedBoard = new ArrayList<>();
-        expectedBoard.add(PlayerCharacter.O);
-        expectedBoard.add(PlayerCharacter.X);
-        expectedBoard.add(PlayerCharacter.NONE);
-        expectedBoard.add(PlayerCharacter.NONE);
-        expectedBoard.add(PlayerCharacter.NONE);
-        expectedBoard.add(PlayerCharacter.NONE);
-        expectedBoard.add(PlayerCharacter.O);
-        expectedBoard.add(PlayerCharacter.NONE);
-        expectedBoard.add(PlayerCharacter.X);
+        Board expectedBoard = new Board(boardDimensions);
+        expectedBoard.add(0, PlayerCharacter.O);
+        expectedBoard.add(1, PlayerCharacter.X);
+        expectedBoard.add(6, PlayerCharacter.O);
+        expectedBoard.add(8, PlayerCharacter.X);
 
         game.play(0); //O
         game.play(1); //X
         game.play(6); //O
         game.play(8); //X
 
-        assertEquals(game.getBoard(), expectedBoard);
+        assertEquals(game.getBoard().toString(), expectedBoard.toString());
     }
 
     public void whenGameInitializedThenIsFinishedFalse(){

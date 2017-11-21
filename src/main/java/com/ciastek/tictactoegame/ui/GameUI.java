@@ -4,10 +4,12 @@ import com.ciastek.tictactoegame.engine.board.Board;
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.board.BoardDimensionsResult;
 import com.ciastek.tictactoegame.engine.game.Game;
+import com.ciastek.tictactoegame.engine.game.GameBuilder;
 import com.ciastek.tictactoegame.engine.game.GameSettings;
 import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.player.PlayerResult;
+import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import com.ciastek.tictactoegame.engine.victory.WinningConditionResult;
 
 import java.util.Scanner;
@@ -23,25 +25,28 @@ public class GameUI {
         // TODO (2): get win conditions from user
         // TODO (3): match number of matches always 3
 
-        GameSettings settings = new GameSettings();
+        GameBuilder gameBuilder = new GameBuilder();
+
         System.out.println("TicTacToeGame");
         System.out.println("I optimistically assume that you'll provide correct values :)");
         input = new Scanner(System.in);
 
-        System.out.println("Provide board size in format: width x height (without spaces). Minimum size 3x3, maximum size 100x100: ");
+        gameBuilder.withBoardDimensions(setBoardDimensions())
+                .withWinningCondition(setWinningCondition(gameBuilder.getBoardDimensions()));
 
-        BoardDimensions boardDimensions = setBoardDimensions();
-        Board board = new Board(boardDimensions);
-        game = new Game(board);
-        setWinningCondition(settings, boardDimensions);
+        //BoardDimensions boardDimensions = setBoardDimensions();
+        //Board board = new Board(boardDimensions);
+        //game = new Game(board);
+        //setWinningCondition(settings, boardDimensions);
+        game = gameBuilder.build();
 
         setFirstPlayer(game);
 
         System.out.println("Game started");
 
-        System.out.println(board.toString());
-
         while (!game.isFinished()) {
+            System.out.println(game.getBoard().toString());
+
             System.out.println("Player: " + game.getCurrentPlayer() + " turn");
             System.out.println("Provide index: ");
             int index = input.nextInt();
@@ -53,8 +58,6 @@ public class GameUI {
             }
 
             // TODO: check if there is winner - after minimal number of moves
-
-            System.out.println(board.toString());
         }
     }
 
@@ -71,7 +74,7 @@ public class GameUI {
         game.setFirstPlayer(firstPlayerResult.getParsedPlayer());
     }
 
-    private static void setWinningCondition(GameSettings settings, BoardDimensions dimensions) {
+    private static WinningCondition setWinningCondition(BoardDimensions dimensions) {
         InputValidator inputValidator = new InputValidator();
         System.out.println("Provide winning condition: greater than 2 and smaller or equal board's width or height");
         Scanner inputCondition = new Scanner(System.in);
@@ -81,6 +84,8 @@ public class GameUI {
             System.out.println("Provided input is incorrect. \nProvide winning condition: greater than 2 and smaller or equal board's width or height");
             winningConditionResult = inputValidator.checkWinningCondition(inputCondition.nextLine(), dimensions);
         }
+
+        return winningConditionResult.getParsedValue();
     }
 
     private static BoardDimensions setBoardDimensions() {
