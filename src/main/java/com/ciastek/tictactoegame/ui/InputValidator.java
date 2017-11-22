@@ -2,12 +2,11 @@ package com.ciastek.tictactoegame.ui;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.board.BoardDimensionsResult;
+import com.ciastek.tictactoegame.engine.movement.Position;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.player.PlayerResult;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import com.ciastek.tictactoegame.engine.victory.WinningConditionResult;
-
-import java.util.regex.Pattern;
 
 public class InputValidator {
     private final int MAX_BOARD_SIZE = 100;
@@ -47,5 +46,16 @@ public class InputValidator {
         }
 
         return new BoardDimensionsResult();
+    }
+
+    public PositionResult checkPosition(String input) {
+        try {
+            int index = Integer.parseInt(input);
+
+            return new PositionResult(true, new Position(index));
+
+        } catch (NumberFormatException exception){
+            return new PositionResult();
+        }
     }
 }

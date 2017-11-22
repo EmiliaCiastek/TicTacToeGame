@@ -4,6 +4,7 @@ import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.board.BoardDimensionsResult;
 import com.ciastek.tictactoegame.engine.game.Game;
 import com.ciastek.tictactoegame.engine.game.GameBuilder;
+import com.ciastek.tictactoegame.engine.movement.Position;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.player.PlayerResult;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
@@ -18,7 +19,6 @@ public class GameUI {
 
         // TODO (1): input validation
         // TODO (2): match number of matches always 3
-        Scanner input = new Scanner(System.in);
         GameBuilder gameBuilder = new GameBuilder();
 
         System.out.println("TicTacToeGame");
@@ -28,15 +28,14 @@ public class GameUI {
                 .withFirstPlayer(setFirstPlayer());
 
         Game game = gameBuilder.build();
-
         System.out.println("Game started");
 
         while (!game.isFinished()) {
             System.out.println(game.getBoard().toString());
 
             System.out.println("Player: " + game.getCurrentPlayer() + " turn");
-            System.out.println("Provide index: ");
-            int index = input.nextInt();
+
+            int index = setPosition().asInt();
 
             try {
                 game.play(index);
@@ -54,7 +53,7 @@ public class GameUI {
         Scanner inputPlayer = new Scanner(System.in);
         PlayerResult firstPlayerResult = inputValidator.checkPlayer(inputPlayer.nextLine());
 
-        while (firstPlayerResult.isValid() != true) {
+        while (!firstPlayerResult.isValid()) {
             System.out.println("Provided input is incorrect. Choose first player: O or X?");
             firstPlayerResult = inputValidator.checkPlayer(inputPlayer.nextLine());
         }
@@ -67,7 +66,7 @@ public class GameUI {
         Scanner inputCondition = new Scanner(System.in);
         WinningConditionResult winningConditionResult = inputValidator.checkWinningCondition(inputCondition.nextLine(), dimensions);
 
-        while (winningConditionResult.isValid() != true) {
+        while (!winningConditionResult.isValid()) {
             System.out.println("Provided input is incorrect. \nProvide winning condition: greater than 2 and smaller or equal board's width or height");
             winningConditionResult = inputValidator.checkWinningCondition(inputCondition.nextLine(), dimensions);
         }
@@ -81,11 +80,25 @@ public class GameUI {
         Scanner sizeInput = new Scanner(System.in);
 
         BoardDimensionsResult boardDimensionsResult = inputValidator.checkBoardDimensions(sizeInput.nextLine());
-        while (boardDimensionsResult.isValid() != true) {
+        while (!boardDimensionsResult.isValid()) {
             System.out.println("Provided input is incorrect. \nProvide board size in format: width x height (without spaces). Minimum size 3x3, maximum size 100x100");
             boardDimensionsResult = inputValidator.checkBoardDimensions(sizeInput.nextLine());
         }
 
         return boardDimensionsResult.getParsedDimensions();
+    }
+
+    private static Position setPosition() {
+        InputValidator inputValidator = new InputValidator();
+        System.out.println("Provide index: ");
+        Scanner indexInput = new Scanner(System.in);
+
+        PositionResult positionResult = inputValidator.checkPosition(indexInput.nextLine());
+        while (!positionResult.isValid()) {
+            System.out.println("Provided index is incorrect. Index has to be a number");
+            positionResult = inputValidator.checkPosition(indexInput.nextLine());
+        }
+
+        return positionResult.getParsedPosition();
     }
 }

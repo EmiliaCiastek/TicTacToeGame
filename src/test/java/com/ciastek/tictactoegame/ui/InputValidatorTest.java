@@ -2,6 +2,7 @@ package com.ciastek.tictactoegame.ui;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.board.BoardDimensionsResult;
+import com.ciastek.tictactoegame.engine.movement.Position;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.player.PlayerResult;
 import com.ciastek.tictactoegame.engine.victory.WinningConditionResult;
@@ -124,8 +125,8 @@ public class InputValidatorTest {
     }
 
     @Test (dataProvider = "incorrect board dimensions input")
-    public void givenIncorrectFormatInputWhenValidateThenReturnEmptyBoardDimensionsResult(String incorrectsInput){
-        BoardDimensionsResult result = validator.checkBoardDimensions(incorrectsInput);
+    public void givenIncorrectFormatInputWhenValidateThenReturnEmptyBoardDimensionsResult(String incorrectInput){
+        BoardDimensionsResult result = validator.checkBoardDimensions(incorrectInput);
 
         assertFalse(result.isValid());
     }
@@ -143,6 +144,18 @@ public class InputValidatorTest {
     public void givenHeightSmallerThanMinDimensionWhenValidateThenReturnEmptyBoardDimensionsResult(){
         input = "2x5";
         BoardDimensionsResult result = validator.checkBoardDimensions(input);
+
+        assertFalse(result.isValid());
+    }
+
+    @DataProvider(name = "incorrect position input")
+    public static Object[] incorrectPositionInput() {
+        return new Object[]{"", " ", "bla", "/n", "2 x 4", " 3xfff"} ;
+    }
+
+    @Test (dataProvider = "incorrect position input")
+    public void givenIncorrectPositionInputWhenValidateThenReturnEmptyPositionResult(String incorrectInput){
+        PositionResult result = validator.checkPosition(incorrectInput);
 
         assertFalse(result.isValid());
     }
