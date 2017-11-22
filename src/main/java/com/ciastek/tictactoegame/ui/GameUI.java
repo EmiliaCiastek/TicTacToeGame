@@ -22,7 +22,6 @@ public class GameUI {
         GameBuilder gameBuilder = new GameBuilder();
 
         System.out.println("TicTacToeGame");
-        System.out.println("I optimistically assume that you'll provide correct values :)");
         gameBuilder.withBoardDimensions(setBoardDimensions())
                 .withWinningCondition(setWinningCondition(gameBuilder.getBoardDimensions()))
                 .withFirstPlayer(setFirstPlayer());
@@ -57,7 +56,7 @@ public class GameUI {
             System.out.println("Provided input is incorrect. Choose first player: O or X?");
             firstPlayerResult = inputValidator.checkPlayer(inputPlayer.nextLine());
         }
-        return firstPlayerResult.getParsedPlayer();
+        return firstPlayerResult.getParsedResult();
     }
 
     private static WinningCondition setWinningCondition(BoardDimensions dimensions) {
@@ -85,7 +84,7 @@ public class GameUI {
             boardDimensionsResult = inputValidator.checkBoardDimensions(sizeInput.nextLine());
         }
 
-        return boardDimensionsResult.getParsedDimensions();
+        return boardDimensionsResult.getParsedResult();
     }
 
     private static Position setPosition() {
@@ -99,6 +98,6 @@ public class GameUI {
             positionResult = inputValidator.checkPosition(indexInput.nextLine());
         }
 
-        return positionResult.getParsedPosition();
+        return positionResult.getParsedResult();
     }
 }

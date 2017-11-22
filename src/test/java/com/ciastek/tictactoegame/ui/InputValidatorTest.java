@@ -2,7 +2,6 @@ package com.ciastek.tictactoegame.ui;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.board.BoardDimensionsResult;
-import com.ciastek.tictactoegame.engine.movement.Position;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.player.PlayerResult;
 import com.ciastek.tictactoegame.engine.victory.WinningConditionResult;
@@ -23,7 +22,7 @@ public class InputValidatorTest {
         input = "O";
         PlayerResult actual = validator.checkPlayer(input);
 
-        assertEquals(actual.getParsedPlayer(), PlayerCharacter.O);
+        assertEquals(actual.getParsedResult(), PlayerCharacter.O);
         assertTrue(actual.isValid());
     }
 
@@ -32,7 +31,7 @@ public class InputValidatorTest {
         input = "fwhfuyewrf";
         PlayerResult actual = validator.checkPlayer(input);
 
-        assertEquals(actual.getParsedPlayer(), PlayerCharacter.NONE);
+        assertEquals(actual.getParsedResult(), PlayerCharacter.NONE);
         assertFalse(actual.isValid());
     }
 
@@ -41,7 +40,7 @@ public class InputValidatorTest {
         input = "X";
         PlayerResult actual = validator.checkPlayer(input);
 
-        assertEquals(actual.getParsedPlayer(), PlayerCharacter.X);
+        assertEquals(actual.getParsedResult(), PlayerCharacter.X);
         assertTrue(actual.isValid());
     }
 
@@ -50,7 +49,7 @@ public class InputValidatorTest {
         input = "";
         PlayerResult actual = validator.checkPlayer(input);
 
-        assertEquals(actual.getParsedPlayer(), PlayerCharacter.NONE);
+        assertEquals(actual.getParsedResult(), PlayerCharacter.NONE);
         assertFalse(actual.isValid());
     }
 
@@ -115,8 +114,8 @@ public class InputValidatorTest {
         BoardDimensionsResult result = validator.checkBoardDimensions(input);
 
         assertTrue(result.isValid());
-        assertEquals(result.getParsedDimensions().getWidth(), 5);
-        assertEquals(result.getParsedDimensions().getHeight(), 6);
+        assertEquals(result.getParsedResult().getWidth(), 5);
+        assertEquals(result.getParsedResult().getHeight(), 6);
     }
 
     @DataProvider(name = "incorrect board dimensions input")

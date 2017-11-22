@@ -1,6 +1,7 @@
 package com.ciastek.tictactoegame.engine.player;
 
 import com.ciastek.tictactoegame.engine.movement.Movement;
+import com.ciastek.tictactoegame.engine.movement.Position;
 
 public class Player {
     private PlayerCharacter character;
@@ -19,12 +20,12 @@ public class Player {
         this.name = name;
     }
 
-    public Movement move(){
-        return null;
-    }
-
     public PlayerCharacter getCharacter() {
         return character;
+    }
+
+    public Movement makeMove(Position position){
+        return new Movement(position, this.getCharacter());
     }
 
 }

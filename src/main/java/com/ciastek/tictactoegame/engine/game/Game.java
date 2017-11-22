@@ -8,68 +8,30 @@ import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import com.ciastek.tictactoegame.engine.board.Board;
 
 public class Game {
-    private PlayerCharacter currentPlayer;
-    private Board board;
-    private Referee referee;
-    private boolean isGameWon = false;
-    private MovementValidator validator;
-    private GameSettings gameSettings;
+    private final int NUMBER_OF_ROUNDS = 3;
+    private final Round round;
 
-    public Game(Board board) {
-        this.board = board;
-        referee = new Referee(new WinningCondition(3));
-        validator = new MovementValidator(board);
-    }
+    private boolean isGameWon = false;
+    private GameSettings gameSettings;
 
     public Game(GameSettings gameSettings) {
         this.gameSettings = gameSettings;
-        board = new Board(gameSettings.getBoardDimensions());
-        currentPlayer = gameSettings.getFirstPlayer();
-        validator = new MovementValidator(board);
-        referee = new Referee(gameSettings.getWinningCondition());
+        this.round = new Round(gameSettings);
     }
 
 
     public PlayerCharacter getCurrentPlayer() {
-        return currentPlayer;
+        return round.getCurrentPlayer();
     }
 
     public void play(int index) {
-        try {
-            validator.validate(index);
-            board.add(index, currentPlayer);
-        } catch (IllegalArgumentException exception) {
-            throw exception;
-        }
-
-        isGameWon = referee.isWon(board, index);
-        if (isGameWon) {
-            System.out.println("Game over! Player " + currentPlayer + " won!!!");
-        }
-        switchPlayer();
-    }
-
-    private void switchPlayer() {
-        //TODO (1): Players objects!
-
-        if (currentPlayer == PlayerCharacter.O) {
-            currentPlayer = PlayerCharacter.X;
-        } else {
-            currentPlayer = PlayerCharacter.O;
-        }
-    }
-
-    public Board getBoard() {
-        return board;
+        round.play(index);
     }
 
     public boolean isFinished() {
-        return board.isFilled() || isGameWon;
+        return round.isFinished();
     }
 
-    public PlayerCharacter getBoardField(int index) {
-        return board.getCharacterBoard().get(index);
-    }
 
     public WinningCondition getWinningCondition() {
         return gameSettings.getWinningCondition();
@@ -79,7 +41,7 @@ public class Game {
         return gameSettings.getBoardDimensions();
     }
 
-    public void setFirstPlayer(PlayerCharacter firstPlayer) {
-        this.currentPlayer = firstPlayer;
+    public String getBoard() {
+        return round.getBoard().toString();
     }
 }

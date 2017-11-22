@@ -3,8 +3,8 @@ package com.ciastek.tictactoegame.ui;
 import com.ciastek.tictactoegame.Result;
 import com.ciastek.tictactoegame.engine.movement.Position;
 
-public class PositionResult extends Result<Position> {
-    private boolean valid;
+public class PositionResult implements Result<Position> {
+    private final boolean isValid;
     private Position parsedPosition;
 
 
@@ -18,11 +18,11 @@ public class PositionResult extends Result<Position> {
         this.parsedPosition = new Position(-1);
     }
 
-    public Position getParsedPosition() {
+    public Position getParsedResult() {
         return parsedPosition;
     }
     public boolean isValid() {
-        return valid;
+        return isValid;
     }
 
 

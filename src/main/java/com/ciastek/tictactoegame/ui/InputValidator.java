@@ -51,7 +51,6 @@ public class InputValidator {
     public PositionResult checkPosition(String input) {
         try {
             int index = Integer.parseInt(input);
-
             return new PositionResult(true, new Position(index));
 
         } catch (NumberFormatException exception){

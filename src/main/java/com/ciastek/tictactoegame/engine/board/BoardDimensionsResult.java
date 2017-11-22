@@ -2,7 +2,7 @@ package com.ciastek.tictactoegame.engine.board;
 
 import com.ciastek.tictactoegame.Result;
 
-public class BoardDimensionsResult extends Result<BoardDimensions>{
+public class BoardDimensionsResult implements Result<BoardDimensions>{
 
     private BoardDimensions parsedDimensions;
     private boolean isValid;
@@ -17,7 +17,7 @@ public class BoardDimensionsResult extends Result<BoardDimensions>{
         this.parsedDimensions = null;
     }
 
-    public BoardDimensions getParsedDimensions(){
+    public BoardDimensions getParsedResult(){
         return parsedDimensions;
     }
 
