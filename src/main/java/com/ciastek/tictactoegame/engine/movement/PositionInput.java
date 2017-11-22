@@ -12,7 +12,7 @@ public class PositionInput {
         System.out.println("Player: " + player.getCharacter() + " turn");
 
         InputValidator inputValidator = new InputValidator();
-        System.out.println("Provide index: ");
+        System.out.println("Provide position: ");
         Scanner indexInput = new Scanner(System.in);
 
         PositionResult positionResult = inputValidator.checkPosition(indexInput.nextLine());

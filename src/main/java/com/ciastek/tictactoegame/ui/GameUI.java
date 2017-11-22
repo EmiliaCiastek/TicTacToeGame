@@ -30,14 +30,8 @@ public class GameUI {
         System.out.println("Game started");
 
         while (!game.isFinished()) {
-            System.out.println(game.getBoard().toString());
-
-            System.out.println("Player: " + game.getCurrentPlayer() + " turn");
-
-            int index = setPosition().asInt();
-
             try {
-                game.play(index);
+                game.play();
             } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());
             }

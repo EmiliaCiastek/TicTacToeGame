@@ -1,37 +1,41 @@
 package com.ciastek.tictactoegame.engine.game;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
-import com.ciastek.tictactoegame.engine.movement.MovementValidator;
+import com.ciastek.tictactoegame.engine.movement.PositionInput;
+import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
-import com.ciastek.tictactoegame.engine.victory.Referee;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
-import com.ciastek.tictactoegame.engine.board.Board;
 
 public class Game {
     private final int NUMBER_OF_ROUNDS = 3;
-    private final Round round;
+    private Round currentRound;
 
     private boolean isGameWon = false;
+    private boolean isGameFinished = false;
+
     private GameSettings gameSettings;
 
     public Game(GameSettings gameSettings) {
         this.gameSettings = gameSettings;
-        this.round = new Round(gameSettings);
     }
 
+    public void play() {
+        for (int i = 0; i < NUMBER_OF_ROUNDS; i++) {
+            currentRound = new Round(gameSettings);
+            PositionInput positionInput = new PositionInput();
 
-    public PlayerCharacter getCurrentPlayer() {
-        return round.getCurrentPlayer();
-    }
+            while (!currentRound.isFinished()){
+                System.out.println(currentRound.getBoard().toString());
+                int position = positionInput.getPosition(new Player(currentRound.getCurrentPlayer())).asInt();
 
-    public void play(int index) {
-        round.play(index);
+                currentRound.play(position);
+            }
+        }
     }
 
     public boolean isFinished() {
-        return round.isFinished();
+        return isGameFinished;
     }
-
 
     public WinningCondition getWinningCondition() {
         return gameSettings.getWinningCondition();
@@ -42,6 +46,6 @@ public class Game {
     }
 
     public String getBoard() {
-        return round.getBoard().toString();
+        return currentRound.getBoard().toString();
     }
 }
