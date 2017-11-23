@@ -36,7 +36,9 @@ public class Round {
 
         isGameWon = referee.isWon(board, index);
 
-        switchPlayer();
+        if (!isGameWon) {
+            switchPlayer();
+        }
     }
 
     public PlayerCharacter getCurrentPlayer() {
@@ -53,5 +55,9 @@ public class Round {
 
     public boolean isFinished() {
         return board.isFilled() || isGameWon;
+    }
+
+    public boolean isGameWon() {
+        return isGameWon;
     }
 }

@@ -10,9 +10,7 @@ public class Game {
     private final int NUMBER_OF_ROUNDS = 3;
     private Round currentRound;
 
-    private boolean isGameWon = false;
     private boolean isGameFinished = false;
-
     private GameSettings gameSettings;
 
     public Game(GameSettings gameSettings) {
@@ -22,6 +20,7 @@ public class Game {
     public void play() {
         for (int i = 0; i < NUMBER_OF_ROUNDS; i++) {
             currentRound = new Round(gameSettings);
+            System.out.println("Round number " + (i + 1) + " started!");
             PositionInput positionInput = new PositionInput();
 
             while (!currentRound.isFinished()){
@@ -29,6 +28,11 @@ public class Game {
                 int position = positionInput.getPosition(new Player(currentRound.getCurrentPlayer())).asInt();
 
                 currentRound.play(position);
+            }
+
+            System.out.println("Round over!");
+            if (currentRound.isGameWon()){
+                System.out.println("Player: " + currentRound.getCurrentPlayer() + " won! Congratulations!");
             }
         }
     }
