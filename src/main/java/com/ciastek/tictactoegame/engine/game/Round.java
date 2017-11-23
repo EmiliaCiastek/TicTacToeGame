@@ -50,6 +50,10 @@ public class Round {
         return players.peek();
     }
 
+    public String getBoardAsString() {
+        return board.toString();
+    }
+
     public Board getBoard() {
         return board;
     }

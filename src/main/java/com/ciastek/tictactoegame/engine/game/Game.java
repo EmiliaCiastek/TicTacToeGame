@@ -24,7 +24,8 @@ public class Game {
 
             //TODO: round.start()
             while (!currentRound.isFinished()){
-                System.out.println(currentRound.getBoard().toString());
+                System.out.println();
+                System.out.println(currentRound.getBoardAsString());
                 int position = positionInput.getPosition(new Player(currentRound.getCurrentPlayer())).asInt();
 
                 currentRound.play(position);
@@ -46,6 +47,6 @@ public class Game {
     }
 
     public String getBoard() {
-        return currentRound.getBoard().toString();
+        return currentRound.getBoardAsString();
     }
 }
