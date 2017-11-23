@@ -16,9 +16,8 @@ public class GameUI {
 
 
     public static void main(String[] args) {
+        //TODO: add quit option
 
-        // TODO (1): input validation
-        // TODO (2): match number of matches always 3
         GameBuilder gameBuilder = new GameBuilder();
 
         System.out.println("TicTacToeGame");

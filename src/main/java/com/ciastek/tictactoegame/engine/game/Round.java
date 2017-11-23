@@ -1,17 +1,18 @@
 package com.ciastek.tictactoegame.engine.game;
 
 import com.ciastek.tictactoegame.engine.board.Board;
-import com.ciastek.tictactoegame.engine.movement.Movement;
+import com.ciastek.tictactoegame.engine.events.RoundEndedWithVictoryEvent;
 import com.ciastek.tictactoegame.engine.movement.MovementValidator;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.Referee;
+import com.ciastek.tictactoegame.ui.Printer;
 
 import java.util.LinkedList;
 
 public class Round {
     private LinkedList<PlayerCharacter> players;
     private Board board;
-    private boolean isGameWon;
+    private boolean isRoundWon;
     private Referee referee;
 
     public Round(GameSettings gameSettings) {
@@ -34,11 +35,15 @@ public class Round {
             throw exception;
         }
 
-        isGameWon = referee.isWon(board, index);
+        isRoundWon = referee.isWon(board, index);
 
-        if (!isGameWon) {
-            switchPlayer();
+        if(isRoundWon){
+            Printer printer = new Printer();
+            printer.printMessage(new RoundEndedWithVictoryEvent(getCurrentPlayer()));
         }
+
+        switchPlayer();
+
     }
 
     public PlayerCharacter getCurrentPlayer() {
@@ -54,10 +59,10 @@ public class Round {
     }
 
     public boolean isFinished() {
-        return board.isFilled() || isGameWon;
+        return board.isFilled() || isRoundWon;
     }
 
-    public boolean isGameWon() {
-        return isGameWon;
+    public boolean isRoundWon() {
+        return isRoundWon;
     }
 }

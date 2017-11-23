@@ -3,7 +3,6 @@ package com.ciastek.tictactoegame.engine.game;
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.movement.PositionInput;
 import com.ciastek.tictactoegame.engine.player.Player;
-import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 
 public class Game {
@@ -23,18 +22,15 @@ public class Game {
             System.out.println("Round number " + (i + 1) + " started!");
             PositionInput positionInput = new PositionInput();
 
+            //TODO: round.start()
             while (!currentRound.isFinished()){
                 System.out.println(currentRound.getBoard().toString());
                 int position = positionInput.getPosition(new Player(currentRound.getCurrentPlayer())).asInt();
 
                 currentRound.play(position);
             }
-
-            System.out.println("Round over!");
-            if (currentRound.isGameWon()){
-                System.out.println("Player: " + currentRound.getCurrentPlayer() + " won! Congratulations!");
-            }
         }
+        isGameFinished = true;
     }
 
     public boolean isFinished() {
