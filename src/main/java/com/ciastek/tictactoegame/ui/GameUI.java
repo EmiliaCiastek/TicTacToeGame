@@ -4,7 +4,6 @@ import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.board.BoardDimensionsResult;
 import com.ciastek.tictactoegame.engine.game.Game;
 import com.ciastek.tictactoegame.engine.game.GameBuilder;
-import com.ciastek.tictactoegame.engine.movement.Position;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.player.PlayerResult;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
@@ -13,7 +12,6 @@ import com.ciastek.tictactoegame.engine.victory.WinningConditionResult;
 import java.util.Scanner;
 
 public class GameUI {
-
 
     public static void main(String[] args) {
         //TODO: add quit option
@@ -54,12 +52,12 @@ public class GameUI {
 
     private static WinningCondition setWinningCondition(BoardDimensions dimensions) {
         InputValidator inputValidator = new InputValidator();
-        System.out.println("Provide winning condition: greater than 2 and smaller or equal board's width or height");
+        System.out.println("Provide winning condition: greater than 2 and smaller or equal " + Math.min(dimensions.getWidth(), dimensions.getHeight()));
         Scanner inputCondition = new Scanner(System.in);
         WinningConditionResult winningConditionResult = inputValidator.checkWinningCondition(inputCondition.nextLine(), dimensions);
 
         while (!winningConditionResult.isValid()) {
-            System.out.println("Provided input is incorrect. \nProvide winning condition: greater than 2 and smaller or equal board's width or height");
+            System.out.println("Provided input is incorrect. Provide winning condition: greater than 2 and smaller or equal " + Math.min(dimensions.getWidth(), dimensions.getHeight()));
             winningConditionResult = inputValidator.checkWinningCondition(inputCondition.nextLine(), dimensions);
         }
 
@@ -78,19 +76,5 @@ public class GameUI {
         }
 
         return boardDimensionsResult.getParsedResult();
-    }
-
-    private static Position setPosition() {
-        InputValidator inputValidator = new InputValidator();
-        System.out.println("Provide index: ");
-        Scanner indexInput = new Scanner(System.in);
-
-        PositionResult positionResult = inputValidator.checkPosition(indexInput.nextLine());
-        while (!positionResult.isValid()) {
-            System.out.println("Provided index is incorrect. Index has to be a number");
-            positionResult = inputValidator.checkPosition(indexInput.nextLine());
-        }
-
-        return positionResult.getParsedResult();
     }
 }

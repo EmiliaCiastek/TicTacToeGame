@@ -25,7 +25,7 @@ public class InputValidator {
         try {
             int winningConditionValue = Integer.parseInt(input);
 
-            if(winningConditionValue < 3 || winningConditionValue > Math.max(dimensions.getHeight(), dimensions.getWidth())){
+            if(winningConditionValue < 3 || winningConditionValue > Math.min(dimensions.getHeight(), dimensions.getWidth())){
                 return new WinningConditionResult();
             } else {
                 return new WinningConditionResult(true, new WinningCondition(winningConditionValue));

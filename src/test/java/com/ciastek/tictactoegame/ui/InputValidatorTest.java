@@ -78,7 +78,6 @@ public class InputValidatorTest {
         return new Object[]{"", " ", "bla", "/n"} ;
     }
 
-
     @Test (dataProvider = "incorrect input")
     public void givenIncorrectStringOfWinningConditionWhenValidateThenReturnEmptyConditionResult(String incorrectInput){
         WinningConditionResult result = validator.checkWinningCondition(incorrectInput, dimensions);
@@ -86,23 +85,38 @@ public class InputValidatorTest {
         assertFalse(result.isValid());
     }
 
-    @Test
-    public void givenWinningConditionGreaterThanBoardHeightWhenValidateThenReturnEmptyConditionResult(){
-        dimensions = new BoardDimensions(3, 6);
 
-        input = "7";
+    @DataProvider(name = "incorrect winning condition")
+    public static Object[][] incorrectWinningCondition() {
+        return new Object[][]{
+                {"5", new BoardDimensions(3,5)},
+                {"5", new BoardDimensions(5,3)},
+                {"2", new BoardDimensions(3,5)},
+                {"10", new BoardDimensions(3,5)},
+        };
+    }
 
-        WinningConditionResult result = validator.checkWinningCondition(input, dimensions);
+    @Test (dataProvider = "incorrect winning condition")
+    public void givenWinningConditionGreaterThanBoardHeightWhenValidateThenReturnEmptyConditionResult(String winningCondition, BoardDimensions dimensions){
+
+        WinningConditionResult result = validator.checkWinningCondition(winningCondition, dimensions);
 
         assertFalse(result.isValid());
     }
 
-    @Test
-    public void givenWinningConditionSmallerThanBoardWidthWhenValidateThenReturnCorrectConditionResult(){
-        dimensions = new BoardDimensions(3, 6);
-        input = "5";
+    @DataProvider(name = "correct winning condition")
+    public static Object[][] correctWinningCondition() {
+        return new Object[][]{
+                {"5", new BoardDimensions(5,5)},
+                {"3", new BoardDimensions(5,3)},
+                {"3", new BoardDimensions(3,5)},
+                {"10", new BoardDimensions(12,15)},
+        };
+    }
 
-        WinningConditionResult result = validator.checkWinningCondition(input, dimensions);
+    @Test (dataProvider = "correct winning condition")
+    public void givenWinningConditionSmallerThanBoardWidthWhenValidateThenReturnCorrectConditionResult(String winningCondition, BoardDimensions dimensions){
+        WinningConditionResult result = validator.checkWinningCondition(winningCondition, dimensions);
 
         assertTrue(result.isValid());
     }
