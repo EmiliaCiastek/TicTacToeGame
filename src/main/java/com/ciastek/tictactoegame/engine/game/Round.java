@@ -9,7 +9,7 @@ import com.ciastek.tictactoegame.ui.Printer;
 
 import java.util.LinkedList;
 
-public class Round {
+class Round {
     private LinkedList<PlayerCharacter> players;
     private Board board;
     private boolean isRoundWon;

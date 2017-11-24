@@ -4,7 +4,7 @@ import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 
 import java.util.List;
 
-public class VictoryValidator {
+class VictoryValidator {
     private WinningCondition winningCondition;
 
     public VictoryValidator(WinningCondition winningCondition){

@@ -8,12 +8,10 @@ import java.util.List;
 
 public class Referee {
 
-    private WinningCondition winningCondition;
     private BoardSplitter splitter;
     private VictoryValidator validator;
 
     public Referee(WinningCondition winningCondition) {
-        this.winningCondition = winningCondition;
         this.splitter = new BoardSplitter();
         this.validator = new VictoryValidator(winningCondition);
     }
@@ -24,11 +22,11 @@ public class Referee {
         List<PlayerCharacter> topLeftDiagonal = splitter.getTopLeftBottomRightDiagonal(board, index);
         List<PlayerCharacter> topRightDiagonal = splitter.getTopRightBottomLeftDiagonal(board, index);
 
-        boolean isVictory = validator.isVictory(column) ||
+        boolean isWon = validator.isVictory(column) ||
                 validator.isVictory(row) ||
                 validator.isVictory(topLeftDiagonal) ||
                 validator.isVictory(topRightDiagonal);
 
-        return isVictory;
+        return isWon;
     }
 }

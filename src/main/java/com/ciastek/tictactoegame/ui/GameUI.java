@@ -32,8 +32,6 @@ public class GameUI {
             } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());
             }
-
-            // TODO (3): check if there is winner - after minimal number of moves
         }
     }
 
