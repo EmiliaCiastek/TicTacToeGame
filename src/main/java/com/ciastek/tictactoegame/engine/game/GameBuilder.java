@@ -31,7 +31,7 @@ public class GameBuilder {
 
 
     public Game build() {
-        return new Game(new GameSettings(boardDimensions, winningCondition, firstPlayer));
+        return new Game(new GameSettings(boardDimensions, winningCondition, firstPlayer), new GameRoundFactory());
     }
 
     public GameBuilder withFirstPlayer(PlayerCharacter firstPlayer) {

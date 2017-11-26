@@ -2,7 +2,9 @@ package com.ciastek.tictactoegame.engine.game;
 
 import com.ciastek.tictactoegame.engine.board.Board;
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
+import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
+import com.ciastek.tictactoegame.engine.victory.RoundResult;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -10,22 +12,21 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public class RoundTest {
+public class GameRoundTest {
     private GameSettings gameSettings;
-    private Round round;
+    private GameRound round;
 
     @BeforeMethod
     public void setUp(){
         gameSettings = new GameSettings(new BoardDimensions(3, 3),
                 new WinningCondition(3), PlayerCharacter.O);
-        round = new Round(gameSettings);
+        round = new GameRound(gameSettings);
     }
 
     @Test
     public void whenRoundInitializeThenNewEmptyBoardCreated(){
         Board board = round.getBoard();
 
-        assertEquals(board.getBoardDimensions(), gameSettings.getBoardDimensions());
         assertEquals(board.getBoardDimensions(), gameSettings.getBoardDimensions());
     }
 
@@ -87,5 +88,16 @@ public class RoundTest {
     public void givenIncorrectMovesThenThrowException(int incorrectIndex){
         round.play(0);
         round.play(incorrectIndex);
+    }
+
+    @Test
+    public void whenVictoryThenOIsAWinner(){
+        round.play(0); //O
+        round.play(4); //X
+        round.play(1); //O
+        round.play(3); //X
+        RoundResult result = round.play(2); //O
+
+        assertEquals(result.getWinner().getCharacter(), PlayerCharacter.O);
     }
 }

@@ -1,21 +1,22 @@
 package com.ciastek.tictactoegame.engine.game;
 
 import com.ciastek.tictactoegame.engine.board.Board;
-import com.ciastek.tictactoegame.engine.events.RoundEndedWithVictoryEvent;
 import com.ciastek.tictactoegame.engine.movement.MovementValidator;
+import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.Referee;
-import com.ciastek.tictactoegame.ui.Printer;
+import com.ciastek.tictactoegame.engine.victory.RoundResult;
 
 import java.util.LinkedList;
 
-class Round {
+public class GameRound implements Round {
+
     private LinkedList<PlayerCharacter> players;
     private Board board;
     private boolean isRoundWon;
     private Referee referee;
 
-    public Round(GameSettings gameSettings) {
+    public GameRound(GameSettings gameSettings) {
         board = new Board(gameSettings.getBoardDimensions());
         referee = new Referee(gameSettings.getWinningCondition());
         PlayerCharacter  currentPlayer = gameSettings.getFirstPlayer();
@@ -26,7 +27,7 @@ class Round {
         players.add(secondPlayer);
     }
 
-    public void play(int index) {
+    public RoundResult play(int index) {
         try {
             MovementValidator validator = new MovementValidator(board);
             validator.validate(index);
@@ -36,14 +37,11 @@ class Round {
         }
 
         isRoundWon = referee.isWon(board, index);
-
-        if(isRoundWon){
-            Printer printer = new Printer();
-            printer.printMessage(new RoundEndedWithVictoryEvent(getCurrentPlayer()));
-        }
+        RoundResult result = new RoundResult(isRoundWon, new Player(getCurrentPlayer()));
 
         switchPlayer();
 
+        return result;
     }
 
     public PlayerCharacter getCurrentPlayer() {
@@ -64,9 +62,5 @@ class Round {
 
     public boolean isFinished() {
         return board.isFilled() || isRoundWon;
-    }
-
-    public boolean isRoundWon() {
-        return isRoundWon;
     }
 }
