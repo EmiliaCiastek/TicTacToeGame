@@ -36,12 +36,24 @@ public class Game implements Observable{
             if(roundResult.isWon()){
                 Player winner = roundResult.getWinner().get();
                 notifyObservers(new RoundEndedWithVictoryEvent(winner));
+                winner.addPoints(3);
             } else {
                 notifyObservers(new RoundEndedWithDrawEvent());
+                gameSettings.getFirstPlayer().addPoints(1);
+                gameSettings.getSecondPlayer().addPoints(1);
             }
         }
 
         notifyObservers(new GameEndedEvent());
+
+        Player first = gameSettings.getFirstPlayer();
+        Player second = gameSettings.getSecondPlayer();
+        int firstPlayerScore = first.getScore();
+        int secondPlayerScore = second.getScore();
+
+        Player gameWinner = firstPlayerScore > secondPlayerScore ? first : second;
+        System.out.println("And the winner is.... " + gameWinner.getName());
+
         isGameFinished = true;
     }
 

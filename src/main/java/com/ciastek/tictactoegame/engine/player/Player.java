@@ -35,4 +35,12 @@ public class Player {
     public String getName() {
         return name;
     }
+
+    public void addPoints(int points){
+        score += points;
+    }
+
+    public int getScore() {
+        return score;
+    }
 }
