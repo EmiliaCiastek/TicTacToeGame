@@ -2,17 +2,17 @@ package com.ciastek.tictactoegame.engine.player;
 
 import com.ciastek.tictactoegame.Result;
 
-public class PlayerResult implements Result<PlayerCharacter> {
+public class FirstCharacterResult implements Result<PlayerCharacter> {
 
     private PlayerCharacter parsedPlayer;
     private boolean isValid;
 
-    public PlayerResult(boolean isValid, PlayerCharacter parsedPlayer) {
+    public FirstCharacterResult(boolean isValid, PlayerCharacter parsedPlayer) {
         this.isValid = isValid;
         this.parsedPlayer = parsedPlayer;
     }
 
-    public PlayerResult(){
+    public FirstCharacterResult(){
         this.isValid = false;
         this.parsedPlayer = PlayerCharacter.NONE;
     }

@@ -18,8 +18,10 @@ public class GameRoundTest {
 
     @BeforeMethod
     public void setUp(){
+        Player firstPlayer = new Player(PlayerCharacter.O, "first");
+        Player secondPlayer = new Player(PlayerCharacter.X, "second");
         gameSettings = new GameSettings(new BoardDimensions(3, 3),
-                new WinningCondition(3), PlayerCharacter.O);
+                new WinningCondition(3), firstPlayer, secondPlayer);
         round = new GameRound(gameSettings);
     }
 
@@ -34,8 +36,9 @@ public class GameRoundTest {
     public void whenOPlayThenCurrentPlayerX(){
         int index = 0;
         round.play(index);
+        Player currentPlayer = round.getCurrentPlayer();
 
-        assertEquals(round.getCurrentPlayer(), PlayerCharacter.X);
+        assertEquals(currentPlayer.getCharacter(), PlayerCharacter.X);
     }
 
     @Test

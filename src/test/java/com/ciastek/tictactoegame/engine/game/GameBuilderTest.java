@@ -1,6 +1,7 @@
 package com.ciastek.tictactoegame.engine.game;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
+import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import org.testng.annotations.Test;
@@ -46,11 +47,13 @@ public class GameBuilderTest {
     @Test
     public void givenFirstPlayerWhenWithFirstPlayerThenAddFirstPlayer(){
         GameBuilder builder = new GameBuilder();
-        PlayerCharacter firstPlayer = PlayerCharacter.O;
+        Player oPlayer = new Player(PlayerCharacter.O, "OPlayer");
+        Player xPlayer = new Player(PlayerCharacter.X, "XPlayer");
+        PlayerCharacter firstPlayerCharacter = PlayerCharacter.O;
+        builder.withPlayers(oPlayer, xPlayer);
+        builder.withFirstPlayer(firstPlayerCharacter);
 
-        builder.withFirstPlayer(firstPlayer);
-
-        assertEquals(builder.getFirstPlayer(), firstPlayer);
+        assertEquals(builder.getFirstPlayer(), oPlayer);
     }
 
 }

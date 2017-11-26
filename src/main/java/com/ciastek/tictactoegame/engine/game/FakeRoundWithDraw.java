@@ -4,17 +4,17 @@ import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.RoundResult;
 
-public class FakeRound implements Round {
-    private boolean isFinished = false;
+public class FakeRoundWithDraw implements Round {
+    private boolean isFinished;
 
     @Override
     public RoundResult play(int index) {
-        return new RoundResult(true, new Player(PlayerCharacter.X));
+        return new RoundResult();
     }
 
     @Override
-    public PlayerCharacter getCurrentPlayer() {
-        return PlayerCharacter.X;
+    public Player getCurrentPlayer() {
+        return new Player(PlayerCharacter.X);
     }
 
     @Override

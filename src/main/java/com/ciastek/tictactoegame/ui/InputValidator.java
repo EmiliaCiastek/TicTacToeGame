@@ -3,8 +3,9 @@ package com.ciastek.tictactoegame.ui;
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.board.BoardDimensionsResult;
 import com.ciastek.tictactoegame.engine.movement.Position;
+import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
-import com.ciastek.tictactoegame.engine.player.PlayerResult;
+import com.ciastek.tictactoegame.engine.player.FirstCharacterResult;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import com.ciastek.tictactoegame.engine.victory.WinningConditionResult;
 
@@ -12,12 +13,12 @@ public class InputValidator {
     private final int MAX_BOARD_SIZE = 100;
     private final int MIN_BOARD_SIZE = 3;
 
-    public PlayerResult checkPlayer(String input) {
+    public FirstCharacterResult checkPlayer(String input) {
 
         if(input.equals("O") || input.equals("X")){
-            return new PlayerResult(true, PlayerCharacter.valueOf(input));
+            return new FirstCharacterResult(true, PlayerCharacter.valueOf(input));
         } else {
-            return new PlayerResult();
+            return new FirstCharacterResult();
         }
     }
 
@@ -56,5 +57,13 @@ public class InputValidator {
         } catch (NumberFormatException exception){
             return new PositionResult();
         }
+    }
+
+    public PlayerResult checkPlayerName(String input, PlayerCharacter playerCharacter) {
+        if (!input.matches("[a-zA-Z]+")){
+            return new PlayerResult();
+        }
+
+        return new PlayerResult(true, new Player(playerCharacter, input));
     }
 }

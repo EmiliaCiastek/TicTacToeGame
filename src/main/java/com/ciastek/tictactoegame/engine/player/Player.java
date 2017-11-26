@@ -20,6 +20,10 @@ public class Player {
         this.name = name;
     }
 
+    public Player(String name){
+        this.name = name;
+    }
+
     public PlayerCharacter getCharacter() {
         return character;
     }
@@ -28,4 +32,7 @@ public class Player {
         return new Movement(position, this.getCharacter());
     }
 
+    public String getName() {
+        return name;
+    }
 }

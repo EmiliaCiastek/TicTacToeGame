@@ -2,8 +2,9 @@ package com.ciastek.tictactoegame.ui;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.board.BoardDimensionsResult;
+import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
-import com.ciastek.tictactoegame.engine.player.PlayerResult;
+import com.ciastek.tictactoegame.engine.player.FirstCharacterResult;
 import com.ciastek.tictactoegame.engine.victory.WinningConditionResult;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -20,7 +21,7 @@ public class InputValidatorTest {
     @Test
     public void givenCorrectOPlayerInputWhenValidateThenReturnCorrectPlayerResult(){
         input = "O";
-        PlayerResult actual = validator.checkPlayer(input);
+        FirstCharacterResult actual = validator.checkPlayer(input);
 
         assertEquals(actual.getParsedResult(), PlayerCharacter.O);
         assertTrue(actual.isValid());
@@ -29,7 +30,7 @@ public class InputValidatorTest {
     @Test
     public void givenIncorrectPlayerInputWhenValidateThenReturnEmptyPlayerResult(){
         input = "fwhfuyewrf";
-        PlayerResult actual = validator.checkPlayer(input);
+        FirstCharacterResult actual = validator.checkPlayer(input);
 
         assertEquals(actual.getParsedResult(), PlayerCharacter.NONE);
         assertFalse(actual.isValid());
@@ -38,7 +39,7 @@ public class InputValidatorTest {
     @Test
     public void givenCorrectXPlayerInputWhenValidateThenReturnCorrectPlayerResult(){
         input = "X";
-        PlayerResult actual = validator.checkPlayer(input);
+        FirstCharacterResult actual = validator.checkPlayer(input);
 
         assertEquals(actual.getParsedResult(), PlayerCharacter.X);
         assertTrue(actual.isValid());
@@ -47,7 +48,7 @@ public class InputValidatorTest {
     @Test
     public void givenEmptyInputWhenValidatePlayerThenReturnEmptyPlayerResult(){
         input = "";
-        PlayerResult actual = validator.checkPlayer(input);
+        FirstCharacterResult actual = validator.checkPlayer(input);
 
         assertEquals(actual.getParsedResult(), PlayerCharacter.NONE);
         assertFalse(actual.isValid());
@@ -163,7 +164,7 @@ public class InputValidatorTest {
 
     @DataProvider(name = "incorrect position input")
     public static Object[] incorrectPositionInput() {
-        return new Object[]{"", " ", "bla", "/n", "2 x 4", " 3xfff"} ;
+        return new Object[]{"", " ", "bla", "\n","\t", "2 x 4", " 3xfff"} ;
     }
 
     @Test (dataProvider = "incorrect position input")
@@ -171,5 +172,31 @@ public class InputValidatorTest {
         PositionResult result = validator.checkPosition(incorrectInput);
 
         assertFalse(result.isValid());
+    }
+
+    @DataProvider(name = "incorrect name input")
+    public static Object[] incorrectNameInput() {
+        return new Object[]{"", " ", "\n", "\t", "344nbhyh333"} ;
+    }
+
+    @Test (dataProvider = "incorrect name input")
+    public void givenIncorrectNameInputWhenValidateThenReturnEmptyNameResult(String incorrectInput){
+        PlayerResult result = validator.checkPlayerName(incorrectInput, PlayerCharacter.X);
+
+        assertFalse(result.isValid());
+    }
+
+    @DataProvider(name = "correct name input")
+    public static Object[] correctNameInput() {
+        return new Object[]{"lalala", "BAAAA", "imie"} ;
+    }
+
+    @Test (dataProvider = "correct name input")
+    public void givenCorrectNameInputWhenValidateThenReturnPlayerResult(String correctInput){
+        PlayerResult result = validator.checkPlayerName(correctInput, PlayerCharacter.O);
+
+        assertTrue(result.isValid());
+        Player player = result.getParsedResult();
+        assertEquals(player.getName(), correctInput);
     }
 }

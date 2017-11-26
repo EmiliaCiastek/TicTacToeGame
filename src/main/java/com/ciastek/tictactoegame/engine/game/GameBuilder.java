@@ -2,6 +2,7 @@ package com.ciastek.tictactoegame.engine.game;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.movement.PositionScannerInput;
+import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import com.ciastek.tictactoegame.ui.Printer;
@@ -9,8 +10,11 @@ import com.ciastek.tictactoegame.ui.Printer;
 public class GameBuilder {
     private BoardDimensions boardDimensions;
     private WinningCondition winningCondition;
-    private PlayerCharacter firstPlayer;
+    private Player firstPlayer;
+    private Player secondPlayer;
     private Observer gameObserver;
+    private Player oPlayer;
+    private Player xPlayer;
 
     public GameBuilder withBoardDimensions(BoardDimensions dimensions){
         this.boardDimensions = dimensions;
@@ -39,18 +43,35 @@ public class GameBuilder {
 
 
     public Game build() {
-        Game game = new Game(new GameSettings(boardDimensions, winningCondition, firstPlayer), new GameRoundFactory(), new PositionScannerInput());
+        GameSettings settings = new GameSettings(boardDimensions, winningCondition, firstPlayer, secondPlayer
+        );
+        Game game = new Game(settings, new GameRoundFactory(), new PositionScannerInput());
         game.registerObserver(gameObserver);
         return game;
     }
 
-    public GameBuilder withFirstPlayer(PlayerCharacter firstPlayer) {
-        this.firstPlayer = firstPlayer;
+    public GameBuilder withFirstPlayer(PlayerCharacter firstPlayerCharacter) {
+        switch (firstPlayerCharacter){
+            case X:
+                firstPlayer = xPlayer;
+                secondPlayer = oPlayer;
+                break;
+            case O:
+                firstPlayer = oPlayer;
+                secondPlayer = xPlayer;
+                break;
+        }
 
         return this;
     }
 
-    public PlayerCharacter getFirstPlayer() {
+    public Player getFirstPlayer() {
         return firstPlayer;
+    }
+
+    public GameBuilder withPlayers(Player oPlayer, Player xPlayer) {
+        this.oPlayer = oPlayer;
+        this.xPlayer = xPlayer;
+        return this;
     }
 }

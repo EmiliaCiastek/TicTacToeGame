@@ -4,8 +4,9 @@ import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.board.BoardDimensionsResult;
 import com.ciastek.tictactoegame.engine.game.Game;
 import com.ciastek.tictactoegame.engine.game.GameBuilder;
+import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
-import com.ciastek.tictactoegame.engine.player.PlayerResult;
+import com.ciastek.tictactoegame.engine.player.FirstCharacterResult;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import com.ciastek.tictactoegame.engine.victory.WinningConditionResult;
 
@@ -19,7 +20,8 @@ public class GameUI {
         GameBuilder gameBuilder = new GameBuilder();
 
         System.out.println("TicTacToeGame");
-        gameBuilder.withBoardDimensions(setBoardDimensions())
+        gameBuilder.withPlayers(setPlayer(PlayerCharacter.O), setPlayer(PlayerCharacter.X))
+                .withBoardDimensions(setBoardDimensions())
                 .withWinningCondition(setWinningCondition(gameBuilder.getBoardDimensions()))
                 .withFirstPlayer(setFirstPlayer())
                 .withObserver(new Printer());
@@ -36,11 +38,25 @@ public class GameUI {
         }
     }
 
+    private static Player setPlayer(PlayerCharacter playerCharacter) {
+        InputValidator inputValidator = new InputValidator();
+        System.out.println(String.format("Provide name for %s player", playerCharacter));
+        Scanner inputPlayer = new Scanner(System.in);
+        PlayerResult oPlayerResult = inputValidator.checkPlayerName(inputPlayer.nextLine(), playerCharacter);
+
+        while (!oPlayerResult.isValid()) {
+            System.out.println("Provided name is incorrect. Name can contains only letters.");
+            oPlayerResult = inputValidator.checkPlayerName(inputPlayer.nextLine(), playerCharacter);
+        }
+
+        return oPlayerResult.getParsedResult();
+    }
+
     private static PlayerCharacter setFirstPlayer() {
         InputValidator inputValidator = new InputValidator();
         System.out.println("Choose first player: O or X?");
         Scanner inputPlayer = new Scanner(System.in);
-        PlayerResult firstPlayerResult = inputValidator.checkPlayer(inputPlayer.nextLine());
+        FirstCharacterResult firstPlayerResult = inputValidator.checkPlayer(inputPlayer.nextLine());
 
         while (!firstPlayerResult.isValid()) {
             System.out.println("Provided input is incorrect. Choose first player: O or X?");
