@@ -1,8 +1,10 @@
 package com.ciastek.tictactoegame.engine.game;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
+import com.ciastek.tictactoegame.engine.movement.PositionScannerInput;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
+import com.ciastek.tictactoegame.ui.Printer;
 
 public class GameBuilder {
     private BoardDimensions boardDimensions;
@@ -31,7 +33,7 @@ public class GameBuilder {
 
 
     public Game build() {
-        return new Game(new GameSettings(boardDimensions, winningCondition, firstPlayer), new GameRoundFactory());
+        return new Game(new GameSettings(boardDimensions, winningCondition, firstPlayer), new GameRoundFactory(), new PositionScannerInput(), new Printer());
     }
 
     public GameBuilder withFirstPlayer(PlayerCharacter firstPlayer) {

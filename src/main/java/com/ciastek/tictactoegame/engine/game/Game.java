@@ -1,7 +1,9 @@
 package com.ciastek.tictactoegame.engine.game;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
+import com.ciastek.tictactoegame.engine.events.GameEndedEvent;
 import com.ciastek.tictactoegame.engine.events.RoundEndedWithVictoryEvent;
+import com.ciastek.tictactoegame.engine.events.RoundStartedEvent;
 import com.ciastek.tictactoegame.engine.movement.PositionInput;
 import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.victory.RoundResult;
@@ -15,27 +17,29 @@ public class Game {
     private boolean isGameFinished = false;
     private GameSettings gameSettings;
     private RoundFactory fabric;
+    private PositionInput positionInput;
+    private Printer printer;
 
-    public Game(GameSettings gameSettings, RoundFactory fabric) {
+    public Game(GameSettings gameSettings, RoundFactory fabric, PositionInput positionInput, Printer printer) {
         this.gameSettings = gameSettings;
         this.fabric = fabric;
+        this.positionInput = positionInput;
+        this.printer = printer;
     }
 
     public void play() {
-        for (int i = 0; i < NUMBER_OF_ROUNDS; i++) {
+        for (int roundNumber = 1; roundNumber <= NUMBER_OF_ROUNDS; roundNumber++) {
             currentRound = fabric.getRound(gameSettings);
-            System.out.println("Round number " + (i + 1) + " started!");
-            PositionInput positionInput = new PositionInput();
+            printer.printMessage(new RoundStartedEvent(roundNumber));
 
-            //TODO: round.start()
             RoundResult roundResult = executeRound(positionInput);
 
             if(roundResult.isWon()){
-                Printer printer = new Printer();
                 printer.printMessage(new RoundEndedWithVictoryEvent(roundResult.getWinner().getCharacter()));
             } //TODo: RoundEndedWithDrawEvent
-
         }
+
+        printer.printMessage(new GameEndedEvent());
         isGameFinished = true;
     }
 

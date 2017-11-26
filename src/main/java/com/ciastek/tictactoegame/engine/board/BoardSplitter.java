@@ -19,11 +19,8 @@ public class BoardSplitter {
 
     public List<PlayerCharacter> getColumn(Board board, int index) {
         int boardHeight = board.getBoardDimensions().getHeight();
-
         int indexDelta = board.getBoardDimensions().getWidth();
         int columnNumber = getColumnNumber(index, indexDelta);
-
-
         List<PlayerCharacter> column = new ArrayList<>(boardHeight);
 
         for (int i = 0; i < boardHeight; i++) {
@@ -112,6 +109,4 @@ public class BoardSplitter {
     private int getColumnNumber(int index, int boardWidth){
         return index % boardWidth;
     }
-
-
 }

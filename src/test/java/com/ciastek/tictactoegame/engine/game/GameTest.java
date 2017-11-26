@@ -1,33 +1,49 @@
 package com.ciastek.tictactoegame.engine.game;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
+import com.ciastek.tictactoegame.engine.events.GameEndedEvent;
+import com.ciastek.tictactoegame.engine.movement.FakePositionInput;
+import com.ciastek.tictactoegame.engine.movement.PositionInput;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
+import com.ciastek.tictactoegame.ui.Printer;
+import org.mockito.ArgumentCaptor;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import static org.mockito.Mockito.*;
 import static org.testng.Assert.assertEquals;
 
 public class GameTest {
+    private Game game;
+    private ByteArrayOutputStream bytes;
+    private Printer mockedPrinter;
 
-    @Test
-    public void givenPlayerXWonThreeTimesThenVictoryMessageShouldBePrinted(){
-        String eventMessage = "Round over! Player X won! Congratulations!";
+    @BeforeMethod
+    public void setUp(){
         Round fakeRound = new FakeRound();
+        PositionInput fakeInput = new FakePositionInput();
         BoardDimensions boardDimensions = new BoardDimensions(3, 3);
         WinningCondition winningCondition = new WinningCondition(3);
 
         GameSettings gameSettings = new GameSettings(boardDimensions, winningCondition, PlayerCharacter.O);
-        Game game = new Game(gameSettings, roundFabric -> fakeRound);
+        mockedPrinter = mock(Printer.class);
+        game = new Game(gameSettings, roundFabric -> fakeRound, fakeInput, mockedPrinter);
 
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bytes = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bytes));
+    }
+
+    @Test
+    public void givenPlayerXWonThreeTimesThenVictoryMessageShouldBePrinted(){
+        ArgumentCaptor<GameEndedEvent> argumentCaptor = ArgumentCaptor.forClass(GameEndedEvent.class);
 
         game.play();
 
-        assertEquals(bytes.toString(), eventMessage);
+        verify(mockedPrinter, atLeastOnce()).printMessage(argumentCaptor.capture());
+        assertEquals(argumentCaptor.getValue().getMessage(), "Game over!");
     }
-
 }
