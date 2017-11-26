@@ -5,7 +5,7 @@ import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 
-class GameSettings {
+public class GameSettings {
     private WinningCondition winningCondition;
     private BoardDimensions boardDimensions;
     private Player firstPlayer;

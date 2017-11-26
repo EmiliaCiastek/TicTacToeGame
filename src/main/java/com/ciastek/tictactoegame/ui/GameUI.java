@@ -19,7 +19,7 @@ public class GameUI {
 
         GameBuilder gameBuilder = new GameBuilder();
 
-        System.out.println("TicTacToeGame");
+        System.out.println("Welcome in TicTacToeGame");
         gameBuilder.withPlayers(setPlayer(PlayerCharacter.O), setPlayer(PlayerCharacter.X))
                 .withBoardDimensions(setBoardDimensions())
                 .withWinningCondition(setWinningCondition(gameBuilder.getBoardDimensions()))
