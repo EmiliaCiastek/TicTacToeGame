@@ -1,26 +1,26 @@
 package com.ciastek.tictactoegame.engine.victory;
 
 import com.ciastek.tictactoegame.engine.player.Player;
-import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
+import java.util.Optional;
 
 public class RoundResult {
     private boolean isWon = false;
-    private Player winner;
+    private Optional<Player> winner;
 
     public RoundResult(boolean isWon, Player winner) {
         this.isWon = isWon;
-        this.winner = winner;
+        this.winner = Optional.of(winner);
     }
 
-    public RoundResult(){
-        this.winner = new Player(PlayerCharacter.NONE);
+    public RoundResult() {
+        this.winner = Optional.empty();
     }
 
-    public boolean isWon(){
+    public boolean isWon() {
         return isWon;
     }
 
-    public Player getWinner() {
+    public Optional<Player> getWinner() {
         return winner;
     }
 }

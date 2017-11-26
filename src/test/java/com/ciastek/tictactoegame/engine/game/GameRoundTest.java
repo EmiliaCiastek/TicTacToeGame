@@ -98,6 +98,7 @@ public class GameRoundTest {
         round.play(3); //X
         RoundResult result = round.play(2); //O
 
-        assertEquals(result.getWinner().getCharacter(), PlayerCharacter.O);
+        Player winner = result.getWinner().get();
+        assertEquals(winner.getCharacter(), PlayerCharacter.O);
     }
 }

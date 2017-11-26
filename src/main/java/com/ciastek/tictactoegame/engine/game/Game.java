@@ -6,6 +6,7 @@ import com.ciastek.tictactoegame.engine.events.RoundEndedWithVictoryEvent;
 import com.ciastek.tictactoegame.engine.events.RoundStartedEvent;
 import com.ciastek.tictactoegame.engine.movement.PositionInput;
 import com.ciastek.tictactoegame.engine.player.Player;
+import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.RoundResult;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import com.ciastek.tictactoegame.ui.Printer;
@@ -35,7 +36,9 @@ public class Game {
             RoundResult roundResult = executeRound(positionInput);
 
             if(roundResult.isWon()){
-                printer.printMessage(new RoundEndedWithVictoryEvent(roundResult.getWinner().getCharacter()));
+                Player winner = roundResult.getWinner().get();
+                PlayerCharacter winnerCharacter = winner.getCharacter();
+                printer.printMessage(new RoundEndedWithVictoryEvent(winnerCharacter));
             } //TODo: RoundEndedWithDrawEvent
         }
 
