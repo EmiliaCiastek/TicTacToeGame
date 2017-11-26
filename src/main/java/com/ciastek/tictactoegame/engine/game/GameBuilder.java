@@ -10,6 +10,7 @@ public class GameBuilder {
     private BoardDimensions boardDimensions;
     private WinningCondition winningCondition;
     private PlayerCharacter firstPlayer;
+    private Observer gameObserver;
 
     public GameBuilder withBoardDimensions(BoardDimensions dimensions){
         this.boardDimensions = dimensions;
@@ -27,13 +28,20 @@ public class GameBuilder {
         return this;
     }
 
+    public GameBuilder withObserver(Observer observer){
+        this.gameObserver = observer;
+        return this;
+    }
+
     public WinningCondition getWinningCondition() {
         return winningCondition;
     }
 
 
     public Game build() {
-        return new Game(new GameSettings(boardDimensions, winningCondition, firstPlayer), new GameRoundFactory(), new PositionScannerInput(), new Printer());
+        Game game = new Game(new GameSettings(boardDimensions, winningCondition, firstPlayer), new GameRoundFactory(), new PositionScannerInput());
+        game.registerObserver(gameObserver);
+        return game;
     }
 
     public GameBuilder withFirstPlayer(PlayerCharacter firstPlayer) {

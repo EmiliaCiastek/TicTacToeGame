@@ -31,7 +31,8 @@ public class GameTest {
 
         GameSettings gameSettings = new GameSettings(boardDimensions, winningCondition, PlayerCharacter.O);
         mockedPrinter = mock(Printer.class);
-        game = new Game(gameSettings, roundFabric -> fakeRound, fakeInput, mockedPrinter);
+        game = new Game(gameSettings, roundFabric -> fakeRound, fakeInput);
+        game.registerObserver(mockedPrinter);
 
         bytes = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bytes));
@@ -43,7 +44,7 @@ public class GameTest {
 
         game.play();
 
-        verify(mockedPrinter, atLeastOnce()).printMessage(argumentCaptor.capture());
+        verify(mockedPrinter, atLeastOnce()).notify(argumentCaptor.capture());
         assertEquals(argumentCaptor.getValue().getMessage(), "Game over!");
     }
 }

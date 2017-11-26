@@ -2,6 +2,7 @@ package com.ciastek.tictactoegame.engine.game;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.events.GameEndedEvent;
+import com.ciastek.tictactoegame.engine.events.GameEvent;
 import com.ciastek.tictactoegame.engine.events.RoundEndedWithVictoryEvent;
 import com.ciastek.tictactoegame.engine.events.RoundStartedEvent;
 import com.ciastek.tictactoegame.engine.movement.PositionInput;
@@ -11,7 +12,10 @@ import com.ciastek.tictactoegame.engine.victory.RoundResult;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import com.ciastek.tictactoegame.ui.Printer;
 
-public class Game {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Game implements Observable{
     private final int NUMBER_OF_ROUNDS = 3;
     private Round currentRound;
 
@@ -19,30 +23,29 @@ public class Game {
     private GameSettings gameSettings;
     private RoundFactory fabric;
     private PositionInput positionInput;
-    private Printer printer;
+    private List<Observer> observers;
 
-    public Game(GameSettings gameSettings, RoundFactory fabric, PositionInput positionInput, Printer printer) {
+    public Game(GameSettings gameSettings, RoundFactory fabric, PositionInput positionInput) {
+        observers = new ArrayList<>();
         this.gameSettings = gameSettings;
         this.fabric = fabric;
         this.positionInput = positionInput;
-        this.printer = printer;
     }
 
     public void play() {
         for (int roundNumber = 1; roundNumber <= NUMBER_OF_ROUNDS; roundNumber++) {
             currentRound = fabric.getRound(gameSettings);
-            printer.printMessage(new RoundStartedEvent(roundNumber));
-
+            notifyObservers(new RoundStartedEvent(roundNumber));
             RoundResult roundResult = executeRound(positionInput);
 
             if(roundResult.isWon()){
                 Player winner = roundResult.getWinner().get();
                 PlayerCharacter winnerCharacter = winner.getCharacter();
-                printer.printMessage(new RoundEndedWithVictoryEvent(winnerCharacter));
+                notifyObservers(new RoundEndedWithVictoryEvent(winnerCharacter));
             } //TODo: RoundEndedWithDrawEvent
         }
 
-        printer.printMessage(new GameEndedEvent());
+        notifyObservers(new GameEndedEvent());
         isGameFinished = true;
     }
 
@@ -74,5 +77,22 @@ public class Game {
 
     public String getBoard() {
         return currentRound.getBoardAsString();
+    }
+
+    @Override
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void unregisterObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers(GameEvent event) {
+        for (Observer observer : observers) {
+            observer.notify(event);
+        }
     }
 }

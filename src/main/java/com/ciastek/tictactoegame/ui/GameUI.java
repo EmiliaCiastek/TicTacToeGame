@@ -21,7 +21,8 @@ public class GameUI {
         System.out.println("TicTacToeGame");
         gameBuilder.withBoardDimensions(setBoardDimensions())
                 .withWinningCondition(setWinningCondition(gameBuilder.getBoardDimensions()))
-                .withFirstPlayer(setFirstPlayer());
+                .withFirstPlayer(setFirstPlayer())
+                .withObserver(new Printer());
 
         Game game = gameBuilder.build();
         System.out.println("Game started");
