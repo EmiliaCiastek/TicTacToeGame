@@ -26,7 +26,7 @@ public class InputValidator {
         try {
             int winningConditionValue = Integer.parseInt(input);
 
-            if(winningConditionValue < 3 || winningConditionValue > Math.min(dimensions.getHeight(), dimensions.getWidth())){
+            if(winningConditionValue < MIN_BOARD_SIZE || winningConditionValue > Math.min(dimensions.getHeight(), dimensions.getWidth())){
                 return new WinningConditionResult();
             } else {
                 return new WinningConditionResult(true, new WinningCondition(winningConditionValue));
@@ -50,10 +50,10 @@ public class InputValidator {
     }
 
     public PositionResult checkPosition(String input) {
+
         try {
             int index = Integer.parseInt(input);
             return new PositionResult(true, new Position(index));
-
         } catch (NumberFormatException exception){
             return new PositionResult();
         }

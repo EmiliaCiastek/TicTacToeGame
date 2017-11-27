@@ -21,7 +21,6 @@ public class PositionScannerInput implements PositionInput{
 
         InputValidator inputValidator = new InputValidator();
         System.out.println("Provide position: ");
-        //Scanner indexInput = new Scanner(System.in);
 
         PositionResult positionResult = inputValidator.checkPosition(inputReader.readInput());
         while (!positionResult.isValid()) {
