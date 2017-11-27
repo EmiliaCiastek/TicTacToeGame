@@ -26,13 +26,7 @@ public class GameRound implements Round {
     }
 
     public RoundResult play(int index) {
-        /*try {
-            MovementValidator validator = new MovementValidator(board);
-            validator.validate(index);*/
-            board.add(index, getCurrentPlayer().getCharacter());
-        /*} catch (IllegalArgumentException exception) {
-            throw exception;
-        } */
+        board.add(index, getCurrentPlayer().getCharacter());
 
         isRoundWon = referee.isWon(board, index);
         RoundResult result = new RoundResult(isRoundWon, getCurrentPlayer());

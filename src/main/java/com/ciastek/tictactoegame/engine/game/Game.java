@@ -54,7 +54,9 @@ public class Game implements Observable{
         int secondPlayerScore = second.getScore();
 
         Player gameWinner = firstPlayerScore > secondPlayerScore ? first : second;
-        System.out.println("And the winner is.... " + gameWinner.getName()); //TODO: create Event and notify printer
+        String resultMessage = String.format("And the winner is.... %s! %s:%d, %s:%d", gameWinner.getName(), first.getCharacter(), first.getScore(), second.getCharacter(), second.getScore());
+        System.out.println(resultMessage);
+
 
         isGameFinished = true;
     }
