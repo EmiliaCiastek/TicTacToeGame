@@ -6,9 +6,14 @@ import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.RoundResult;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
+import com.ciastek.tictactoegame.ui.GameUI;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.io.*;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.testng.Assert.*;
 
@@ -92,5 +97,20 @@ public class GameRoundTest {
 
         Player winner = result.getWinner().get();
         assertEquals(winner.getCharacter(), PlayerCharacter.O);
+    }
+
+    @Test
+    public void whenDrawThenRoundResultFalse(){
+        round.play(0); //O
+        round.play(1); //X
+        round.play(4); //O
+        round.play(2); //X
+        round.play(5); //O
+        round.play(3); //X
+        round.play(6); //O
+        round.play(8); //X
+        RoundResult result = round.play(7); //O
+
+        assertFalse(result.isWon());
     }
 }
