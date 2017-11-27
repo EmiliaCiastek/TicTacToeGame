@@ -1,5 +1,6 @@
 package com.ciastek.tictactoegame.engine.movement;
 
+import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.board.Board;
 
@@ -21,6 +22,18 @@ public class MovementValidator {
         if (gameBoard.getCharacterAt(index) != PlayerCharacter.NONE) {
             throw new IllegalArgumentException("Field is already occupied");
         }
+    }
 
+    public boolean isValid(int index) {
+        BoardDimensions dimensions = gameBoard.getBoardDimensions();
+        int boardSize = dimensions.getWidth() * dimensions.getHeight();
+
+        if(index < 0 || index >= boardSize){
+            return false;
+        } else if(gameBoard.getCharacterAt(index) != PlayerCharacter.NONE){
+            return false;
+        }
+
+        return true;
     }
 }

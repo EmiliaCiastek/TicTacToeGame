@@ -82,17 +82,6 @@ public class GameRoundTest {
         assertTrue(round.isFinished());
     }
 
-    @DataProvider(name = "Incorrect moves")
-    public static Object[] incorrectMoves(){
-        return new Object[] { -1, 12, 0};
-    }
-    @Test(dataProvider = "Incorrect moves",
-            expectedExceptions = IllegalArgumentException.class)
-    public void givenIncorrectMovesThenThrowException(int incorrectIndex){
-        round.play(0);
-        round.play(incorrectIndex);
-    }
-
     @Test
     public void whenVictoryThenOIsAWinner(){
         round.play(0); //O

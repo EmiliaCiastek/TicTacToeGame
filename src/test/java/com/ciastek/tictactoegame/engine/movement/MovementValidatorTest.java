@@ -4,7 +4,11 @@ import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.board.Board;
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 public class MovementValidatorTest {
     private MovementValidator validator;
@@ -19,22 +23,32 @@ public class MovementValidatorTest {
         validator = new MovementValidator(board);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Coordinates have to be equals or greater than 0")
-    public void givenCoordinatesSmallerThan1WhenAddThenThrowException(){
-        validator.validate(-1);
+    @DataProvider(name = "indices out of bound")
+    public static Object[] indicesOutOfBounds (){
+            return new Object[] {-1, -100, -5, 55, 12, 34};
+    }
+    @Test(dataProvider = "indices out of bound")
+    public void givenOutOfBoundIndicesWhenIsValidThenReturnFalse(int incorrectIndex){
+        assertFalse(validator.isValid(incorrectIndex));
     }
 
-    @Test (expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Coordinates have to be equals or smaller than board size")
-    public void givenCoordinatesGreaterThanBoardSizeWhenAddThenThrowException(){
-        validator.validate(20);
+    @DataProvider(name = "correct indices")
+    public static Object[] correctIndices (){
+        return new Object[] {0, 1, 11, 10, 5, 4};
+    }
+    @Test(dataProvider = "correct indices")
+    public void givenCorrectIndicesWhenIsValidThenReturnTrue(int correctIndex){
+        assertTrue(validator.isValid(correctIndex));
     }
 
-    @Test (expectedExceptions = IllegalArgumentException.class, expectedExceptionsMessageRegExp = "Field is already occupied")
-    public void givenOccupiedCoordinatesWhenAddThenThrowException(){
+    @DataProvider(name = "occupied indices")
+    public static Object[] occupiedIndices (){
+        return new Object[] {0, 1, 11, 10, 5, 4};
+    }
+    @Test(dataProvider = "occupied indices")
+    public void givenOccupiedIndicesWhenIsValidThenReturnFalse(int occupiedIndex){
+        board.add(occupiedIndex, PlayerCharacter.X);
 
-        int index = 4;
-        board.add(index, PlayerCharacter.X);
-
-        validator.validate(index);
+        assertFalse(validator.isValid(occupiedIndex));
     }
 }

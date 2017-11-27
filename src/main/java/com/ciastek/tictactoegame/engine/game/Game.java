@@ -2,6 +2,7 @@ package com.ciastek.tictactoegame.engine.game;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.events.*;
+import com.ciastek.tictactoegame.engine.movement.MovementValidator;
 import com.ciastek.tictactoegame.engine.movement.PositionInput;
 import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.victory.RoundResult;
@@ -19,6 +20,7 @@ public class Game implements Observable{
     private RoundFactory factory;
     private PositionInput positionInput;
     private List<Observer> observers;
+    private MovementValidator movementValidator;
 
     public Game(GameSettings gameSettings, RoundFactory factory, PositionInput positionInput) {
         observers = new ArrayList<>();
@@ -52,19 +54,24 @@ public class Game implements Observable{
         int secondPlayerScore = second.getScore();
 
         Player gameWinner = firstPlayerScore > secondPlayerScore ? first : second;
-        System.out.println("And the winner is.... " + gameWinner.getName());
+        System.out.println("And the winner is.... " + gameWinner.getName()); //TODO: create Event and notify printer
 
         isGameFinished = true;
     }
 
     private RoundResult executeRound(PositionInput positionInput) {
         RoundResult roundResult = new RoundResult();
+        MovementValidator movementValidator = new MovementValidator(currentRound.getBoard());
 
         while (!currentRound.isFinished()){
             System.out.println();
             System.out.println(currentRound.getBoardAsString());
             int position = positionInput.getPosition(currentRound.getCurrentPlayer()).asInt();
 
+            while (!movementValidator.isValid(position)){
+                System.out.println("Provided index is incorrect!"); //TODO: create Event and notify printer + detailed Message
+                position = positionInput.getPosition(currentRound.getCurrentPlayer()).asInt();
+            }
             roundResult = currentRound.play(position);
         }
 

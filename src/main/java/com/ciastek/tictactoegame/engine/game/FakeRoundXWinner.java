@@ -1,5 +1,7 @@
 package com.ciastek.tictactoegame.engine.game;
 
+import com.ciastek.tictactoegame.engine.board.Board;
+import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.RoundResult;
@@ -27,5 +29,10 @@ public class FakeRoundXWinner implements Round {
         boolean result = isFinished;
         isFinished = !isFinished;
         return result;
+    }
+
+    @Override
+    public Board getBoard() {
+        return new Board(new BoardDimensions(3, 3));
     }
 }
