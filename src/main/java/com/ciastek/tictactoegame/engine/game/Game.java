@@ -5,6 +5,7 @@ import com.ciastek.tictactoegame.engine.events.*;
 import com.ciastek.tictactoegame.engine.movement.MovementValidator;
 import com.ciastek.tictactoegame.engine.movement.PositionInput;
 import com.ciastek.tictactoegame.engine.player.Player;
+import com.ciastek.tictactoegame.engine.victory.GameReferee;
 import com.ciastek.tictactoegame.engine.victory.RoundResult;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 
@@ -20,13 +21,14 @@ public class Game implements Observable{
     private RoundFactory factory;
     private PositionInput positionInput;
     private List<Observer> observers;
-    private MovementValidator movementValidator;
+    private GameReferee gameReferee;
 
     public Game(GameSettings gameSettings, RoundFactory factory, PositionInput positionInput) {
         observers = new ArrayList<>();
         this.gameSettings = gameSettings;
         this.factory = factory;
         this.positionInput = positionInput;
+        this.gameReferee = new GameReferee(gameSettings.getFirstPlayer(), gameSettings.getSecondPlayer());
     }
 
     public void play() {
@@ -46,17 +48,7 @@ public class Game implements Observable{
             }
         }
 
-        notifyObservers(new GameEndedEvent());
-
-        Player first = gameSettings.getFirstPlayer();
-        Player second = gameSettings.getSecondPlayer();
-        int firstPlayerScore = first.getScore();
-        int secondPlayerScore = second.getScore();
-
-        Player gameWinner = firstPlayerScore > secondPlayerScore ? first : second;
-        String resultMessage = String.format("And the winner is.... %s! %s:%d, %s:%d", gameWinner.getName(), first.getCharacter(), first.getScore(), second.getCharacter(), second.getScore());
-        System.out.println(resultMessage);
-
+        notifyObservers(new GameEndedEvent(gameReferee.generateGameResult()));
 
         isGameFinished = true;
     }

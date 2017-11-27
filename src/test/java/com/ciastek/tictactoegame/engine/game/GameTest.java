@@ -48,20 +48,6 @@ public class GameTest {
     }
 
     @Test
-    public void givenPlayerXWonThreeTimesThenVictoryMessageShouldBePrinted(){
-        Round fakeRound = new FakeRoundXWinner();
-
-        ArgumentCaptor<GameEndedEvent> argumentCaptor = ArgumentCaptor.forClass(GameEndedEvent.class);
-        game = new Game(gameSettings, roundFabric -> fakeRound, fakeInput);
-        game.registerObserver(mockedPrinter);
-
-        game.play();
-
-        verify(mockedPrinter, atLeastOnce()).notify(argumentCaptor.capture());
-        assertEquals(argumentCaptor.getValue().getMessage(), "Game over!");
-    }
-
-    @Test
     public void givenDrawRoundThenDrawMessageShouldBePrinted(){
         ArgumentCaptor<RoundEndedWithDrawEvent> argumentCaptor = ArgumentCaptor.forClass(RoundEndedWithDrawEvent.class);
         game = new Game(gameSettings, roundFabric -> new FakeRoundWithDraw(), fakeInput);
