@@ -13,10 +13,12 @@ import com.ciastek.tictactoegame.engine.victory.WinningConditionResult;
 import java.util.Scanner;
 
 public class GameUI {
+    private static InputReader inputReader;
 
     public static void main(String[] args) {
         //TODO: add quit option
 
+        inputReader = new InputReader();
         GameBuilder gameBuilder = new GameBuilder();
 
         System.out.println("Welcome in TicTacToeGame");
@@ -24,7 +26,8 @@ public class GameUI {
                 .withBoardDimensions(setBoardDimensions())
                 .withWinningCondition(setWinningCondition(gameBuilder.getBoardDimensions()))
                 .withFirstPlayer(setFirstPlayer())
-                .withObserver(new Printer());
+                .withObserver(new Printer())
+                .withImputReader(inputReader);
 
         Game game = gameBuilder.build();
         System.out.println("Game started");
@@ -41,12 +44,12 @@ public class GameUI {
     private static Player setPlayer(PlayerCharacter playerCharacter) {
         InputValidator inputValidator = new InputValidator();
         System.out.println(String.format("Provide name for %s player", playerCharacter));
-        Scanner inputPlayer = new Scanner(System.in);
-        PlayerResult oPlayerResult = inputValidator.checkPlayerName(inputPlayer.nextLine(), playerCharacter);
+        //Scanner inputPlayer = new Scanner(System.in);
+        PlayerResult oPlayerResult = inputValidator.checkPlayerName(inputReader.readInput(), playerCharacter);
 
         while (!oPlayerResult.isValid()) {
             System.out.println("Provided name is incorrect. Name can contains only letters.");
-            oPlayerResult = inputValidator.checkPlayerName(inputPlayer.nextLine(), playerCharacter);
+            oPlayerResult = inputValidator.checkPlayerName(inputReader.readInput(), playerCharacter);
         }
 
         return oPlayerResult.getParsedResult();
@@ -55,12 +58,12 @@ public class GameUI {
     private static PlayerCharacter setFirstPlayer() {
         InputValidator inputValidator = new InputValidator();
         System.out.println("Choose first player: O or X?");
-        Scanner inputPlayer = new Scanner(System.in);
-        FirstCharacterResult firstPlayerResult = inputValidator.checkPlayer(inputPlayer.nextLine());
+        //Scanner inputPlayer = new Scanner(System.in);
+        FirstCharacterResult firstPlayerResult = inputValidator.checkPlayer(inputReader.readInput());
 
         while (!firstPlayerResult.isValid()) {
             System.out.println("Provided input is incorrect. Choose first player: O or X?");
-            firstPlayerResult = inputValidator.checkPlayer(inputPlayer.nextLine());
+            firstPlayerResult = inputValidator.checkPlayer(inputReader.readInput());
         }
         return firstPlayerResult.getParsedResult();
     }
@@ -68,12 +71,12 @@ public class GameUI {
     private static WinningCondition setWinningCondition(BoardDimensions dimensions) {
         InputValidator inputValidator = new InputValidator();
         System.out.println("Provide winning condition: greater than 2 and smaller or equal " + Math.min(dimensions.getWidth(), dimensions.getHeight()));
-        Scanner inputCondition = new Scanner(System.in);
-        WinningConditionResult winningConditionResult = inputValidator.checkWinningCondition(inputCondition.nextLine(), dimensions);
+       // Scanner inputCondition = new Scanner(System.in);
+        WinningConditionResult winningConditionResult = inputValidator.checkWinningCondition(inputReader.readInput(), dimensions);
 
         while (!winningConditionResult.isValid()) {
             System.out.println("Provided input is incorrect. Provide winning condition: greater than 2 and smaller or equal " + Math.min(dimensions.getWidth(), dimensions.getHeight()));
-            winningConditionResult = inputValidator.checkWinningCondition(inputCondition.nextLine(), dimensions);
+            winningConditionResult = inputValidator.checkWinningCondition(inputReader.readInput(), dimensions);
         }
 
         return winningConditionResult.getParsedValue();
@@ -82,12 +85,12 @@ public class GameUI {
     private static BoardDimensions setBoardDimensions() {
         InputValidator inputValidator = new InputValidator();
         System.out.println("Provide board size in format: width x height (without spaces). Minimum size 3x3, maximum size 100x100");
-        Scanner sizeInput = new Scanner(System.in);
+        //Scanner sizeInput = new Scanner(System.in);
 
-        BoardDimensionsResult boardDimensionsResult = inputValidator.checkBoardDimensions(sizeInput.nextLine());
+        BoardDimensionsResult boardDimensionsResult = inputValidator.checkBoardDimensions(inputReader.readInput());
         while (!boardDimensionsResult.isValid()) {
             System.out.println("Provided input is incorrect. \nProvide board size in format: width x height (without spaces). Minimum size 3x3, maximum size 100x100");
-            boardDimensionsResult = inputValidator.checkBoardDimensions(sizeInput.nextLine());
+            boardDimensionsResult = inputValidator.checkBoardDimensions(inputReader.readInput());
         }
 
         return boardDimensionsResult.getParsedResult();
