@@ -65,7 +65,7 @@ public class Game implements Observable{
             while (!movementValidator.isValid(position)){
                 System.out.println("Provided index is incorrect!"); //TODO: create Event and notify printer + detailed Message
                 position = positionInput.getPosition(currentRound.getCurrentPlayer()).asInt();
-            }
+            } //TODO: if position inValid check if q/Q and then quit
             roundResult = currentRound.play(position);
         }
 

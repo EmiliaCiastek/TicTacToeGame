@@ -50,6 +50,9 @@ public class InputValidator {
     }
 
     public PositionResult checkPosition(String input) {
+        if(input.equalsIgnoreCase("Q")){
+            return new PositionResult(true);
+        }
 
         try {
             int index = Integer.parseInt(input);

@@ -22,6 +22,11 @@ public class PlayerResult implements Result<Player>{
     }
 
     @Override
+    public boolean isQuit() {
+        return false;
+    }
+
+    @Override
     public Player getParsedResult() {
         return parsedPlayer;
     }

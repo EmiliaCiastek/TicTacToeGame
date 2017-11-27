@@ -24,6 +24,9 @@ public class PositionScannerInput implements PositionInput{
 
         PositionResult positionResult = inputValidator.checkPosition(inputReader.readInput());
         while (!positionResult.isValid()) {
+            if(positionResult.isQuit()) {
+                break;
+            }
             System.out.println("Provided index is incorrect. Index has to be a number");
             positionResult = inputValidator.checkPosition(inputReader.readInput());
         }

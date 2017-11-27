@@ -24,4 +24,9 @@ public class BoardDimensionsResult implements Result<BoardDimensions>{
     public boolean isValid(){
         return isValid;
     }
+
+    @Override
+    public boolean isQuit() {
+        return false;
+    }
 }

@@ -24,4 +24,9 @@ public class FirstCharacterResult implements Result<PlayerCharacter> {
     public boolean isValid() {
         return isValid;
     }
+
+    @Override
+    public boolean isQuit() {
+        return false;
+    }
 }

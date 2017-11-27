@@ -6,11 +6,18 @@ import com.ciastek.tictactoegame.engine.movement.Position;
 public class PositionResult implements Result<Position> {
     private final boolean isValid;
     private Position parsedPosition;
+    private boolean isQuit;
 
 
     public PositionResult(boolean isValid, Position parsedPosition) {
         this.isValid = isValid;
         this.parsedPosition = parsedPosition;
+    }
+
+    public PositionResult(boolean isQuit){
+        this.isQuit = isQuit;
+        this.parsedPosition = new Position(-1);
+        isValid = false;
     }
 
     public PositionResult(){
@@ -23,6 +30,11 @@ public class PositionResult implements Result<Position> {
     }
     public boolean isValid() {
         return isValid;
+    }
+
+    @Override
+    public boolean isQuit() {
+        return false;
     }
 
 
