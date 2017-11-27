@@ -18,12 +18,20 @@ public class InputValidatorTest {
     private String input;
     private BoardDimensions dimensions = new BoardDimensions(5, 6);
 
-    @Test
-    public void givenCorrectOPlayerInputWhenValidateThenReturnCorrectPlayerResult(){
-        input = "O";
-        FirstCharacterResult actual = validator.checkPlayer(input);
+    @DataProvider(name = "first player")
+    public static Object[][] firstPlayer(){
+        return new Object[][] {
+                {"O", PlayerCharacter.O},
+                {"o", PlayerCharacter.O},
+                {"X", PlayerCharacter.X},
+                {"x", PlayerCharacter.X},
+        };
+    }
+    @Test(dataProvider = "first player")
+    public void givenCorrectFirstPlayerInputWhenValidateThenReturnFirstCharacterResult(String inputPlayer, PlayerCharacter expected){
+        FirstCharacterResult actual = validator.checkPlayer(inputPlayer);
 
-        assertEquals(actual.getParsedResult(), PlayerCharacter.O);
+        assertEquals(actual.getParsedResult(), expected);
         assertTrue(actual.isValid());
     }
 
@@ -34,15 +42,6 @@ public class InputValidatorTest {
 
         assertEquals(actual.getParsedResult(), PlayerCharacter.NONE);
         assertFalse(actual.isValid());
-    }
-
-    @Test
-    public void givenCorrectXPlayerInputWhenValidateThenReturnCorrectPlayerResult(){
-        input = "X";
-        FirstCharacterResult actual = validator.checkPlayer(input);
-
-        assertEquals(actual.getParsedResult(), PlayerCharacter.X);
-        assertTrue(actual.isValid());
     }
 
     @Test

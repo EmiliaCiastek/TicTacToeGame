@@ -13,4 +13,8 @@ public class Printer implements Observer{
     private void printMessage(String eventMessage){
         System.out.println(eventMessage);
     }
+
+    public void printWelcomeMessage() {
+        printMessage("Welcome in TicTacToeGame");
+    }
 }

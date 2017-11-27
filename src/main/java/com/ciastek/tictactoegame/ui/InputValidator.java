@@ -15,8 +15,8 @@ public class InputValidator {
 
     public FirstCharacterResult checkPlayer(String input) {
 
-        if(input.equals("O") || input.equals("X")){
-            return new FirstCharacterResult(true, PlayerCharacter.valueOf(input));
+        if(input.equalsIgnoreCase("O") || input.equalsIgnoreCase("X")){
+            return new FirstCharacterResult(true, PlayerCharacter.valueOf(input.toUpperCase()));
         } else {
             return new FirstCharacterResult();
         }
