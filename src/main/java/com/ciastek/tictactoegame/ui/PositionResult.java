@@ -3,24 +3,23 @@ package com.ciastek.tictactoegame.ui;
 import com.ciastek.tictactoegame.engine.movement.Position;
 
 public class PositionResult implements Result<Position> {
-    private final boolean isValid;
     private Position parsedPosition;
+    private ResultState resultState;
 
-
-    public PositionResult(boolean isValid, Position parsedPosition) {
-        this.isValid = isValid;
+    public PositionResult(ResultState resultState, Position parsedPosition){
+        this.resultState = resultState;
         this.parsedPosition = parsedPosition;
     }
 
-    public PositionResult(){
-        this.isValid = false;
-        this.parsedPosition = new Position(-1);
+    public PositionResult(ResultState resultState){
+        this.resultState = resultState;
     }
 
     public Position getParsedResult() {
         return parsedPosition;
     }
-    public boolean isValid() {
-        return isValid;
+
+    public ResultState getResultState() {
+        return resultState;
     }
 }

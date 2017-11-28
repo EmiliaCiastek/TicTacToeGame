@@ -15,6 +15,7 @@ public class GameEndedEvent implements GameEvent {
     @Override
     public String getMessage() {
         String message = resourceBundle.getString("gameOverMessage");
+        message = message.replaceAll("-", System.lineSeparator());
         return String.format(message, gameResultMessage);
     }
 }

@@ -4,20 +4,20 @@ import com.ciastek.tictactoegame.engine.player.Player;
 
 public class PlayerResult implements Result<Player>{
     private Player parsedPlayer;
-    private boolean isValid;
+    private ResultState resultState;
 
-    public PlayerResult(boolean isValid, Player parsedPlayer) {
-        this.isValid = isValid;
+    public PlayerResult(ResultState resultState, Player parsedPlayer) {
         this.parsedPlayer = parsedPlayer;
+        this.resultState = resultState;
     }
 
-    public PlayerResult(){
-        this.isValid = false;
+    public PlayerResult(ResultState resultState){
+        this.resultState = resultState;
     }
 
     @Override
-    public boolean isValid() {
-        return isValid;
+    public ResultState getResultState() {
+        return resultState;
     }
 
     @Override

@@ -12,6 +12,8 @@ public class GameStartedEvent implements GameEvent {
 
     @Override
     public String getMessage() {
-        return resourceBundle.getString("gameStartedMessage");
+        String message = resourceBundle.getString("gameStartedMessage");
+        message = message.replaceAll("-", System.lineSeparator());
+        return message;
     }
 }

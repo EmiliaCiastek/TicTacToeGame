@@ -31,7 +31,7 @@ public class InputValidatorTest {
         FirstCharacterResult actual = validator.checkPlayer(inputPlayer);
 
         assertEquals(actual.getParsedResult(), expected);
-        assertTrue(actual.isValid());
+        assertTrue(actual.getResultState() == ResultState.VALID);
     }
 
     @Test
@@ -39,8 +39,7 @@ public class InputValidatorTest {
         input = "fwhfuyewrf";
         FirstCharacterResult actual = validator.checkPlayer(input);
 
-        assertEquals(actual.getParsedResult(), PlayerCharacter.NONE);
-        assertFalse(actual.isValid());
+        assertTrue(actual.getResultState() == ResultState.INVALID);
     }
 
     @Test
@@ -48,8 +47,7 @@ public class InputValidatorTest {
         input = "";
         FirstCharacterResult actual = validator.checkPlayer(input);
 
-        assertEquals(actual.getParsedResult(), PlayerCharacter.NONE);
-        assertFalse(actual.isValid());
+        assertTrue(actual.getResultState() == ResultState.INVALID);
     }
 
     @Test
@@ -58,7 +56,7 @@ public class InputValidatorTest {
 
         WinningConditionResult result = validator.checkWinningCondition(input, dimensions);
 
-        assertFalse(result.isValid());
+        assertTrue(result.getResultState() == ResultState.INVALID);
     }
 
     @Test
@@ -67,8 +65,8 @@ public class InputValidatorTest {
 
         WinningConditionResult result = validator.checkWinningCondition(input, dimensions);
 
-        assertEquals(result.getParsedValue().asInt(), 5);
-        assertTrue(result.isValid());
+        assertEquals(result.getParsedResult().asInt(), 5);
+        assertTrue(result.getResultState() == ResultState.VALID);
     }
 
 
@@ -81,7 +79,7 @@ public class InputValidatorTest {
     public void givenIncorrectStringOfWinningConditionWhenValidateThenReturnEmptyConditionResult(String incorrectInput){
         WinningConditionResult result = validator.checkWinningCondition(incorrectInput, dimensions);
 
-        assertFalse(result.isValid());
+        assertTrue(result.getResultState() == ResultState.INVALID);
     }
 
 
@@ -100,7 +98,7 @@ public class InputValidatorTest {
 
         WinningConditionResult result = validator.checkWinningCondition(winningCondition, dimensions);
 
-        assertFalse(result.isValid());
+        assertTrue(result.getResultState() == ResultState.INVALID);
     }
 
     @DataProvider(name = "correct winning condition")
@@ -117,7 +115,7 @@ public class InputValidatorTest {
     public void givenWinningConditionSmallerThanBoardWidthWhenValidateThenReturnCorrectConditionResult(String winningCondition, BoardDimensions dimensions){
         WinningConditionResult result = validator.checkWinningCondition(winningCondition, dimensions);
 
-        assertTrue(result.isValid());
+        assertTrue(result.getResultState() == ResultState.VALID);
     }
 
     @Test
@@ -126,7 +124,7 @@ public class InputValidatorTest {
 
         BoardDimensionsResult result = validator.checkBoardDimensions(input);
 
-        assertTrue(result.isValid());
+        assertTrue(result.getResultState() == ResultState.VALID);
         assertEquals(result.getParsedResult().getWidth(), 5);
         assertEquals(result.getParsedResult().getHeight(), 6);
     }
@@ -140,7 +138,7 @@ public class InputValidatorTest {
     public void givenIncorrectFormatInputWhenValidateThenReturnEmptyBoardDimensionsResult(String incorrectInput){
         BoardDimensionsResult result = validator.checkBoardDimensions(incorrectInput);
 
-        assertFalse(result.isValid());
+        assertTrue(result.getResultState() == ResultState.INVALID);
     }
 
     @Test
@@ -149,7 +147,7 @@ public class InputValidatorTest {
 
         BoardDimensionsResult result = validator.checkBoardDimensions(input);
 
-        assertFalse(result.isValid());
+        assertTrue(result.getResultState() == ResultState.INVALID);
     }
 
     @Test
@@ -157,7 +155,7 @@ public class InputValidatorTest {
         input = "2x5";
         BoardDimensionsResult result = validator.checkBoardDimensions(input);
 
-        assertFalse(result.isValid());
+        assertTrue(result.getResultState() == ResultState.INVALID);
     }
 
     @DataProvider(name = "incorrect position input")
@@ -169,7 +167,7 @@ public class InputValidatorTest {
     public void givenIncorrectPositionInputWhenValidateThenReturnEmptyPositionResult(String incorrectInput){
         PositionResult result = validator.checkPosition(incorrectInput);
 
-        assertFalse(result.isValid());
+        assertTrue(result.getResultState() == ResultState.INVALID);
     }
 
     @DataProvider(name = "incorrect name input")
@@ -181,7 +179,7 @@ public class InputValidatorTest {
     public void givenIncorrectNameInputWhenValidateThenReturnEmptyNameResult(String incorrectInput){
         PlayerResult result = validator.checkPlayerName(incorrectInput, PlayerCharacter.X);
 
-        assertFalse(result.isValid());
+        assertTrue(result.getResultState() == ResultState.INVALID);
     }
 
     @DataProvider(name = "correct name input")
@@ -193,7 +191,7 @@ public class InputValidatorTest {
     public void givenCorrectNameInputWhenValidateThenReturnPlayerResult(String correctInput){
         PlayerResult result = validator.checkPlayerName(correctInput, PlayerCharacter.O);
 
-        assertTrue(result.isValid());
+        assertTrue(result.getResultState() == ResultState.VALID);
         Player player = result.getParsedResult();
         assertEquals(player.getName(), correctInput);
     }

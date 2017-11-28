@@ -88,7 +88,7 @@ public class GameUI {
         gamePrinter.notify(new PlayerNameEvent(resourceBundle, playerCharacter));
         PlayerResult playerNameResult = inputValidator.checkPlayerName(inputReader.readInput(), playerCharacter);
 
-        while (!playerNameResult.isValid()) {
+        while (playerNameResult.getResultState() == ResultState.INVALID) {
             gamePrinter.notify(new IncorrectInputEvent(resourceBundle));
             gamePrinter.notify(new PlayerNameEvent(resourceBundle, playerCharacter));
             playerNameResult = inputValidator.checkPlayerName(inputReader.readInput(), playerCharacter);
@@ -101,7 +101,7 @@ public class GameUI {
         gamePrinter.notify(new FirstPlayerEvent(resourceBundle));
         FirstCharacterResult firstPlayerResult = inputValidator.checkPlayer(inputReader.readInput());
 
-        while (!firstPlayerResult.isValid()) {
+        while (firstPlayerResult.getResultState() == ResultState.INVALID) {
             gamePrinter.notify(new IncorrectInputEvent(resourceBundle));
             gamePrinter.notify(new FirstPlayerEvent(resourceBundle));
             firstPlayerResult = inputValidator.checkPlayer(inputReader.readInput());
@@ -114,20 +114,20 @@ public class GameUI {
         gamePrinter.notify(new WinningConditionEvent(resourceBundle, maxWinningConditionValue));
         WinningConditionResult winningConditionResult = inputValidator.checkWinningCondition(inputReader.readInput(), dimensions);
 
-        while (!winningConditionResult.isValid()) {
+        while (winningConditionResult.getResultState() == ResultState.INVALID) {
             gamePrinter.notify(new IncorrectInputEvent(resourceBundle));
             gamePrinter.notify(new WinningConditionEvent(resourceBundle, maxWinningConditionValue));
             winningConditionResult = inputValidator.checkWinningCondition(inputReader.readInput(), dimensions);
         }
 
-        return winningConditionResult.getParsedValue();
+        return winningConditionResult.getParsedResult();
     }
 
     private static BoardDimensions setBoardDimensions() {
         gamePrinter.notify(new BoardDimensionsEvent(resourceBundle));
 
         BoardDimensionsResult boardDimensionsResult = inputValidator.checkBoardDimensions(inputReader.readInput());
-        while (!boardDimensionsResult.isValid()) {
+        while (boardDimensionsResult.getResultState() == ResultState.INVALID) {
             gamePrinter.notify(new IncorrectInputEvent(resourceBundle));
             gamePrinter.notify(new BoardDimensionsEvent(resourceBundle));
             boardDimensionsResult = inputValidator.checkBoardDimensions(inputReader.readInput());

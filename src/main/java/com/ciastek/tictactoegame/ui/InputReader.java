@@ -10,12 +10,6 @@ public class InputReader {
     }
 
     public String readInput() {
-        String line = inputScanner.nextLine();
-
-        if(line.equalsIgnoreCase("Q")){
-            System.exit(0);
-        }
-
-        return line;
+        return inputScanner.nextLine();
     }
 }

@@ -9,6 +9,8 @@ import com.ciastek.tictactoegame.engine.victory.GameReferee;
 import com.ciastek.tictactoegame.engine.victory.RoundResult;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import com.ciastek.tictactoegame.ui.Observer;
+import com.ciastek.tictactoegame.ui.PositionResult;
+import com.ciastek.tictactoegame.ui.ResultState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,7 @@ public class Game implements Observable {
     private List<Observer> observers;
     private GameReferee gameReferee;
     private ResourceBundle resourceBundle;
+    private boolean isGameExited;
 
     public Game(GameSettings gameSettings, RoundFactory factory, PositionInput positionInput, ResourceBundle resourceBundle) {
         this.resourceBundle = resourceBundle;
@@ -41,19 +44,23 @@ public class Game implements Observable {
             notifyObservers(new RoundStartedEvent(resourceBundle, roundNumber));
             RoundResult roundResult = executeRound(positionInput);
 
-            if(roundResult.isWon()){
-                Player winner = roundResult.getWinner().get();
-                notifyObservers(new RoundEndedWithVictoryEvent(resourceBundle, winner));
-                winner.addPoints(3);
+            if (!isGameExited) {
+                if (roundResult.isWon()) {
+                    Player winner = roundResult.getWinner().get();
+                    notifyObservers(new RoundEndedWithVictoryEvent(resourceBundle, winner));
+                    winner.addPoints(3);
+                } else {
+                    notifyObservers(new RoundEndedWithDrawEvent(resourceBundle));
+                    gameSettings.getFirstPlayer().addPoints(1);
+                    gameSettings.getSecondPlayer().addPoints(1);
+                }
+                notifyObservers(new GameEndedEvent(resourceBundle, gameReferee.generateGameResult()));
             } else {
-                notifyObservers(new RoundEndedWithDrawEvent(resourceBundle));
-                gameSettings.getFirstPlayer().addPoints(1);
-                gameSettings.getSecondPlayer().addPoints(1);
+                notifyObservers(new GameLeftEvent(resourceBundle));
+                break;
             }
+
         }
-
-        notifyObservers(new GameEndedEvent(resourceBundle, gameReferee.generateGameResult()));
-
         isGameFinished = true;
     }
 
@@ -64,12 +71,30 @@ public class Game implements Observable {
         while (!currentRound.isFinished()){
             System.out.println();
             System.out.println(currentRound.getBoardAsString());
-            int position = positionInput.getPosition(currentRound.getCurrentPlayer()).asInt();
+
+            PositionResult positionResult = positionInput.getPosition(currentRound.getCurrentPlayer());
+
+            if(positionResult.getResultState() == ResultState.EXIT){
+                isGameExited = true;
+                break;
+            }
+
+            int position = positionResult.getParsedResult().asInt();
 
             while (!movementValidator.isValid(position)){
                 notifyObservers(new IncorrectInputEvent(resourceBundle));
-                position = positionInput.getPosition(currentRound.getCurrentPlayer()).asInt();
-            } //TODO: if position inValid check if q/Q and then quit
+                positionResult = positionInput.getPosition(currentRound.getCurrentPlayer());
+                if(positionResult.getResultState() == ResultState.EXIT){
+                    isGameExited = true;
+                    break;
+                } else {
+                    isGameExited = false;
+                }
+                position = positionResult.getParsedResult().asInt();
+            }
+
+            if(isGameExited)
+                break;
             roundResult = currentRound.play(position);
         }
 

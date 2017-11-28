@@ -3,7 +3,6 @@ package com.ciastek.tictactoegame.ui;
 import com.ciastek.tictactoegame.engine.events.IncorrectIndexFormatEvent;
 import com.ciastek.tictactoegame.engine.events.PlayerTurnEvent;
 import com.ciastek.tictactoegame.engine.events.ProvidePositionEvent;
-import com.ciastek.tictactoegame.engine.movement.Position;
 import com.ciastek.tictactoegame.engine.player.Player;
 
 import java.util.ResourceBundle;
@@ -21,7 +20,7 @@ public class PositionScannerInput implements PositionInput {
         this.resourceBundle = resourceBundle;
     }
 
-    public Position getPosition(Player player) {
+    public PositionResult getPosition(Player player) {
         printer.notify(new PlayerTurnEvent(resourceBundle, player.getCharacter()));
 
         InputValidator inputValidator = new InputValidator();
@@ -29,13 +28,23 @@ public class PositionScannerInput implements PositionInput {
         String inputLine = inputReader.readInput();
 
         PositionResult positionResult = inputValidator.checkPosition(inputLine);
-        while (!positionResult.isValid()) {
+
+        /*while (!positionResult.isValid()) {
             printer.notify(new IncorrectIndexFormatEvent(resourceBundle));
             inputLine = inputReader.readInput();
             positionResult = inputValidator.checkPosition(inputLine);
         }
 
         return positionResult.getParsedResult();
+    */
+
+        while (positionResult.getResultState() == ResultState.INVALID) {
+            printer.notify(new IncorrectIndexFormatEvent(resourceBundle));
+            inputLine = inputReader.readInput();
+            positionResult = inputValidator.checkPosition(inputLine);
+        }
+
+        return positionResult;
     }
 
 }
