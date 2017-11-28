@@ -13,7 +13,6 @@ import static org.testng.Assert.assertTrue;
 public class RefereeTest {
     private Referee referee = new Referee(new WinningCondition(3));
 
-
     @Test
     public void givenNoWinningBoardPieceThenNoWinner(){
         BoardDimensions boardDimensions = new BoardDimensions(10, 12);
@@ -54,5 +53,4 @@ public class RefereeTest {
 
         assertTrue(referee.isWon(board, 0));
     }
-
 }

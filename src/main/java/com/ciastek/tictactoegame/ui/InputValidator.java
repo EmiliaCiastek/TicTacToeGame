@@ -8,11 +8,11 @@ import com.ciastek.tictactoegame.engine.player.FirstCharacterResult;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import com.ciastek.tictactoegame.engine.victory.WinningConditionResult;
 
-public class InputValidator {
+class InputValidator {
     private final int MAX_BOARD_SIZE = 100;
     private final int MIN_BOARD_SIZE = 3;
 
-    public FirstCharacterResult checkPlayer(String input) {
+    FirstCharacterResult checkPlayer(String input) {
 
         if(input.equalsIgnoreCase("O") || input.equalsIgnoreCase("X")){
             return new FirstCharacterResult(ResultState.VALID, PlayerCharacter.valueOf(input.toUpperCase()));
@@ -21,7 +21,7 @@ public class InputValidator {
         }
     }
 
-    public WinningConditionResult checkWinningCondition(String input, BoardDimensions dimensions) {
+    WinningConditionResult checkWinningCondition(String input, BoardDimensions dimensions) {
         try {
             int winningConditionValue = Integer.parseInt(input);
 
@@ -35,7 +35,7 @@ public class InputValidator {
         }
     }
 
-    public BoardDimensionsResult checkBoardDimensions(String input) {
+    BoardDimensionsResult checkBoardDimensions(String input) {
         if(input.matches("(\\d+)x(\\d+)")){
             int width = Integer.parseInt(input.split("x")[0]);
             int height = Integer.parseInt(input.split("x")[1]);
@@ -48,7 +48,7 @@ public class InputValidator {
         return new BoardDimensionsResult(ResultState.INVALID);
     }
 
-    public PositionResult checkPosition(String input) {
+    PositionResult checkPosition(String input) {
         if(input.equalsIgnoreCase("q")){
             return new PositionResult(ResultState.EXIT);
         }
@@ -61,7 +61,7 @@ public class InputValidator {
         }
     }
 
-    public PlayerResult checkPlayerName(String input, PlayerCharacter playerCharacter) {
+    PlayerResult checkPlayerName(String input, PlayerCharacter playerCharacter) {
         if (!input.matches("[a-zA-Z]+")){
             return new PlayerResult(ResultState.INVALID);
         }

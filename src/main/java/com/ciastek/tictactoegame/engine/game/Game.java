@@ -3,12 +3,12 @@ package com.ciastek.tictactoegame.engine.game;
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.events.*;
 import com.ciastek.tictactoegame.engine.movement.MovementValidator;
-import com.ciastek.tictactoegame.ui.PositionInput;
 import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.victory.GameReferee;
 import com.ciastek.tictactoegame.engine.victory.RoundResult;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import com.ciastek.tictactoegame.ui.Observer;
+import com.ciastek.tictactoegame.ui.PositionInput;
 import com.ciastek.tictactoegame.ui.PositionResult;
 import com.ciastek.tictactoegame.ui.ResultState;
 

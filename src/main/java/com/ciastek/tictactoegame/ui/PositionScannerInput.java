@@ -29,15 +29,6 @@ public class PositionScannerInput implements PositionInput {
 
         PositionResult positionResult = inputValidator.checkPosition(inputLine);
 
-        /*while (!positionResult.isValid()) {
-            printer.notify(new IncorrectIndexFormatEvent(resourceBundle));
-            inputLine = inputReader.readInput();
-            positionResult = inputValidator.checkPosition(inputLine);
-        }
-
-        return positionResult.getParsedResult();
-    */
-
         while (positionResult.getResultState() == ResultState.INVALID) {
             printer.notify(new IncorrectIndexFormatEvent(resourceBundle));
             inputLine = inputReader.readInput();
@@ -46,5 +37,4 @@ public class PositionScannerInput implements PositionInput {
 
         return positionResult;
     }
-
 }

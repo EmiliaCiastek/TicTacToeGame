@@ -6,12 +6,14 @@ import java.io.PrintStream;
 public class FilePrinter implements Printer {
 
     @Override
-    public void initPrinter(){
+    public void initPrinter() {
         PrintStream fileStream = null;
         try {
             fileStream = new PrintStream("output.txt");
         } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage()); //TODO: test in terminal
         }
+
         System.setOut(fileStream);
     }
 

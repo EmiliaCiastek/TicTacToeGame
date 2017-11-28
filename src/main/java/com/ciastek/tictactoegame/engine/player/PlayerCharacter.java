@@ -15,6 +15,4 @@ public enum PlayerCharacter {
     public String toString() {
         return value;
     }
-
-
 }

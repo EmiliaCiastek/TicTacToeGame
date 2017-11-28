@@ -4,20 +4,20 @@ import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 
-public class GameSettings {
+class GameSettings {
     private WinningCondition winningCondition;
     private BoardDimensions boardDimensions;
     private Player firstPlayer;
     private Player secondPlayer;
 
-    public GameSettings(BoardDimensions boardDimensions, WinningCondition winningCondition, Player firstPlayer, Player secondPlayer){
+    GameSettings(BoardDimensions boardDimensions, WinningCondition winningCondition, Player firstPlayer, Player secondPlayer){
         this.boardDimensions = boardDimensions;
         this.winningCondition = winningCondition;
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
     }
 
-    public WinningCondition getWinningCondition() {
+    WinningCondition getWinningCondition() {
         return winningCondition;
     }
 
@@ -25,11 +25,11 @@ public class GameSettings {
         return boardDimensions;
     }
 
-    public Player getFirstPlayer() {
+    Player getFirstPlayer() {
         return firstPlayer;
     }
 
-    public Player getSecondPlayer() {
+    Player getSecondPlayer() {
         return secondPlayer;
     }
 }

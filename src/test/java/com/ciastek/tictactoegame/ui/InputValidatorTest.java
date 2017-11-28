@@ -1,15 +1,14 @@
 package com.ciastek.tictactoegame.ui;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
+import com.ciastek.tictactoegame.engine.player.FirstCharacterResult;
 import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
-import com.ciastek.tictactoegame.engine.player.FirstCharacterResult;
 import com.ciastek.tictactoegame.engine.victory.WinningConditionResult;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 public class InputValidatorTest {
@@ -26,6 +25,7 @@ public class InputValidatorTest {
                 {"x", PlayerCharacter.X},
         };
     }
+
     @Test(dataProvider = "first player")
     public void givenCorrectFirstPlayerInputWhenValidateThenReturnFirstCharacterResult(String inputPlayer, PlayerCharacter expected){
         FirstCharacterResult actual = validator.checkPlayer(inputPlayer);
@@ -69,7 +69,6 @@ public class InputValidatorTest {
         assertTrue(result.getResultState() == ResultState.VALID);
     }
 
-
     @DataProvider(name = "incorrect input")
     public static Object[] incorrectInputWinningCondition() {
         return new Object[]{"", " ", "bla", "/n"} ;
@@ -81,7 +80,6 @@ public class InputValidatorTest {
 
         assertTrue(result.getResultState() == ResultState.INVALID);
     }
-
 
     @DataProvider(name = "incorrect winning condition")
     public static Object[][] incorrectWinningCondition() {

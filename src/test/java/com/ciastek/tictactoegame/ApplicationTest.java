@@ -39,5 +39,4 @@ public class ApplicationTest {
 
         assertEquals(actualLastLine, expectedGameResult);
     }
-
 }

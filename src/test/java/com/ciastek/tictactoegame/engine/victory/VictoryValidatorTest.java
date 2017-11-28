@@ -1,8 +1,6 @@
 package com.ciastek.tictactoegame.engine.victory;
 
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
-import com.ciastek.tictactoegame.engine.victory.VictoryValidator;
-import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -55,5 +53,4 @@ public class VictoryValidatorTest {
 
         assertFalse(victory.isVictory(boardPiece));
     }
-
 }

@@ -9,12 +9,11 @@ import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import com.ciastek.tictactoegame.engine.victory.WinningConditionResult;
-import com.ciastek.tictactoegame.ui.*;
 
 import java.util.ResourceBundle;
 
 public class GameUI {
-    private InputReader inputReader; //TODO: add setting input reader
+    private InputReader inputReader;
     private Printer gamePrinter;
     private ResourceBundle resourceBundle;
     private InputValidator inputValidator;
@@ -25,7 +24,7 @@ public class GameUI {
         inputValidator = new InputValidator();
     }
 
-    public void startGameUI() {
+    public void run() {
         gamePrinter.notify(new WelcomeGameEvent());
         resourceBundle = ResourceBundle.getBundle(setLanguage());
 
@@ -41,10 +40,10 @@ public class GameUI {
         GameBuilder gameBuilder = new GameBuilder();
         PositionScannerInput positionScannerInput = new PositionScannerInput(inputReader, resourceBundle, gamePrinter);
 
-        gameBuilder.withPlayers(setPlayer(PlayerCharacter.O), setPlayer(PlayerCharacter.X))
-                .withBoardDimensions(setBoardDimensions())
-                .withWinningCondition(setWinningCondition(gameBuilder.getBoardDimensions()))
-                .withFirstPlayer(setFirstPlayer())
+        gameBuilder.withPlayers(readPlayer(PlayerCharacter.O), readPlayer(PlayerCharacter.X))
+                .withBoardDimensions(readBoardDimensions())
+                .withWinningCondition(readWinningCondition(gameBuilder.getBoardDimensions()))
+                .withFirstPlayer(readFirstPlayer())
                 .withObserver(gamePrinter)
                 .withPositionInput(positionScannerInput)
                 .withLanguageFile(resourceBundle);
@@ -61,7 +60,7 @@ public class GameUI {
         return "Strings";
     }
 
-    private Player setPlayer(PlayerCharacter playerCharacter) {
+    private Player readPlayer(PlayerCharacter playerCharacter) {
         gamePrinter.notify(new PlayerNameEvent(resourceBundle, playerCharacter));
         PlayerResult playerNameResult = inputValidator.checkPlayerName(inputReader.readInput(), playerCharacter);
 
@@ -74,7 +73,7 @@ public class GameUI {
         return playerNameResult.getParsedResult();
     }
 
-    private PlayerCharacter setFirstPlayer() {
+    private PlayerCharacter readFirstPlayer() {
         gamePrinter.notify(new FirstPlayerEvent(resourceBundle));
         FirstCharacterResult firstPlayerResult = inputValidator.checkPlayer(inputReader.readInput());
 
@@ -86,7 +85,7 @@ public class GameUI {
         return firstPlayerResult.getParsedResult();
     }
 
-    private WinningCondition setWinningCondition(BoardDimensions dimensions) {
+    private WinningCondition readWinningCondition(BoardDimensions dimensions) {
         int maxWinningConditionValue = Math.min(dimensions.getWidth(), dimensions.getHeight());
         gamePrinter.notify(new WinningConditionEvent(resourceBundle, maxWinningConditionValue));
         WinningConditionResult winningConditionResult = inputValidator.checkWinningCondition(inputReader.readInput(), dimensions);
@@ -100,7 +99,7 @@ public class GameUI {
         return winningConditionResult.getParsedResult();
     }
 
-    private BoardDimensions setBoardDimensions() {
+    private BoardDimensions readBoardDimensions() {
         gamePrinter.notify(new BoardDimensionsEvent(resourceBundle));
 
         BoardDimensionsResult boardDimensionsResult = inputValidator.checkBoardDimensions(inputReader.readInput());

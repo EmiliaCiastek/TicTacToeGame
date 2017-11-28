@@ -1,7 +1,5 @@
 package com.ciastek.tictactoegame.engine.events;
 
-import com.ciastek.tictactoegame.engine.events.GameEvent;
-
 import java.util.ResourceBundle;
 
 public class BoardDimensionsEvent implements GameEvent {

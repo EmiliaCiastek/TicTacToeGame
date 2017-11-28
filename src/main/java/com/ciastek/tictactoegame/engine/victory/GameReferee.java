@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 public class GameReferee {
     private String GAME_RESULT_MESSAGE;
     private String GAME_DRAW_RESULT_MESSAGE;
-
     private Player firstPlayer;
     private Player secondPlayer;
     private ResourceBundle resourceBundle;

@@ -55,5 +55,4 @@ public class GameBuilderTest {
 
         assertEquals(builder.getFirstPlayer(), oPlayer);
     }
-
 }

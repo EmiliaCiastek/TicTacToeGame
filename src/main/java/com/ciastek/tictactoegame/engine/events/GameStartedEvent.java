@@ -9,7 +9,6 @@ public class GameStartedEvent implements GameEvent {
         this.resourceBundle = resourceBundle;
     }
 
-
     @Override
     public String getMessage() {
         String message = resourceBundle.getString("gameStartedMessage");

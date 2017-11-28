@@ -10,7 +10,7 @@ public class Application {
         inputReader = new InputReader();
 
         GameUI gameUI = new GameUI(gamePrinter, inputReader);
-        gameUI.startGameUI();
+        gameUI.run();
     }
 
     private static Printer choosePrinter(String[] args) {

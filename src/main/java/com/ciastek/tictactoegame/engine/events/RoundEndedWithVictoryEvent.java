@@ -1,7 +1,6 @@
 package com.ciastek.tictactoegame.engine.events;
 
 import com.ciastek.tictactoegame.engine.player.Player;
-
 import java.util.ResourceBundle;
 
 public class RoundEndedWithVictoryEvent implements GameEvent {

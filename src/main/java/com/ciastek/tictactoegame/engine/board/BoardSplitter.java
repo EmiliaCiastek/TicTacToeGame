@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class BoardSplitter {
+public class BoardSplitter { //TODO: refactor
 
     public List<PlayerCharacter> getRow(Board board, int index) {
         int boardWidth = board.getBoardDimensions().getWidth();

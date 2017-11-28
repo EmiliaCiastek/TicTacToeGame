@@ -11,5 +11,4 @@ public interface Printer extends Observer {
     }
 
     void printMessage(String message);
-
 }

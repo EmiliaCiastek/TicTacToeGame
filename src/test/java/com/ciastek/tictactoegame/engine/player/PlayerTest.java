@@ -29,8 +29,4 @@ public class PlayerTest {
         assertEquals(actualMovement.getPosition(), expectedMovement.getPosition());
         assertEquals(actualMovement.getCharacter(), expectedMovement.getCharacter());
     }
-
-
-
-
 }

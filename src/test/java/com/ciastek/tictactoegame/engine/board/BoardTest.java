@@ -38,15 +38,12 @@ public class BoardTest {
         assertEquals(board.getCharacterBoard(), expected);
     }
 
-
     @Test
     public void givenCorrectCoordinatesWhenAddThenAddCharacterToBoard() {
         int index = 4;
-        board.add(4, PlayerCharacter.X);
-        assertEquals(board.getCharacterAt(4), PlayerCharacter.X);
+        board.add(index, PlayerCharacter.X);
+        assertEquals(board.getCharacterAt(index), PlayerCharacter.X);
     }
-
-
 
     @Test
     public void givenEmptyBoardWhenToStringThenConvertToString() {
@@ -94,8 +91,6 @@ public class BoardTest {
         assertFalse(board.isFilled());
     }
 
-
-
     @Test
     public void whenBoardFilledThenTrue() {
         boardSize = 3;
@@ -114,5 +109,4 @@ public class BoardTest {
 
         assertTrue(board.isFilled());
     }
-
 }

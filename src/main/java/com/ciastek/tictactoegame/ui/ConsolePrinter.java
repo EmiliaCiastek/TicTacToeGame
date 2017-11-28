@@ -6,5 +6,4 @@ public class ConsolePrinter implements Printer{
     public void printMessage(String eventMessage){
         System.out.println(eventMessage);
     }
-
 }
