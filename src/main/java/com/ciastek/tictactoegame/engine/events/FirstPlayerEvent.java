@@ -6,8 +6,8 @@ public class FirstPlayerEvent implements GameEvent {
     private ResourceBundle resourceBundle;
 
 
-    public FirstPlayerEvent(String filename){
-        resourceBundle = ResourceBundle.getBundle(filename);
+    public FirstPlayerEvent(ResourceBundle resourceBundle){
+        this.resourceBundle = resourceBundle;
     }
 
     @Override

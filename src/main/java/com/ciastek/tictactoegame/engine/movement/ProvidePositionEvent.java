@@ -7,8 +7,8 @@ import java.util.ResourceBundle;
 public class ProvidePositionEvent implements GameEvent {
     private final ResourceBundle resourceBundle;
 
-    public ProvidePositionEvent(String filename) {
-        resourceBundle = ResourceBundle.getBundle(filename);
+    public ProvidePositionEvent(ResourceBundle resourceBundle) {
+        this.resourceBundle = resourceBundle;
     }
 
     @Override

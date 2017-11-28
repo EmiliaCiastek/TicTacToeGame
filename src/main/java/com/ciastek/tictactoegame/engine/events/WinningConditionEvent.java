@@ -7,9 +7,9 @@ public class WinningConditionEvent implements GameEvent {
     private final ResourceBundle resourceBundle;
 
 
-    public WinningConditionEvent(int maxWinningConditionValue, String filename) {
+    public WinningConditionEvent(ResourceBundle resourceBundle, int maxWinningConditionValue) {
         this.maxWinningCondition = maxWinningConditionValue;
-        resourceBundle = ResourceBundle.getBundle(filename);
+        this.resourceBundle = resourceBundle;
     }
 
     @Override

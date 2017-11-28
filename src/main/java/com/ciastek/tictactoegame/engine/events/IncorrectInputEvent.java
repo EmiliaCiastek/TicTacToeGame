@@ -5,8 +5,8 @@ import java.util.ResourceBundle;
 public class IncorrectInputEvent implements GameEvent {
     private ResourceBundle resourceBundle;
 
-    public IncorrectInputEvent(String filename){
-        resourceBundle = ResourceBundle.getBundle(filename);
+    public IncorrectInputEvent(ResourceBundle resourceBundle){
+        this.resourceBundle = resourceBundle;
     }
 
     @Override

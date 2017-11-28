@@ -5,8 +5,8 @@ import java.util.ResourceBundle;
 public class RoundEndedWithDrawEvent implements GameEvent {
     private ResourceBundle resourceBundle;
 
-    public RoundEndedWithDrawEvent(String filename){
-        resourceBundle = ResourceBundle.getBundle(filename);
+    public RoundEndedWithDrawEvent(ResourceBundle resourceBundle){
+        this.resourceBundle = resourceBundle;
    }
 
     @Override

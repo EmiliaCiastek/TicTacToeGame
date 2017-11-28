@@ -6,8 +6,8 @@ public class RoundStartedEvent implements GameEvent {
     private int roundNumber;
     private final ResourceBundle resourceBundle;
 
-    public RoundStartedEvent(int roundNumber, String filename){
-        resourceBundle = ResourceBundle.getBundle(filename);
+    public RoundStartedEvent(ResourceBundle resourceBundle, int roundNumber){
+        this.resourceBundle = resourceBundle;
         this.roundNumber = roundNumber;
     }
 

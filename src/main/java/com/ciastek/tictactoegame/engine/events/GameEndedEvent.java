@@ -7,8 +7,8 @@ public class GameEndedEvent implements GameEvent {
     private ResourceBundle resourceBundle;
 
 
-    public GameEndedEvent(String gameResultMessage, String fileName){
-        this.resourceBundle = ResourceBundle.getBundle(fileName);
+    public GameEndedEvent(ResourceBundle resourceBundle, String gameResultMessage){
+        this.resourceBundle = resourceBundle;
         this.gameResultMessage = gameResultMessage;
     }
 

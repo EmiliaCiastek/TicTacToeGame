@@ -1,7 +1,6 @@
 package com.ciastek.tictactoegame.engine.game;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
-import com.ciastek.tictactoegame.engine.events.GameEndedEvent;
 import com.ciastek.tictactoegame.engine.events.GameEvent;
 import com.ciastek.tictactoegame.engine.events.RoundEndedWithDrawEvent;
 import com.ciastek.tictactoegame.engine.movement.FakePositionInput;
@@ -9,17 +8,15 @@ import com.ciastek.tictactoegame.engine.movement.PositionInput;
 import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
-import com.ciastek.tictactoegame.ui.GameUI;
-import com.ciastek.tictactoegame.ui.Printer;
+import com.ciastek.tictactoegame.ui.ConsolePrinter;
 import org.mockito.ArgumentCaptor;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import static org.mockito.Mockito.*;
 import static org.testng.Assert.assertEquals;
@@ -27,10 +24,10 @@ import static org.testng.Assert.assertEquals;
 public class GameTest {
     private Game game;
     private ByteArrayOutputStream bytes;
-    private Printer mockedPrinter;
+    private ConsolePrinter mockedPrinter;
     private GameSettings gameSettings;
     private PositionInput fakeInput;
-    private String lannguageFile ="Strings";
+    private ResourceBundle resourceBundle = ResourceBundle.getBundle("Strings");
 
     @BeforeMethod
     public void setUp(){
@@ -41,7 +38,7 @@ public class GameTest {
         Player secondPlayer = new Player(PlayerCharacter.X, "second");
 
         gameSettings = new GameSettings(boardDimensions, winningCondition, firstPlayer, secondPlayer);
-        mockedPrinter = mock(Printer.class);
+        mockedPrinter = mock(ConsolePrinter.class);
 
 
         bytes = new ByteArrayOutputStream();
@@ -51,7 +48,7 @@ public class GameTest {
     @Test
     public void givenDrawRoundThenDrawMessageShouldBePrinted(){
         ArgumentCaptor<RoundEndedWithDrawEvent> argumentCaptor = ArgumentCaptor.forClass(RoundEndedWithDrawEvent.class);
-        game = new Game(gameSettings, roundFabric -> new FakeRoundWithDraw(), fakeInput, lannguageFile);
+        game = new Game(gameSettings, roundFabric -> new FakeRoundWithDraw(), fakeInput, resourceBundle);
         game.registerObserver(mockedPrinter);
         game.play();
 

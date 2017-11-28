@@ -7,8 +7,8 @@ import java.util.ResourceBundle;
 public class IncorrectIndexFormatEvent implements GameEvent {
     private final ResourceBundle resourceBundle;
 
-    public IncorrectIndexFormatEvent(String filename) {
-        resourceBundle = ResourceBundle.getBundle(filename);
+    public IncorrectIndexFormatEvent(ResourceBundle resourceBundle) {
+        this.resourceBundle = resourceBundle;
     }
 
     @Override

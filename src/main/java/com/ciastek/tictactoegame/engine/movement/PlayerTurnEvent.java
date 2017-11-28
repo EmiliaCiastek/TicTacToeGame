@@ -9,9 +9,9 @@ public class PlayerTurnEvent implements GameEvent {
     private PlayerCharacter character;
     private final ResourceBundle resourceBundle;
 
-    public PlayerTurnEvent(PlayerCharacter character, String filename) {
+    public PlayerTurnEvent(ResourceBundle resourceBundle, PlayerCharacter character) {
         this.character = character;
-        resourceBundle = ResourceBundle.getBundle(filename);
+        this.resourceBundle = resourceBundle;
     }
 
     @Override

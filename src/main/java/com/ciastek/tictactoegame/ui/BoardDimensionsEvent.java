@@ -7,8 +7,8 @@ import java.util.ResourceBundle;
 public class BoardDimensionsEvent implements GameEvent {
     private final ResourceBundle resourceBundle;
 
-    public BoardDimensionsEvent(String filename) {
-        resourceBundle = ResourceBundle.getBundle(filename);
+    public BoardDimensionsEvent(ResourceBundle resourceBundle) {
+        this.resourceBundle = resourceBundle;
     }
 
     @Override

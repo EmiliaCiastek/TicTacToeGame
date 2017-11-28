@@ -2,12 +2,12 @@ package com.ciastek.tictactoegame.engine.game;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.movement.PositionInput;
-import com.ciastek.tictactoegame.engine.movement.PositionScannerInput;
 import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import com.ciastek.tictactoegame.ui.InputReader;
-import com.ciastek.tictactoegame.ui.Printer;
+
+import java.util.ResourceBundle;
 
 public class GameBuilder {
     private BoardDimensions boardDimensions;
@@ -18,7 +18,7 @@ public class GameBuilder {
     private Player oPlayer;
     private Player xPlayer;
     private InputReader inputReader;
-    private String languageFile;
+    private ResourceBundle resourceBundle;
     private PositionInput positionInput;
 
     public GameBuilder withBoardDimensions(BoardDimensions dimensions){
@@ -31,8 +31,8 @@ public class GameBuilder {
         return boardDimensions;
     }
 
-    public GameBuilder withLanguageFile(String languageFile){
-        this.languageFile = languageFile;
+    public GameBuilder withLanguageFile(ResourceBundle resourceBundle){
+        this.resourceBundle = resourceBundle;
 
         return this;
     }
@@ -61,7 +61,7 @@ public class GameBuilder {
     public Game build() {
         GameSettings settings = new GameSettings(boardDimensions, winningCondition, firstPlayer, secondPlayer
         );
-        Game game = new Game(settings, new GameRoundFactory(), positionInput, languageFile);
+        Game game = new Game(settings, new GameRoundFactory(), positionInput, resourceBundle);
         game.registerObserver(gameObserver);
         return game;
     }

@@ -8,8 +8,8 @@ public class PlayerNameEvent implements GameEvent{
     private PlayerCharacter playerCharacter;
     private ResourceBundle resourceBundle;
 
-    public PlayerNameEvent(PlayerCharacter playerCharacter, String filename){
-        resourceBundle = ResourceBundle.getBundle(filename);
+    public PlayerNameEvent(ResourceBundle resourceBundle, PlayerCharacter playerCharacter){
+        this.resourceBundle = resourceBundle;
         this.playerCharacter = playerCharacter;
     }
 

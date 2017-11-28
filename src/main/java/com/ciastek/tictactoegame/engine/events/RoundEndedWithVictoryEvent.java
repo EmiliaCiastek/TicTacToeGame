@@ -8,8 +8,8 @@ public class RoundEndedWithVictoryEvent implements GameEvent {
     private final Player winner;
     private final ResourceBundle resourceBundle;
 
-    public RoundEndedWithVictoryEvent(Player winner, String filename){
-        resourceBundle = ResourceBundle.getBundle(filename);
+    public RoundEndedWithVictoryEvent(ResourceBundle resourceBundle, Player winner){
+        this.resourceBundle = resourceBundle;
         this.winner = winner;
     }
 
