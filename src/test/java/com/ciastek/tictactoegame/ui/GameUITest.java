@@ -13,9 +13,9 @@ public class GameUITest {
     @DataProvider(name = "game sequences")
     public static Object[][] gameSequences(){
         return new Object[][]{
-                {"PlayerO\nPlayerX\n3x3\n3\nO\n0\n1\n2\n3\n4\n5\n6\n0\n1\n2\n3\n4\n5\n6\n0\n1\n2\n3\n4\n5\n6", "And the winner is.... " + "PlayerO! O:9, X:0"},
-                {"PlayerO\nPlayerX\n3x3\n3\nX\n0\n1\n2\n3\n4\n5\n6\n0\n1\n2\n3\n4\n5\n6\n0\n1\n2\n3\n4\n5\n6", "And the winner is.... " + "PlayerX! X:9, O:0"},
-                {"PlayerO\nPlayerX\n3x3\n3\nO\n0\n1\n4\n2\n5\n3\n6\n8\n7\n0\n1\n4\n2\n5\n3\n6\n8\n7\n0\n1\n4\n2\n5\n3\n6\n8\n7", "Game ended with draw! O:3, X:3"}
+                {"EN\nPlayerO\nPlayerX\n3x3\n3\nO\n0\n1\n2\n3\n4\n5\n6\n0\n1\n2\n3\n4\n5\n6\n0\n1\n2\n3\n4\n5\n6", "And the winner is.... " + "PlayerO! O:9, X:0"},
+                {"EN\nPlayerO\nPlayerX\n3x3\n3\nX\n0\n1\n2\n3\n4\n5\n6\n0\n1\n2\n3\n4\n5\n6\n0\n1\n2\n3\n4\n5\n6", "And the winner is.... " + "PlayerX! X:9, O:0"},
+                {"EN\nPlayerO\nPlayerX\n3x3\n3\nO\n0\n1\n4\n2\n5\n3\n6\n8\n7\n0\n1\n4\n2\n5\n3\n6\n8\n7\n0\n1\n4\n2\n5\n3\n6\n8\n7", "Game ended with draw! O:3, X:3"}
         };
     }
 

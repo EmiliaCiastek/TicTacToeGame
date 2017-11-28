@@ -1,15 +1,19 @@
 package com.ciastek.tictactoegame.engine.events;
 
-public class WinningConditionEvent implements GameEvent {
-    private final String WINING_CONDITION_MESSAGE = "Provide winning condition: greater than 2 and smaller or equal %s";
-    private int maxWinningCondition;
+import java.util.ResourceBundle;
 
-    public WinningConditionEvent(int maxWinningConditionValue) {
+public class WinningConditionEvent implements GameEvent {
+    private int maxWinningCondition;
+    private final ResourceBundle resourceBundle;
+
+
+    public WinningConditionEvent(int maxWinningConditionValue, String filename) {
         this.maxWinningCondition = maxWinningConditionValue;
+        resourceBundle = ResourceBundle.getBundle(filename);
     }
 
     @Override
     public String getMessage() {
-        return String.format(WINING_CONDITION_MESSAGE, maxWinningCondition);
+        return String.format(resourceBundle.getString("provideWinningConditionMessage"), maxWinningCondition);
     }
 }

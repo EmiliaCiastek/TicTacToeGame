@@ -1,10 +1,16 @@
 package com.ciastek.tictactoegame.engine.events;
 
+import java.util.ResourceBundle;
+
 public class IncorrectInputEvent implements GameEvent {
-    private final String INCORRECT_INPUT_MESSAGE = "Provided input is incorrect.";
+    private ResourceBundle resourceBundle;
+
+    public IncorrectInputEvent(String filename){
+        resourceBundle = ResourceBundle.getBundle(filename);
+    }
 
     @Override
     public String getMessage() {
-        return INCORRECT_INPUT_MESSAGE;
+        return resourceBundle.getString("incorrectInputMessage");
     }
 }

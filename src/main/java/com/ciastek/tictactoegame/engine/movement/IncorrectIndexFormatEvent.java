@@ -1,18 +1,18 @@
-package com.ciastek.tictactoegame.ui;
+package com.ciastek.tictactoegame.engine.movement;
 
 import com.ciastek.tictactoegame.engine.events.GameEvent;
 
 import java.util.ResourceBundle;
 
-public class BoardDimensionsEvent implements GameEvent {
+public class IncorrectIndexFormatEvent implements GameEvent {
     private final ResourceBundle resourceBundle;
 
-    public BoardDimensionsEvent(String filename) {
+    public IncorrectIndexFormatEvent(String filename) {
         resourceBundle = ResourceBundle.getBundle(filename);
     }
 
     @Override
     public String getMessage() {
-        return resourceBundle.getString("provideBoardDimensionsMessage");
+        return resourceBundle.getString("incorrectIndexFormatMessage");
     }
 }

@@ -1,15 +1,20 @@
 package com.ciastek.tictactoegame.engine.events;
 
-public class GameEndedEvent implements GameEvent {
-    private final String GAME_OVER_MESSAGE = "Game over!";
-    private String gameResultMessage;
+import java.util.ResourceBundle;
 
-    public GameEndedEvent(String gameResultMessage){
+public class GameEndedEvent implements GameEvent {
+    private String gameResultMessage;
+    private ResourceBundle resourceBundle;
+
+
+    public GameEndedEvent(String gameResultMessage, String fileName){
+        this.resourceBundle = ResourceBundle.getBundle(fileName);
         this.gameResultMessage = gameResultMessage;
     }
 
     @Override
     public String getMessage() {
-        return GAME_OVER_MESSAGE + "\n" + gameResultMessage;
+        String message = resourceBundle.getString("gameOverMessage");
+        return String.format(message, gameResultMessage);
     }
 }

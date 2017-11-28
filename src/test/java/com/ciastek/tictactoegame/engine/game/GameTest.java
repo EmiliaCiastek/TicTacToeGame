@@ -30,6 +30,7 @@ public class GameTest {
     private Printer mockedPrinter;
     private GameSettings gameSettings;
     private PositionInput fakeInput;
+    private String lannguageFile ="Strings";
 
     @BeforeMethod
     public void setUp(){
@@ -50,7 +51,7 @@ public class GameTest {
     @Test
     public void givenDrawRoundThenDrawMessageShouldBePrinted(){
         ArgumentCaptor<RoundEndedWithDrawEvent> argumentCaptor = ArgumentCaptor.forClass(RoundEndedWithDrawEvent.class);
-        game = new Game(gameSettings, roundFabric -> new FakeRoundWithDraw(), fakeInput);
+        game = new Game(gameSettings, roundFabric -> new FakeRoundWithDraw(), fakeInput, lannguageFile);
         game.registerObserver(mockedPrinter);
         game.play();
 

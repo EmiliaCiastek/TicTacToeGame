@@ -5,6 +5,7 @@ import com.ciastek.tictactoegame.engine.board.BoardDimensionsResult;
 import com.ciastek.tictactoegame.engine.events.*;
 import com.ciastek.tictactoegame.engine.game.Game;
 import com.ciastek.tictactoegame.engine.game.GameBuilder;
+import com.ciastek.tictactoegame.engine.movement.PositionScannerInput;
 import com.ciastek.tictactoegame.engine.player.FirstCharacterResult;
 import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
@@ -14,6 +15,7 @@ import com.ciastek.tictactoegame.engine.victory.WinningConditionResult;
 public class GameUI {
     private static InputReader inputReader;
     private static Printer gamePrinter;
+    private static String languageFile;
 
     public static void main(String[] args) {
         //TODO: add quit option
@@ -25,44 +27,57 @@ public class GameUI {
 
         gamePrinter.notify(new WelcomeGameEvent());
 
+        languageFile = setLanguage();
+        PositionScannerInput positionScannerInput = new PositionScannerInput(inputReader, languageFile, gamePrinter);
+
         gameBuilder.withPlayers(setPlayer(PlayerCharacter.O), setPlayer(PlayerCharacter.X))
                 .withBoardDimensions(setBoardDimensions())
                 .withWinningCondition(setWinningCondition(gameBuilder.getBoardDimensions()))
                 .withFirstPlayer(setFirstPlayer())
                 .withObserver(gamePrinter)
-                .withImputReader(inputReader);
+                .withPositionInput(positionScannerInput)
+                .withLanguageFile(languageFile);
 
         Game game = gameBuilder.build();
 
-        gamePrinter.notify(new GameStartedEvent());
+        gamePrinter.notify(new GameStartedEvent(languageFile));
 
         while (!game.isFinished()) {
             game.play();
         }
     }
 
-    private static Player setPlayer(PlayerCharacter playerCharacter) {
-        InputValidator inputValidator = new InputValidator();
-        gamePrinter.notify(new PlayerNameEvent(playerCharacter));
-        PlayerResult oPlayerResult = inputValidator.checkPlayerName(inputReader.readInput(), playerCharacter);
-
-        while (!oPlayerResult.isValid()) {
-            gamePrinter.notify(new IncorrectInputEvent());
-            gamePrinter.notify(new PlayerNameEvent(playerCharacter));
-            oPlayerResult = inputValidator.checkPlayerName(inputReader.readInput(), playerCharacter);
+    private static String setLanguage() {
+        String languageInput = inputReader.readInput();
+        if(languageInput.equalsIgnoreCase("PL")){
+            return "Strings_pl";
         }
 
-        return oPlayerResult.getParsedResult();
+        return "Strings";
+    }
+
+    private static Player setPlayer(PlayerCharacter playerCharacter) {
+        InputValidator inputValidator = new InputValidator();
+        gamePrinter.notify(new PlayerNameEvent(playerCharacter, languageFile));
+        PlayerResult playerNameResult = inputValidator.checkPlayerName(inputReader.readInput(), playerCharacter);
+
+        while (!playerNameResult.isValid()) {
+            gamePrinter.notify(new IncorrectInputEvent(languageFile));
+            gamePrinter.notify(new PlayerNameEvent(playerCharacter, languageFile));
+            playerNameResult = inputValidator.checkPlayerName(inputReader.readInput(), playerCharacter);
+        }
+
+        return playerNameResult.getParsedResult();
     }
 
     private static PlayerCharacter setFirstPlayer() {
         InputValidator inputValidator = new InputValidator();
-        gamePrinter.notify(new FirstPlayerEvent());
+        gamePrinter.notify(new FirstPlayerEvent(languageFile));
         FirstCharacterResult firstPlayerResult = inputValidator.checkPlayer(inputReader.readInput());
 
         while (!firstPlayerResult.isValid()) {
-            gamePrinter.notify(new IncorrectInputEvent());
-            gamePrinter.notify(new FirstPlayerEvent());
+            gamePrinter.notify(new IncorrectInputEvent(languageFile));
+            gamePrinter.notify(new FirstPlayerEvent(languageFile));
             firstPlayerResult = inputValidator.checkPlayer(inputReader.readInput());
         }
         return firstPlayerResult.getParsedResult();
@@ -71,12 +86,12 @@ public class GameUI {
     private static WinningCondition setWinningCondition(BoardDimensions dimensions) {
         InputValidator inputValidator = new InputValidator();
         int maxWinningConditionValue = Math.min(dimensions.getWidth(), dimensions.getHeight());
-        gamePrinter.notify(new WinningConditionEvent(maxWinningConditionValue));
+        gamePrinter.notify(new WinningConditionEvent(maxWinningConditionValue, languageFile));
         WinningConditionResult winningConditionResult = inputValidator.checkWinningCondition(inputReader.readInput(), dimensions);
 
         while (!winningConditionResult.isValid()) {
-            gamePrinter.notify(new IncorrectInputEvent());
-            gamePrinter.notify(new WinningConditionEvent(maxWinningConditionValue));
+            gamePrinter.notify(new IncorrectInputEvent(languageFile));
+            gamePrinter.notify(new WinningConditionEvent(maxWinningConditionValue, languageFile));
             winningConditionResult = inputValidator.checkWinningCondition(inputReader.readInput(), dimensions);
         }
 
@@ -85,12 +100,12 @@ public class GameUI {
 
     private static BoardDimensions setBoardDimensions() {
         InputValidator inputValidator = new InputValidator();
-        gamePrinter.notify(new BoardDimensionsEvent());
+        gamePrinter.notify(new BoardDimensionsEvent(languageFile));
 
         BoardDimensionsResult boardDimensionsResult = inputValidator.checkBoardDimensions(inputReader.readInput());
         while (!boardDimensionsResult.isValid()) {
-            gamePrinter.notify(new IncorrectInputEvent());
-            gamePrinter.notify(new BoardDimensionsEvent());
+            gamePrinter.notify(new IncorrectInputEvent(languageFile));
+            gamePrinter.notify(new BoardDimensionsEvent(languageFile));
             boardDimensionsResult = inputValidator.checkBoardDimensions(inputReader.readInput());
         }
 

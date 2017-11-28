@@ -1,15 +1,18 @@
 package com.ciastek.tictactoegame.engine.events;
 
-public class RoundStartedEvent implements GameEvent {
-    private final String ROUND_STARTED_MESSAGE = "Round number %d started!";
-    private int roundNumber;
+import java.util.ResourceBundle;
 
-    public RoundStartedEvent(int roundNumber){
+public class RoundStartedEvent implements GameEvent {
+    private int roundNumber;
+    private final ResourceBundle resourceBundle;
+
+    public RoundStartedEvent(int roundNumber, String filename){
+        resourceBundle = ResourceBundle.getBundle(filename);
         this.roundNumber = roundNumber;
     }
 
     @Override
     public String getMessage() {
-        return String.format(ROUND_STARTED_MESSAGE, roundNumber);
+        return String.format(resourceBundle.getString("roundStartedMessage"), roundNumber);
     }
 }

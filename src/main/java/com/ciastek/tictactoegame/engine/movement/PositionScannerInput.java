@@ -4,30 +4,33 @@ import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.ui.InputReader;
 import com.ciastek.tictactoegame.ui.InputValidator;
 import com.ciastek.tictactoegame.ui.PositionResult;
+import com.ciastek.tictactoegame.ui.Printer;
 
-import java.util.Scanner;
-
-public class PositionScannerInput implements PositionInput{
-
+public class PositionScannerInput implements PositionInput {
 
     private final InputReader inputReader;
+    private final String filename;
+    private final Printer printer;
 
-    public PositionScannerInput(InputReader inputReader) {
+    public PositionScannerInput(InputReader inputReader, String filename, Printer printer) {
+        this.printer = printer;
         this.inputReader = inputReader;
+        this.filename = filename;
     }
 
     public Position getPosition(Player player){
-        System.out.println("Player: " + player.getCharacter() + " turn");
+        printer.notify(new PlayerTurnEvent(player.getCharacter(), filename));
 
         InputValidator inputValidator = new InputValidator();
-        System.out.println("Provide position: ");
+        printer.notify(new ProvidePositionEvent(filename));
 
         PositionResult positionResult = inputValidator.checkPosition(inputReader.readInput());
         while (!positionResult.isValid()) {
             if(positionResult.isQuit()) {
                 break;
             }
-            System.out.println("Provided index is incorrect. Index has to be a number");
+
+            printer.notify(new IncorrectIndexFormatEvent(filename));
             positionResult = inputValidator.checkPosition(inputReader.readInput());
         }
 

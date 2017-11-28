@@ -4,10 +4,12 @@ import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.events.*;
 import com.ciastek.tictactoegame.engine.movement.MovementValidator;
 import com.ciastek.tictactoegame.engine.movement.PositionInput;
+import com.ciastek.tictactoegame.engine.movement.PositionScannerInput;
 import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.victory.GameReferee;
 import com.ciastek.tictactoegame.engine.victory.RoundResult;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
+import com.ciastek.tictactoegame.ui.InputReader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +24,10 @@ public class Game implements Observable{
     private PositionInput positionInput;
     private List<Observer> observers;
     private GameReferee gameReferee;
+    private String languageFilename;
 
-    public Game(GameSettings gameSettings, RoundFactory factory, PositionInput positionInput) {
+    public Game(GameSettings gameSettings, RoundFactory factory, PositionInput positionInput, String languageFilename) {
+        this.languageFilename = languageFilename;
         observers = new ArrayList<>();
         this.gameSettings = gameSettings;
         this.factory = factory;
@@ -34,21 +38,21 @@ public class Game implements Observable{
     public void play() {
         for (int roundNumber = 1; roundNumber <= NUMBER_OF_ROUNDS; roundNumber++) {
             currentRound = factory.getRound(gameSettings);
-            notifyObservers(new RoundStartedEvent(roundNumber));
+            notifyObservers(new RoundStartedEvent(roundNumber, languageFilename));
             RoundResult roundResult = executeRound(positionInput);
 
             if(roundResult.isWon()){
                 Player winner = roundResult.getWinner().get();
-                notifyObservers(new RoundEndedWithVictoryEvent(winner));
+                notifyObservers(new RoundEndedWithVictoryEvent(winner, languageFilename));
                 winner.addPoints(3);
             } else {
-                notifyObservers(new RoundEndedWithDrawEvent());
+                notifyObservers(new RoundEndedWithDrawEvent(languageFilename));
                 gameSettings.getFirstPlayer().addPoints(1);
                 gameSettings.getSecondPlayer().addPoints(1);
             }
         }
 
-        notifyObservers(new GameEndedEvent(gameReferee.generateGameResult()));
+        notifyObservers(new GameEndedEvent(gameReferee.generateGameResult(), languageFilename));
 
         isGameFinished = true;
     }
@@ -63,7 +67,7 @@ public class Game implements Observable{
             int position = positionInput.getPosition(currentRound.getCurrentPlayer()).asInt();
 
             while (!movementValidator.isValid(position)){
-                System.out.println("Provided index is incorrect!"); //TODO: create Event and notify printer + detailed Message
+                notifyObservers(new IncorrectInputEvent(languageFilename));
                 position = positionInput.getPosition(currentRound.getCurrentPlayer()).asInt();
             } //TODO: if position inValid check if q/Q and then quit
             roundResult = currentRound.play(position);

@@ -2,16 +2,19 @@ package com.ciastek.tictactoegame.engine.events;
 
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 
-public class PlayerNameEvent implements GameEvent{
-    private final String PLAYER_NAME_EVENT = "Provide name for %s player. Name should contains only letters.";
-    private PlayerCharacter playerCharacter;
+import java.util.ResourceBundle;
 
-    public PlayerNameEvent(PlayerCharacter playerCharacter){
+public class PlayerNameEvent implements GameEvent{
+    private PlayerCharacter playerCharacter;
+    private ResourceBundle resourceBundle;
+
+    public PlayerNameEvent(PlayerCharacter playerCharacter, String filename){
+        resourceBundle = ResourceBundle.getBundle(filename);
         this.playerCharacter = playerCharacter;
     }
 
     @Override
     public String getMessage() {
-        return String.format(PLAYER_NAME_EVENT, playerCharacter);
+        return String.format(resourceBundle.getString("providePlayerNameMessage"), playerCharacter);
     }
 }

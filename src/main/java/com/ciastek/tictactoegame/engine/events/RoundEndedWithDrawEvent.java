@@ -1,10 +1,16 @@
 package com.ciastek.tictactoegame.engine.events;
 
+import java.util.ResourceBundle;
+
 public class RoundEndedWithDrawEvent implements GameEvent {
-    private final String ROUND_DRAW_MESSAGE = "Round over with draw!";
+    private ResourceBundle resourceBundle;
+
+    public RoundEndedWithDrawEvent(String filename){
+        resourceBundle = ResourceBundle.getBundle(filename);
+   }
 
     @Override
     public String getMessage() {
-        return ROUND_DRAW_MESSAGE;
+        return resourceBundle.getString("roundEndedWithDrawMessage");
     }
 }
