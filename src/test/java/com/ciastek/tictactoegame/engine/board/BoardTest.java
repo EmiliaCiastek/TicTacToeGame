@@ -52,7 +52,6 @@ public class BoardTest {
         board = new Board(boardDimensions);
         StringBuilder builder = new StringBuilder();
 
-
         builder.append("0\t\t|1\t\t|2\t\t|\n")
                 .append("\n")
                 .append("3\t\t|4\t\t|5\t\t|\n")
@@ -72,7 +71,6 @@ public class BoardTest {
         board.add(1, PlayerCharacter.O);
         board.add(5, PlayerCharacter.X);
         board.add(8, PlayerCharacter.O);
-
 
         StringBuilder builder = new StringBuilder();
         builder.append("X\t\t|O\t\t|2\t\t|\n")
