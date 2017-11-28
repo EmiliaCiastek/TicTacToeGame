@@ -1,4 +1,4 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.ui;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.events.*;
@@ -14,27 +14,31 @@ import com.ciastek.tictactoegame.ui.*;
 import java.util.ResourceBundle;
 
 public class GameUI {
-    private static InputReader inputReader; //TODO: add setting input reader
-    private static Printer gamePrinter;
-    private static ResourceBundle resourceBundle;
-    private static InputValidator inputValidator;
+    private InputReader inputReader; //TODO: add setting input reader
+    private Printer gamePrinter;
+    private ResourceBundle resourceBundle;
+    private InputValidator inputValidator;
 
-
-    public static void main(String[] args) {
-
-        choosePrinter(args);
-
-        //TODO: add quit option
-
-        inputReader = new InputReader();
+    public GameUI(Printer gamePrinter, InputReader inputReader) {
+        this.gamePrinter = gamePrinter;
+        this.inputReader = inputReader;
         inputValidator = new InputValidator();
+    }
 
-        GameBuilder gameBuilder = new GameBuilder();
-
+    public void startGameUI() {
         gamePrinter.notify(new WelcomeGameEvent());
-
         resourceBundle = ResourceBundle.getBundle(setLanguage());
 
+        Game game = initGame();
+        gamePrinter.notify(new GameStartedEvent(resourceBundle));
+
+        while (!game.isFinished()) {
+            game.play();
+        }
+    }
+
+    private Game initGame() {
+        GameBuilder gameBuilder = new GameBuilder();
         PositionScannerInput positionScannerInput = new PositionScannerInput(inputReader, resourceBundle, gamePrinter);
 
         gameBuilder.withPlayers(setPlayer(PlayerCharacter.O), setPlayer(PlayerCharacter.X))
@@ -45,37 +49,10 @@ public class GameUI {
                 .withPositionInput(positionScannerInput)
                 .withLanguageFile(resourceBundle);
 
-        Game game = gameBuilder.build();
-
-        gamePrinter.notify(new GameStartedEvent(resourceBundle));
-
-        while (!game.isFinished()) {
-            game.play();
-        }
+        return gameBuilder.build();
     }
 
-    private static void choosePrinter(String[] args) {
-        if (args.length > 0) {
-            switch (args[0]) {
-                case "err":
-                    gamePrinter = new ErrorPrinter();
-                    break;
-                case "file":
-                    gamePrinter = new FilePrinter();
-                    break;
-                default:
-                    gamePrinter = new ConsolePrinter();
-                    break;
-            }
-
-        } else {
-            gamePrinter = new ConsolePrinter();
-        }
-
-        gamePrinter.initPrinter();
-    }
-
-    private static String setLanguage() {
+    private String setLanguage() {
         String languageInput = inputReader.readInput();
         if (languageInput.equalsIgnoreCase("PL")) {
             return "Strings_pl";
@@ -84,7 +61,7 @@ public class GameUI {
         return "Strings";
     }
 
-    private static Player setPlayer(PlayerCharacter playerCharacter) {
+    private Player setPlayer(PlayerCharacter playerCharacter) {
         gamePrinter.notify(new PlayerNameEvent(resourceBundle, playerCharacter));
         PlayerResult playerNameResult = inputValidator.checkPlayerName(inputReader.readInput(), playerCharacter);
 
@@ -97,7 +74,7 @@ public class GameUI {
         return playerNameResult.getParsedResult();
     }
 
-    private static PlayerCharacter setFirstPlayer() {
+    private PlayerCharacter setFirstPlayer() {
         gamePrinter.notify(new FirstPlayerEvent(resourceBundle));
         FirstCharacterResult firstPlayerResult = inputValidator.checkPlayer(inputReader.readInput());
 
@@ -109,7 +86,7 @@ public class GameUI {
         return firstPlayerResult.getParsedResult();
     }
 
-    private static WinningCondition setWinningCondition(BoardDimensions dimensions) {
+    private WinningCondition setWinningCondition(BoardDimensions dimensions) {
         int maxWinningConditionValue = Math.min(dimensions.getWidth(), dimensions.getHeight());
         gamePrinter.notify(new WinningConditionEvent(resourceBundle, maxWinningConditionValue));
         WinningConditionResult winningConditionResult = inputValidator.checkWinningCondition(inputReader.readInput(), dimensions);
@@ -123,7 +100,7 @@ public class GameUI {
         return winningConditionResult.getParsedResult();
     }
 
-    private static BoardDimensions setBoardDimensions() {
+    private BoardDimensions setBoardDimensions() {
         gamePrinter.notify(new BoardDimensionsEvent(resourceBundle));
 
         BoardDimensionsResult boardDimensionsResult = inputValidator.checkBoardDimensions(inputReader.readInput());

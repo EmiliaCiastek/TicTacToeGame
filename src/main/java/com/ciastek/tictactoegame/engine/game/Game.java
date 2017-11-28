@@ -54,13 +54,16 @@ public class Game implements Observable {
                     gameSettings.getFirstPlayer().addPoints(1);
                     gameSettings.getSecondPlayer().addPoints(1);
                 }
-                notifyObservers(new GameEndedEvent(resourceBundle, gameReferee.generateGameResult()));
             } else {
                 notifyObservers(new GameLeftEvent(resourceBundle));
                 break;
             }
 
         }
+        if(!isGameExited){
+            notifyObservers(new GameEndedEvent(resourceBundle, gameReferee.generateGameResult()));
+        }
+
         isGameFinished = true;
     }
 
@@ -111,10 +114,6 @@ public class Game implements Observable {
 
     public BoardDimensions getBoardDimensions() {
         return gameSettings.getBoardDimensions();
-    }
-
-    public String getBoard() {
-        return currentRound.getBoardAsString();
     }
 
     @Override

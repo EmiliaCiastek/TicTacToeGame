@@ -51,7 +51,7 @@
                         <index>true</index>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.ciastek.tictactoegame.GameUI</mainClass>
+                            <mainClass>com.ciastek.tictactoegame.Application</mainClass>
                         </manifest>
                         <manifestEntries>
                             <mode>development</mode>

@@ -1,6 +1,5 @@
-package com.ciastek.tictactoegame.ui;
+package com.ciastek.tictactoegame;
 
-import com.ciastek.tictactoegame.GameUI;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -8,9 +7,9 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
 
-public class GameUITest {
+public class ApplicationTest {
     @DataProvider(name = "game sequences")
     public static Object[][] gameSequences(){
         return new Object[][]{
@@ -31,7 +30,7 @@ public class GameUITest {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(byteArrayOutputStream);
         System.setOut(ps);
-        GameUI.main(new String[]{});
+        Application.main(new String[]{});
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
 
         List<String> gameOutput = Arrays.asList(byteArrayOutputStream.toString().split(System.lineSeparator()));
