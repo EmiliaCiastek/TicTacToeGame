@@ -1,6 +1,6 @@
 package com.ciastek.tictactoegame.engine.player;
 
-import com.ciastek.tictactoegame.Result;
+import com.ciastek.tictactoegame.ui.Result;
 
 public class FirstCharacterResult implements Result<PlayerCharacter> {
 
@@ -23,10 +23,5 @@ public class FirstCharacterResult implements Result<PlayerCharacter> {
 
     public boolean isValid() {
         return isValid;
-    }
-
-    @Override
-    public boolean isQuit() {
-        return false;
     }
 }

@@ -1,7 +1,6 @@
-package com.ciastek.tictactoegame;
+package com.ciastek.tictactoegame.ui;
 
 public interface Result<T> {
     boolean isValid();
-    boolean isQuit();
     T getParsedResult();
 }

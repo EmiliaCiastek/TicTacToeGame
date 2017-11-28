@@ -1,6 +1,4 @@
-package com.ciastek.tictactoegame.engine.movement;
-
-import com.ciastek.tictactoegame.engine.events.GameEvent;
+package com.ciastek.tictactoegame.engine.events;
 
 import java.util.ResourceBundle;
 

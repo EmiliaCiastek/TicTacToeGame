@@ -1,6 +1,6 @@
-package com.ciastek.tictactoegame.engine.board;
+package com.ciastek.tictactoegame.ui;
 
-import com.ciastek.tictactoegame.Result;
+import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 
 public class BoardDimensionsResult implements Result<BoardDimensions>{
 
@@ -23,10 +23,5 @@ public class BoardDimensionsResult implements Result<BoardDimensions>{
 
     public boolean isValid(){
         return isValid;
-    }
-
-    @Override
-    public boolean isQuit() {
-        return false;
     }
 }

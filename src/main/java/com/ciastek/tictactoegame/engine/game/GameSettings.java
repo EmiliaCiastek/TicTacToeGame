@@ -1,9 +1,8 @@
 package com.ciastek.tictactoegame.engine.game;
 
-import com.ciastek.tictactoegame.engine.player.Player;
-import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
-import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
+import com.ciastek.tictactoegame.engine.player.Player;
+import com.ciastek.tictactoegame.engine.victory.WinningCondition;
 
 public class GameSettings {
     private WinningCondition winningCondition;

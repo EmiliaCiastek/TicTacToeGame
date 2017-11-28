@@ -1,7 +1,6 @@
 package com.ciastek.tictactoegame.ui;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
-import com.ciastek.tictactoegame.engine.board.BoardDimensionsResult;
 import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.player.FirstCharacterResult;

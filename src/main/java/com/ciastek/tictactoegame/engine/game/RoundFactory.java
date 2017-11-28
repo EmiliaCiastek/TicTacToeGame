@@ -1,5 +1,5 @@
 package com.ciastek.tictactoegame.engine.game;
 
-public interface RoundFactory {
+interface RoundFactory {
     Round getRound(GameSettings gameSettings);
 }

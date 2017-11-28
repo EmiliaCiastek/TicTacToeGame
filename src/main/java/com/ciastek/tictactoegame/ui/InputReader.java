@@ -5,11 +5,11 @@ import java.util.Scanner;
 public class InputReader {
     private Scanner inputScanner;
 
-    public InputReader(){
+    public InputReader() {
         inputScanner = new Scanner(System.in);
     }
 
-    public String readInput(){
+    public String readInput() {
         return inputScanner.nextLine();
     }
 }

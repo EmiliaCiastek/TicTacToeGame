@@ -11,7 +11,7 @@ public class PlayerTest {
 
     @Test
     public void whenInitializedThenCharacterSet(){
-        Player player = new Player(PlayerCharacter.O);
+        Player player = new Player(PlayerCharacter.O, "name");
         assertEquals(player.getCharacter(), PlayerCharacter.O);
     }
 
@@ -22,7 +22,7 @@ public class PlayerTest {
 
     @Test (dataProvider = "Correct positions")
     public void givenPositionWhenMakeMoveThenReturnMovement(Position position){
-        Player player = new Player((PlayerCharacter.X));
+        Player player = new Player(PlayerCharacter.X, "name");
         Movement expectedMovement = new Movement(position, player.getCharacter());
         Movement actualMovement = player.makeMove(position);
 

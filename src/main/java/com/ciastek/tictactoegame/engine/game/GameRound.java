@@ -1,7 +1,6 @@
 package com.ciastek.tictactoegame.engine.game;
 
 import com.ciastek.tictactoegame.engine.board.Board;
-import com.ciastek.tictactoegame.engine.movement.MovementValidator;
 import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.victory.Referee;
 import com.ciastek.tictactoegame.engine.victory.RoundResult;

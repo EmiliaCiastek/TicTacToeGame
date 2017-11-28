@@ -1,11 +1,11 @@
 package com.ciastek.tictactoegame.engine.game;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
-import com.ciastek.tictactoegame.engine.movement.PositionInput;
 import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
-import com.ciastek.tictactoegame.ui.InputReader;
+import com.ciastek.tictactoegame.ui.Observer;
+import com.ciastek.tictactoegame.ui.PositionInput;
 
 import java.util.ResourceBundle;
 
@@ -17,7 +17,6 @@ public class GameBuilder {
     private Observer gameObserver;
     private Player oPlayer;
     private Player xPlayer;
-    private InputReader inputReader;
     private ResourceBundle resourceBundle;
     private PositionInput positionInput;
 
@@ -59,8 +58,7 @@ public class GameBuilder {
 
 
     public Game build() {
-        GameSettings settings = new GameSettings(boardDimensions, winningCondition, firstPlayer, secondPlayer
-        );
+        GameSettings settings = new GameSettings(boardDimensions, winningCondition, firstPlayer, secondPlayer);
         Game game = new Game(settings, new GameRoundFactory(), positionInput, resourceBundle);
         game.registerObserver(gameObserver);
         return game;

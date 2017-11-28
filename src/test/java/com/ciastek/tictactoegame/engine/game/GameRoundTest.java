@@ -6,14 +6,8 @@ import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
 import com.ciastek.tictactoegame.engine.victory.RoundResult;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
-import com.ciastek.tictactoegame.ui.GameUI;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.io.*;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.testng.Assert.*;
 

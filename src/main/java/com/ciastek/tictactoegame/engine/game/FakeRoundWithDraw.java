@@ -16,7 +16,7 @@ public class FakeRoundWithDraw implements Round {
 
     @Override
     public Player getCurrentPlayer() {
-        return new Player(PlayerCharacter.X);
+        return new Player(PlayerCharacter.X, "name");
     }
 
     @Override

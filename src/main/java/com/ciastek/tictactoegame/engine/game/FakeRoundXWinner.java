@@ -11,12 +11,12 @@ public class FakeRoundXWinner implements Round {
 
     @Override
     public RoundResult play(int index) {
-        return new RoundResult(true, new Player(PlayerCharacter.X));
+        return new RoundResult(true, new Player(PlayerCharacter.X, "name"));
     }
 
     @Override
     public Player getCurrentPlayer() {
-        return new Player(PlayerCharacter.X);
+        return new Player(PlayerCharacter.X, "name");
     }
 
     @Override

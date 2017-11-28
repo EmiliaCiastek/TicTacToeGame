@@ -1,7 +1,6 @@
 package com.ciastek.tictactoegame.ui;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
-import com.ciastek.tictactoegame.engine.board.BoardDimensionsResult;
 import com.ciastek.tictactoegame.engine.movement.Position;
 import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.player.PlayerCharacter;
@@ -50,10 +49,6 @@ public class InputValidator {
     }
 
     public PositionResult checkPosition(String input) {
-        if(input.equalsIgnoreCase("Q")){
-            return new PositionResult(true);
-        }
-
         try {
             int index = Integer.parseInt(input);
             return new PositionResult(true, new Position(index));

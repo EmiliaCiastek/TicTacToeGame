@@ -3,19 +3,18 @@ package com.ciastek.tictactoegame.engine.game;
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.events.*;
 import com.ciastek.tictactoegame.engine.movement.MovementValidator;
-import com.ciastek.tictactoegame.engine.movement.PositionInput;
-import com.ciastek.tictactoegame.engine.movement.PositionScannerInput;
+import com.ciastek.tictactoegame.ui.PositionInput;
 import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.victory.GameReferee;
 import com.ciastek.tictactoegame.engine.victory.RoundResult;
 import com.ciastek.tictactoegame.engine.victory.WinningCondition;
-import com.ciastek.tictactoegame.ui.InputReader;
+import com.ciastek.tictactoegame.ui.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class Game implements Observable{
+public class Game implements Observable {
     private final int NUMBER_OF_ROUNDS = 3;
     private Round currentRound;
 
@@ -33,7 +32,7 @@ public class Game implements Observable{
         this.gameSettings = gameSettings;
         this.factory = factory;
         this.positionInput = positionInput;
-        this.gameReferee = new GameReferee(gameSettings.getFirstPlayer(), gameSettings.getSecondPlayer());
+        this.gameReferee = new GameReferee(gameSettings.getFirstPlayer(), gameSettings.getSecondPlayer(), resourceBundle);
     }
 
     public void play() {

@@ -1,4 +1,4 @@
-package com.ciastek.tictactoegame.ui;
+package com.ciastek.tictactoegame.engine.events;
 
 import com.ciastek.tictactoegame.engine.events.GameEvent;
 

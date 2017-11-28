@@ -1,5 +1,6 @@
 package com.ciastek.tictactoegame.ui;
 
+import com.ciastek.tictactoegame.GameUI;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -15,7 +16,10 @@ public class GameUITest {
         return new Object[][]{
                 {"EN\nPlayerO\nPlayerX\n3x3\n3\nO\n0\n1\n2\n3\n4\n5\n6\n0\n1\n2\n3\n4\n5\n6\n0\n1\n2\n3\n4\n5\n6", "And the winner is.... " + "PlayerO! O:9, X:0"},
                 {"EN\nPlayerO\nPlayerX\n3x3\n3\nX\n0\n1\n2\n3\n4\n5\n6\n0\n1\n2\n3\n4\n5\n6\n0\n1\n2\n3\n4\n5\n6", "And the winner is.... " + "PlayerX! X:9, O:0"},
-                {"EN\nPlayerO\nPlayerX\n3x3\n3\nO\n0\n1\n4\n2\n5\n3\n6\n8\n7\n0\n1\n4\n2\n5\n3\n6\n8\n7\n0\n1\n4\n2\n5\n3\n6\n8\n7", "Game ended with draw! O:3, X:3"}
+                {"EN\nPlayerO\nPlayerX\n3x3\n3\nO\n0\n1\n4\n2\n5\n3\n6\n8\n7\n0\n1\n4\n2\n5\n3\n6\n8\n7\n0\n1\n4\n2\n5\n3\n6\n8\n7", "Game ended with draw! O:3, X:3"},
+                {"PL\nPlayerO\nPlayerX\n3x3\n3\nO\n0\n1\n2\n3\n4\n5\n6\n0\n1\n2\n3\n4\n5\n6\n0\n1\n2\n3\n4\n5\n6", "Zwyciezyl... " + "PlayerO! O:9, X:0"},
+                {"Pl\nPlayerO\nPlayerX\n3x3\n3\nX\n0\n1\n2\n3\n4\n5\n6\n0\n1\n2\n3\n4\n5\n6\n0\n1\n2\n3\n4\n5\n6", "Zwyciezyl... " + "PlayerX! X:9, O:0"},
+                {"pl\nPlayerO\nPlayerX\n3x3\n3\nO\n0\n1\n4\n2\n5\n3\n6\n8\n7\n0\n1\n4\n2\n5\n3\n6\n8\n7\n0\n1\n4\n2\n5\n3\n6\n8\n7", "Gra zakonczona remisem! O:3, X:3"}
         };
     }
 

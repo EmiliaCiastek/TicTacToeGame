@@ -1,7 +1,10 @@
-package com.ciastek.tictactoegame.engine.movement;
+package com.ciastek.tictactoegame.ui;
 
+import com.ciastek.tictactoegame.engine.events.IncorrectIndexFormatEvent;
+import com.ciastek.tictactoegame.engine.events.PlayerTurnEvent;
+import com.ciastek.tictactoegame.engine.events.ProvidePositionEvent;
+import com.ciastek.tictactoegame.engine.movement.Position;
 import com.ciastek.tictactoegame.engine.player.Player;
-import com.ciastek.tictactoegame.ui.*;
 
 import java.util.ResourceBundle;
 
@@ -11,28 +14,28 @@ public class PositionScannerInput implements PositionInput {
     private final ResourceBundle resourceBundle;
     private final Printer printer;
 
+
     public PositionScannerInput(InputReader inputReader, ResourceBundle resourceBundle, Printer printer) {
         this.printer = printer;
         this.inputReader = inputReader;
         this.resourceBundle = resourceBundle;
     }
 
-    public Position getPosition(Player player){
+    public Position getPosition(Player player) {
         printer.notify(new PlayerTurnEvent(resourceBundle, player.getCharacter()));
 
         InputValidator inputValidator = new InputValidator();
         printer.notify(new ProvidePositionEvent(resourceBundle));
+        String inputLine = inputReader.readInput();
 
-        PositionResult positionResult = inputValidator.checkPosition(inputReader.readInput());
+        PositionResult positionResult = inputValidator.checkPosition(inputLine);
         while (!positionResult.isValid()) {
-            if(positionResult.isQuit()) {
-                break;
-            }
-
             printer.notify(new IncorrectIndexFormatEvent(resourceBundle));
-            positionResult = inputValidator.checkPosition(inputReader.readInput());
+            inputLine = inputReader.readInput();
+            positionResult = inputValidator.checkPosition(inputLine);
         }
 
         return positionResult.getParsedResult();
     }
+
 }
