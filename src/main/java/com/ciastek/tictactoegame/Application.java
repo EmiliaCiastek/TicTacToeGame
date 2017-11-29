@@ -4,7 +4,7 @@ import com.ciastek.tictactoegame.ui.GameUI;
 import com.ciastek.tictactoegame.ui.InputReader;
 import com.ciastek.tictactoegame.ui.Printer;
 
-public class Application {
+class Application {
     public static void main(String[] args) {
         ArgumentsParser argsParser = new ArgumentsParser();
         Printer gamePrinter = argsParser.parse(args);

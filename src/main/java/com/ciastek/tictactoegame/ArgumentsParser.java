@@ -5,7 +5,7 @@ import com.ciastek.tictactoegame.ui.ErrorPrinter;
 import com.ciastek.tictactoegame.ui.FilePrinter;
 import com.ciastek.tictactoegame.ui.Printer;
 
-public class ArgumentsParser {
+class ArgumentsParser {
     public Printer parse(String[] arguments) {
         if (arguments.length > 0) {
             switch (arguments[0]) {
