@@ -17,8 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class Game implements Observable { //TODO refactor
+public class Game implements Observable {
     private final int NUMBER_OF_ROUNDS = 3;
+    private final int DRAW_POINTS = 1;
+    private final int VICTORY_POINTS = 3;
     private Round currentRound;
 
     private boolean isGameFinished = false;
@@ -46,15 +48,7 @@ public class Game implements Observable { //TODO refactor
             RoundResult roundResult = executeRound(positionInput);
 
             if (!isGameExited) {
-                if (roundResult.isWon()) {
-                    Player winner = roundResult.getWinner().get();
-                    notifyObservers(new RoundEndedWithVictoryEvent(resourceBundle, winner));
-                    winner.addPoints(3);
-                } else {
-                    notifyObservers(new RoundEndedWithDrawEvent(resourceBundle));
-                    gameSettings.getFirstPlayer().addPoints(1);
-                    gameSettings.getSecondPlayer().addPoints(1);
-                }
+                calculatePoints(roundResult);
             } else {
                 notifyObservers(new GameLeftEvent(resourceBundle));
                 break;
@@ -68,52 +62,75 @@ public class Game implements Observable { //TODO refactor
         isGameFinished = true;
     }
 
+    private void calculatePoints(RoundResult roundResult) {
+        if (roundResult.isWon()) {
+            Player winner = roundResult.getWinner().get();
+            notifyObservers(new RoundEndedWithVictoryEvent(resourceBundle, winner));
+            winner.addPoints(VICTORY_POINTS);
+        } else {
+            notifyObservers(new RoundEndedWithDrawEvent(resourceBundle));
+            gameSettings.getFirstPlayer().addPoints(DRAW_POINTS);
+            gameSettings.getSecondPlayer().addPoints(DRAW_POINTS);
+        }
+    }
+
     private RoundResult executeRound(PositionInput positionInput) {
         RoundResult roundResult = new RoundResult();
-        MovementValidator movementValidator = new MovementValidator(currentRound.getBoard());
 
         while (!currentRound.isFinished()) {
             System.out.println();
             System.out.println(currentRound.getBoardAsString());
 
-            PositionResult positionResult = positionInput.getPosition(currentRound.getCurrentPlayer());
-
-            if (positionResult.getResultState() == ResultState.EXIT) {
-                isGameExited = true;
-                break;
-            }
-
-            int position = positionResult.getParsedResult().asInt();
-            ValidationState validationState = movementValidator.isValid(position);
-
-            while (validationState != ValidationState.VALID) {
-                notifyObservers(new IncorrectInputEvent(resourceBundle));
-
-                if (validationState == ValidationState.OCCUPIED) {
-                    notifyObservers(new FieldOccupiedEvent(resourceBundle));
-                } else if (validationState == ValidationState.OUT_OF_BOUNDS) {
-                    notifyObservers(new PositionOutOfBoundsEvent(resourceBundle));
-                }
-
-                positionResult = positionInput.getPosition(currentRound.getCurrentPlayer());
-                if (positionResult.getResultState() == ResultState.EXIT) {
-                    isGameExited = true;
-                    break;
-                } else {
-                    isGameExited = false;
-                }
-
-                position = positionResult.getParsedResult().asInt();
-                validationState = movementValidator.isValid(position);
-            }
-
+            int position = validatePosition(positionInput);
 
             if (isGameExited)
                 break;
+
             roundResult = currentRound.play(position);
         }
 
         return roundResult;
+    }
+
+    private int validatePosition(PositionInput positionInput) {
+        PositionResult positionResult = positionInput.getPosition(currentRound.getCurrentPlayer());
+
+        if (positionResult.getResultState() == ResultState.EXIT) {
+            isGameExited = true;
+            return -1;
+        }
+
+        MovementValidator movementValidator = new MovementValidator(currentRound.getBoard());
+
+        int position = positionResult.getParsedResult().asInt();
+        ValidationState validationState = movementValidator.isValid(position);
+
+        while (validationState != ValidationState.VALID) {
+            sendIncorrectPositionEvent(validationState);
+
+            positionResult = positionInput.getPosition(currentRound.getCurrentPlayer());
+            if (positionResult.getResultState() == ResultState.EXIT) {
+                isGameExited = true;
+                break;
+            } else {
+                isGameExited = false;
+            }
+
+            position = positionResult.getParsedResult().asInt();
+            validationState = movementValidator.isValid(position);
+        }
+
+        return position;
+    }
+
+    private void sendIncorrectPositionEvent(ValidationState validationState) {
+        notifyObservers(new IncorrectInputEvent(resourceBundle));
+
+        if (validationState == ValidationState.OCCUPIED) {
+            notifyObservers(new FieldOccupiedEvent(resourceBundle));
+        } else if (validationState == ValidationState.OUT_OF_BOUNDS) {
+            notifyObservers(new PositionOutOfBoundsEvent(resourceBundle));
+        }
     }
 
     public boolean isFinished() {
