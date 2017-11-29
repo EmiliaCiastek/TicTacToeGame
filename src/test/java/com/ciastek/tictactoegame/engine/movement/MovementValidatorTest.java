@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -29,7 +30,7 @@ public class MovementValidatorTest {
     }
     @Test(dataProvider = "indices out of bound")
     public void givenOutOfBoundIndicesWhenIsValidThenReturnFalse(int incorrectIndex){
-        assertFalse(validator.isValid(incorrectIndex));
+        assertEquals(validator.isValid(incorrectIndex), ValidationState.OUT_OF_BOUNDS);
     }
 
     @DataProvider(name = "correct indices")
@@ -38,7 +39,7 @@ public class MovementValidatorTest {
     }
     @Test(dataProvider = "correct indices")
     public void givenCorrectIndicesWhenIsValidThenReturnTrue(int correctIndex){
-        assertTrue(validator.isValid(correctIndex));
+        assertEquals(validator.isValid(correctIndex), ValidationState.VALID);
     }
 
     @DataProvider(name = "occupied indices")
@@ -49,6 +50,6 @@ public class MovementValidatorTest {
     public void givenOccupiedIndicesWhenIsValidThenReturnFalse(int occupiedIndex){
         board.add(occupiedIndex, PlayerCharacter.X);
 
-        assertFalse(validator.isValid(occupiedIndex));
+        assertEquals(validator.isValid(occupiedIndex), ValidationState.OCCUPIED);
     }
 }

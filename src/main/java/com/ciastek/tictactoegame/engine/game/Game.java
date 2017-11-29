@@ -3,6 +3,7 @@ package com.ciastek.tictactoegame.engine.game;
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 import com.ciastek.tictactoegame.engine.events.*;
 import com.ciastek.tictactoegame.engine.movement.MovementValidator;
+import com.ciastek.tictactoegame.engine.movement.ValidationState;
 import com.ciastek.tictactoegame.engine.player.Player;
 import com.ciastek.tictactoegame.engine.victory.GameReferee;
 import com.ciastek.tictactoegame.engine.victory.RoundResult;
@@ -83,7 +84,7 @@ public class Game implements Observable {
             }
 
             int position = positionResult.getParsedResult().asInt();
-
+/*
             while (!movementValidator.isValid(position)){
                 notifyObservers(new IncorrectInputEvent(resourceBundle));
                 positionResult = positionInput.getPosition(currentRound.getCurrentPlayer());
@@ -95,6 +96,33 @@ public class Game implements Observable {
                 }
                 position = positionResult.getParsedResult().asInt();
             }
+*/
+            ValidationState validationState = movementValidator.isValid(position);
+            while (validationState != ValidationState.VALID){
+                notifyObservers(new IncorrectInputEvent(resourceBundle));
+
+                if(validationState == ValidationState.OCCUPIED){
+                    notifyObservers(new FieldOccupiedEvent(resourceBundle));
+                } else if (validationState == ValidationState.OUT_OF_BOUNDS){
+                    notifyObservers(new PositionOutOfBoundsEvent(resourceBundle));
+                }
+
+                positionResult = positionInput.getPosition(currentRound.getCurrentPlayer());
+                if(positionResult.getResultState() == ResultState.EXIT){
+                    isGameExited = true;
+                    break;
+                } else {
+                    isGameExited = false;
+                }
+
+                position = positionResult.getParsedResult().asInt();
+                validationState = movementValidator.isValid(position);
+            }
+
+
+
+
+
 
             if(isGameExited)
                 break;
