@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 import java.io.*;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static org.testng.Assert.assertEquals;
@@ -94,6 +93,43 @@ public class ApplicationTest {
 
     @Test(dataProvider = "horizontal winning sequences")
     public void givenHorizontalVictoryRoundSequenceWithExitThenShouldDisplayPlayerOWonRoundAndLeftGameMessage(String gameSequence, int height) {
+        String[] expectedGameResult = {"Round over! Player O won! Congratulations OPlayerName!", "You left the game :("};
+        System.setIn(new ByteArrayInputStream(gameSequence.getBytes()));
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(byteArrayOutputStream);
+        System.setOut(ps);
+        Application.main(new String[]{});
+        System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+
+        List<String> gameOutput = Arrays.asList(byteArrayOutputStream.toString().split(System.lineSeparator()));
+
+        int resultLineIdx = gameOutput.size() - (7 + (2* height)); // Lines displayed between round result message and first possible input
+
+        String actual = gameOutput.get(resultLineIdx);
+        String[] actualLastLines = {actual ,gameOutput.get(gameOutput.size() - 1)};
+
+        assertEquals(actualLastLines, expectedGameResult);
+    }
+
+    @DataProvider(name = "vertical winning sequences")
+    public static Object[][] generatedVerticalSequences() {
+        SequencesGenerator sequencesGenerator = new SequencesGenerator();
+        int numberOfTests = 15;
+        Object[][] result = new Object[numberOfTests][2];
+
+        for (int i = 0; i < numberOfTests; i++) {
+            int width = ThreadLocalRandom.current().nextInt(3, 50);
+            int height = ThreadLocalRandom.current().nextInt(3, 50);
+
+            result[i][0] = sequencesGenerator.generateVerticalVictoryRound(width, height) + "q";
+            result[i][1] = height;
+        }
+
+        return result;
+    }
+
+    @Test(dataProvider = "vertical winning sequences")
+    public void givenVerticalVictoryRoundSequenceWithExitThenShouldDisplayPlayerOWonRoundAndLeftGameMessage(String gameSequence, int height) {
         String[] expectedGameResult = {"Round over! Player O won! Congratulations OPlayerName!", "You left the game :("};
         System.setIn(new ByteArrayInputStream(gameSequence.getBytes()));
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
