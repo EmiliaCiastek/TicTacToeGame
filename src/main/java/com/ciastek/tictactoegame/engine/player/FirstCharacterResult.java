@@ -13,7 +13,7 @@ public class FirstCharacterResult implements Result<PlayerCharacter> {
         this.parsedPlayer = parsedPlayer;
     }
 
-    public FirstCharacterResult(ResultState resultState){
+    public FirstCharacterResult(ResultState resultState) {
         this.resultState = resultState;
     }
 

@@ -10,7 +10,7 @@ class GameSettings {
     private Player firstPlayer;
     private Player secondPlayer;
 
-    GameSettings(BoardDimensions boardDimensions, WinningCondition winningCondition, Player firstPlayer, Player secondPlayer){
+    GameSettings(BoardDimensions boardDimensions, WinningCondition winningCondition, Player firstPlayer, Player secondPlayer) {
         this.boardDimensions = boardDimensions;
         this.winningCondition = winningCondition;
         this.firstPlayer = firstPlayer;

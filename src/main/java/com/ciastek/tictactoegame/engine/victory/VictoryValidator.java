@@ -7,13 +7,13 @@ import java.util.List;
 class VictoryValidator {
     private WinningCondition winningCondition;
 
-    public VictoryValidator(WinningCondition winningCondition){
+    public VictoryValidator(WinningCondition winningCondition) {
         this.winningCondition = winningCondition;
     }
 
-    public boolean isVictory(List<PlayerCharacter> boardPiece){
+    public boolean isVictory(List<PlayerCharacter> boardPiece) {
 
-        if(boardPiece.size() < winningCondition.asInt()){
+        if (boardPiece.size() < winningCondition.asInt()) {
             return false;
         }
 
@@ -21,9 +21,9 @@ class VictoryValidator {
         int counter = 1;
 
         for (int i = 1; i < boardPiece.size(); i++) {
-            if (boardPiece.get(i) == currentCandidate){
-                counter ++;
-                if (counter == winningCondition.asInt() && currentCandidate != PlayerCharacter.NONE){
+            if (boardPiece.get(i) == currentCandidate) {
+                counter++;
+                if (counter == winningCondition.asInt() && currentCandidate != PlayerCharacter.NONE) {
                     return true;
                 }
             } else {

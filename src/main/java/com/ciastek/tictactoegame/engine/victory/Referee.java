@@ -22,11 +22,7 @@ public class Referee {
         List<PlayerCharacter> topLeftDiagonal = splitter.getTopLeftBottomRightDiagonal(board, index);
         List<PlayerCharacter> topRightDiagonal = splitter.getTopRightBottomLeftDiagonal(board, index);
 
-        boolean isWon = validator.isVictory(column) ||
-                validator.isVictory(row) ||
-                validator.isVictory(topLeftDiagonal) ||
-                validator.isVictory(topRightDiagonal);
-
-        return isWon;
+        return validator.isVictory(column) || validator.isVictory(row) ||
+                validator.isVictory(topLeftDiagonal) || validator.isVictory(topRightDiagonal);
     }
 }

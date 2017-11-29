@@ -6,12 +6,12 @@ public class PositionResult implements Result<Position> {
     private Position parsedPosition;
     private ResultState resultState;
 
-    public PositionResult(ResultState resultState, Position parsedPosition){
+    public PositionResult(ResultState resultState, Position parsedPosition) {
         this.resultState = resultState;
         this.parsedPosition = parsedPosition;
     }
 
-    public PositionResult(ResultState resultState){
+    public PositionResult(ResultState resultState) {
         this.resultState = resultState;
     }
 

@@ -21,7 +21,7 @@ public class GameReferee {
         Player winner;
         String result;
 
-        if(firstPlayer.getScore() == secondPlayer.getScore()){
+        if (firstPlayer.getScore() == secondPlayer.getScore()) {
             GAME_DRAW_RESULT_MESSAGE = resourceBundle.getString("gameDrawResultMessage");
             result = String.format(GAME_DRAW_RESULT_MESSAGE, firstPlayer.getCharacter(), firstPlayer.getScore(), secondPlayer.getCharacter(), secondPlayer.getScore());
         } else {

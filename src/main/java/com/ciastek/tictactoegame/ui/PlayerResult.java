@@ -2,7 +2,7 @@ package com.ciastek.tictactoegame.ui;
 
 import com.ciastek.tictactoegame.engine.player.Player;
 
-public class PlayerResult implements Result<Player>{
+public class PlayerResult implements Result<Player> {
     private Player parsedPlayer;
     private ResultState resultState;
 
@@ -11,7 +11,7 @@ public class PlayerResult implements Result<Player>{
         this.resultState = resultState;
     }
 
-    public PlayerResult(ResultState resultState){
+    public PlayerResult(ResultState resultState) {
         this.resultState = resultState;
     }
 

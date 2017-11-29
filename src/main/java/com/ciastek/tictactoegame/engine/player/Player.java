@@ -8,7 +8,7 @@ public class Player {
     private String name;
     private int score = 0;
 
-    public Player(PlayerCharacter character, String name){
+    public Player(PlayerCharacter character, String name) {
         this.character = character;
         this.name = name;
     }
@@ -17,7 +17,7 @@ public class Player {
         return character;
     }
 
-    public Movement makeMove(Position position){
+    public Movement makeMove(Position position) {
         return new Movement(position, this.getCharacter());
     }
 
@@ -25,7 +25,7 @@ public class Player {
         return name;
     }
 
-    public void addPoints(int points){
+    public void addPoints(int points) {
         score += points;
     }
 

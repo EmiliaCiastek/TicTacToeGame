@@ -2,18 +2,18 @@ package com.ciastek.tictactoegame.ui;
 
 import com.ciastek.tictactoegame.engine.board.BoardDimensions;
 
-public class BoardDimensionsResult implements Result<BoardDimensions>{
+public class BoardDimensionsResult implements Result<BoardDimensions> {
 
     private BoardDimensions parsedDimensions;
     private ResultState resultState;
 
 
-    public BoardDimensionsResult (ResultState resultState, BoardDimensions parsedDimensions){
+    BoardDimensionsResult(ResultState resultState, BoardDimensions parsedDimensions) {
         this.resultState = resultState;
         this.parsedDimensions = parsedDimensions;
     }
 
-    public  BoardDimensionsResult(ResultState resultState){
+    BoardDimensionsResult(ResultState resultState) {
         this.resultState = resultState;
     }
 
@@ -22,7 +22,7 @@ public class BoardDimensionsResult implements Result<BoardDimensions>{
         return resultState;
     }
 
-    public BoardDimensions getParsedResult(){
+    public BoardDimensions getParsedResult() {
         return parsedDimensions;
     }
 }

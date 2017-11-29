@@ -2,8 +2,9 @@ package com.ciastek.tictactoegame.ui;
 
 import com.ciastek.tictactoegame.engine.events.GameEvent;
 
-public interface Printer extends Observer {
-    default void initPrinter(){}
+public interface Printer extends Observer { //TODO check initPrinter
+    default void initPrinter() {
+    }
 
     @Override
     default void notify(GameEvent gameEvent) {

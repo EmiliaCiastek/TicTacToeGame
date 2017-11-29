@@ -21,7 +21,7 @@ public class SequencesGenerator {
         return stringBuilder.toString();
     }
 
-    private int generateRandomMove(int size){
+    private int generateRandomMove(int size) {
         Random random = new Random();
         return random.nextInt(size);
     }
@@ -32,17 +32,17 @@ public class SequencesGenerator {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(generateBeginOfSequence(boardWidth, boardHeight));
 
-        int numberOfMoves = winningCondition * 2 -1;
+        int numberOfMoves = winningCondition * 2 - 1;
         int position = 0;
-        int previousPosition =position;
+        int previousPosition = position;
 
         stringBuilder.append((position))
                 .append(System.lineSeparator());
 
         for (int i = 1; i < numberOfMoves; i++) {
 
-            if(i%2== 0){
-                position = previousPosition+ 1;
+            if (i % 2 == 0) {
+                position = previousPosition + 1;
                 previousPosition = position;
             } else {
                 position += boardWidth;
@@ -60,17 +60,17 @@ public class SequencesGenerator {
         stringBuilder.append(generateBeginOfSequence(boardWidth, boardHeight));
 
         int winningCondition = Math.min(boardWidth, boardHeight);
-        int numberOfMoves = winningCondition * 2 -1;
+        int numberOfMoves = winningCondition * 2 - 1;
         int position = 0;
-        int previousPosition =position;
+        int previousPosition = position;
 
         stringBuilder.append((position))
                 .append(System.lineSeparator());
 
         for (int i = 1; i < numberOfMoves; i++) {
 
-            if(i%2== 0){
-                position = previousPosition + boardWidth ;
+            if (i % 2 == 0) {
+                position = previousPosition + boardWidth;
                 previousPosition = position;
             } else {
                 position = previousPosition + 1;
@@ -83,7 +83,7 @@ public class SequencesGenerator {
         return stringBuilder.toString();
     }
 
-    private String generateBeginOfSequence(int boardWidth, int boardHeight){
+    private String generateBeginOfSequence(int boardWidth, int boardHeight) {
         String boardSize = "%sx%s";
         int winningCondition = Math.min(boardWidth, boardHeight);
 

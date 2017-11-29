@@ -17,7 +17,7 @@ public class GameRound implements Round {
     public GameRound(GameSettings gameSettings) {
         board = new Board(gameSettings.getBoardDimensions());
         referee = new Referee(gameSettings.getWinningCondition());
-        Player  currentPlayer = gameSettings.getFirstPlayer();
+        Player currentPlayer = gameSettings.getFirstPlayer();
         players = new LinkedList<>();
         players.add(currentPlayer);
 

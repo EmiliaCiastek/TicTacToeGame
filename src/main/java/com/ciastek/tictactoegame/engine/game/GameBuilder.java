@@ -20,7 +20,7 @@ public class GameBuilder {
     private ResourceBundle resourceBundle;
     private PositionInput positionInput;
 
-    public GameBuilder withBoardDimensions(BoardDimensions dimensions){
+    public GameBuilder withBoardDimensions(BoardDimensions dimensions) {
         this.boardDimensions = dimensions;
 
         return this;
@@ -30,7 +30,7 @@ public class GameBuilder {
         return boardDimensions;
     }
 
-    public GameBuilder withLanguageFile(ResourceBundle resourceBundle){
+    public GameBuilder withLanguageFile(ResourceBundle resourceBundle) {
         this.resourceBundle = resourceBundle;
 
         return this;
@@ -42,12 +42,12 @@ public class GameBuilder {
         return this;
     }
 
-    public GameBuilder withObserver(Observer observer){
+    public GameBuilder withObserver(Observer observer) {
         this.gameObserver = observer;
         return this;
     }
 
-    public GameBuilder withPositionInput(PositionInput positionInput){
+    public GameBuilder withPositionInput(PositionInput positionInput) {
         this.positionInput = positionInput;
         return this;
     }
@@ -65,7 +65,7 @@ public class GameBuilder {
     }
 
     public GameBuilder withFirstPlayer(PlayerCharacter firstPlayerCharacter) {
-        switch (firstPlayerCharacter){
+        switch (firstPlayerCharacter) {
             case X:
                 firstPlayer = xPlayer;
                 secondPlayer = oPlayer;

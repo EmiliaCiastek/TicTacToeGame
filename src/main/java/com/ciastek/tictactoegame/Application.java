@@ -1,6 +1,8 @@
 package com.ciastek.tictactoegame;
 
-import com.ciastek.tictactoegame.ui.*;
+import com.ciastek.tictactoegame.ui.GameUI;
+import com.ciastek.tictactoegame.ui.InputReader;
+import com.ciastek.tictactoegame.ui.Printer;
 
 public class Application {
     public static void main(String[] args) {

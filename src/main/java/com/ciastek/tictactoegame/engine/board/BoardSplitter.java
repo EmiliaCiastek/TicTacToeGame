@@ -49,10 +49,10 @@ public class BoardSplitter { //TODO: refactor
         int previousColumn = getColumnNumber(currentIndex, boardWidth);
 
         List<PlayerCharacter> aboveStartIndexElements = new ArrayList<>();
-        while(currentIndex >= 0 && getColumnNumber(currentIndex, boardWidth) >= previousColumn){
+        while (currentIndex >= 0 && getColumnNumber(currentIndex, boardWidth) >= previousColumn) {
             aboveStartIndexElements.add(board.getCharacterAt(currentIndex));
             currentIndex -= diagonalIndexDelta;
-            previousColumn ++;
+            previousColumn++;
         }
 
         Collections.reverse(aboveStartIndexElements);
@@ -62,7 +62,7 @@ public class BoardSplitter { //TODO: refactor
         currentIndex = startIndex + diagonalIndexDelta;
         previousColumn = getColumnNumber(startIndex, boardWidth);
 
-        while (currentIndex < board.getSize() && getColumnNumber(currentIndex, boardWidth) <= previousColumn){
+        while (currentIndex < board.getSize() && getColumnNumber(currentIndex, boardWidth) <= previousColumn) {
             diagonal.add(board.getCharacterAt(currentIndex));
             currentIndex += diagonalIndexDelta;
             previousColumn--;
@@ -77,9 +77,9 @@ public class BoardSplitter { //TODO: refactor
         int diagonalIndexDelta = boardWidth + 1;
         int previousColumn = getColumnNumber(currentIndex, boardWidth);
 
-        while(currentIndex >= 0 && previousColumn >= 0){
+        while (currentIndex >= 0 && previousColumn >= 0) {
             aboveStartIndex.add(board.getCharacterAt(currentIndex));
-            previousColumn --;
+            previousColumn--;
             currentIndex -= diagonalIndexDelta;
         }
         Collections.reverse(aboveStartIndex);
@@ -102,11 +102,11 @@ public class BoardSplitter { //TODO: refactor
         return belowStartIndex;
     }
 
-    private int getRowNumber(int index, int boardWidth){
-        return index/boardWidth;
+    private int getRowNumber(int index, int boardWidth) {
+        return index / boardWidth;
     }
 
-    private int getColumnNumber(int index, int boardWidth){
+    private int getColumnNumber(int index, int boardWidth) {
         return index % boardWidth;
     }
 }
