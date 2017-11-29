@@ -7,7 +7,7 @@ public class Application {
         ArgumentsParser argsParser = new ArgumentsParser();
         Printer gamePrinter = argsParser.parse(args);
         gamePrinter.initPrinter();
-        InputReader inputReader; //TODO: add setting input reader based on args
+        InputReader inputReader;
         inputReader = new InputReader();
 
         GameUI gameUI = new GameUI(gamePrinter, inputReader);

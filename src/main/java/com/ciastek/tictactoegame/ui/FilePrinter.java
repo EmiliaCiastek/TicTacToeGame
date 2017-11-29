@@ -7,14 +7,13 @@ public class FilePrinter implements Printer {
 
     @Override
     public void initPrinter() {
-        PrintStream fileStream = null;
+        PrintStream fileStream;
         try {
             fileStream = new PrintStream("output.txt");
+            System.setOut(fileStream);
         } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage()); //TODO: test in terminal
+            System.out.println("File not found - default output is console");
         }
-
-        System.setOut(fileStream);
     }
 
     @Override
